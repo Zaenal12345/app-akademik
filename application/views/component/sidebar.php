@@ -22,7 +22,7 @@
 			</div>
 			
 			<ul class="nav pcoded-inner-navbar ">
-				<li class="nav-item pcoded-menu-caption">
+				<li class="nav-item pcoded-menu-caption" style="color: #ff5252">
 				    <label>Main</label>
 				</li>
 				<li class="nav-item <?= $title == 'Dashboard' ? 'active' : '' ?>">
@@ -72,18 +72,18 @@
 <!-- [ navigation menu ] end -->
 
 <!-- [ Header ] start -->
-<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
+<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue" style="background-color: #ff5252;">
 	<div class="m-header">
 		<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
 		<a href="#!" class="b-brand">
-			<!-- ========   change your logo hear   ============ -->
-			<!-- <img src="<?= base_url()?>assets/template/dist/assets/images/logo.png" alt="" class="logo"> -->SIAKAD UNAS PASIM
+			SIAKAD UNAS PASIM
 			<img src="<?= base_url()?>assets/template/dist/assets/images/logo-icon.png" alt="" class="logo-thumb">
 		</a>
 		<a href="#!" class="mob-toggler">
 			<i class="feather icon-more-vertical"></i>
 		</a>
 	</div>
+
 	<div class="collapse navbar-collapse">
 		
 		<ul class="navbar-nav ml-auto">

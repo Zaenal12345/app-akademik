@@ -19,6 +19,19 @@ class Jadwal extends CI_Controller
 		
 		// get admin data
 		$admin_data = $this->AuthModel->getDataByUsername($this->session->userdata('username'));
+		$data = [
+			'fakultas' => $this->db->get('fakultas')->result(),
+			'data' => $admin_data,
+			'title' => 'Master',
+			'sub_title' => 'Jurusan',
+		];
+		
+		$this->load->view('component/header',$data);
+		$this->load->view('component/sidebar',$data);
+		$this->load->view('pages/jadwal/jadwal',$data);
+		$this->load->view('component/footer',$data);
+		$this->load->view('pages/jadwal/jadwal_script',$data);
+
 		
 
 }

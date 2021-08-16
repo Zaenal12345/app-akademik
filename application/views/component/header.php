@@ -35,6 +35,15 @@
         .fixed-button{
             display: none;
         }
+        body{
+            background-color: #ff5252;
+        }
+        .nav-item.active {
+            color: #ff5252 !important
+        }
+        .pcoded-navbar.menu-light .pcoded-inner-navbar > li.active > a, .pcoded-navbar.menu-light .pcoded-inner-navbar > li.pcoded-trigger > a {
+            background: #ff5252;
+        }
     </style>
 </head>
 <body class="">
