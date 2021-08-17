@@ -44,6 +44,13 @@
         .pcoded-navbar.menu-light .pcoded-inner-navbar > li.active > a, .pcoded-navbar.menu-light .pcoded-inner-navbar > li.pcoded-trigger > a {
             background: #ff5252;
         }
+        .nav-item.active a:hover{
+            color: red;
+        }
+        .pro-body li a:hover{
+            background-color: #ff5252 !important;
+
+        }
     </style>
 </head>
 <body class="">

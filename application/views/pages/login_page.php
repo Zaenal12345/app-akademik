@@ -98,6 +98,15 @@
         .dropdown-backdrop{
             z-index: -1 !important;
         }
+        .btn-blue{
+            border-color: #ff5252 !important;
+        }
+        .btn-blue:click{
+            color: white !important;
+        }
+        .btn-blue:hover{
+            color: white !important;
+        }
     </style>
 
 </head>
@@ -201,18 +210,18 @@
                         <hr>
 
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="User Name" id="username" name="username">
-                            <small id="username_error" style="font-size:7px" class="text-danger"></small>
+                            <input type="text" class="form-control" placeholder="User Name" id="username" name="username" autofocus="on">
+                            <small id="username_error" class="text-danger"></small>
                         </div>
 
                         <div class="form-group">
                             <input type="password" class="form-control" placeholder="Password" id="password" name="password">
-                            <small id="password_error" style="font-size:7px" class="text-danger"></small>
+                            <small id="password_error" class="text-danger"></small>
                         </div>
 
                         <div class="form-group text-center">
 
-                            <button type="submit" class="btn btn-blue btn-block">Log In</button>
+                            <button type="submit" class="btn btn-blue btn-block" style="background-color: #ff5252 !important;">Log In</button>
 
                         </div>
 

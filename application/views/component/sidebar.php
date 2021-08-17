@@ -94,7 +94,7 @@
 						<i class="feather icon-user"></i>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right profile-notification">
-						<div class="pro-head">
+						<div class="pro-head" style="background-color: #ff5252">
 							<img src="<?= base_url('assets/')?>logo.png" class="img-radius" alt="User-Profile-Image">
 							<span><?= strtoupper($data->username); ?></span>
 							<!-- <a href="auth-signin.html" class="dud-logout" title="Logout">

@@ -29,12 +29,12 @@
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col-12">
-                                        <h4 class="text-c-blue"><?= $mahasiswa?></h4>
+                                        <h4 class="text-c-yellow"><?= $mahasiswa?></h4>
                                         <h6 class="text-muted m-b-0">Total Mahasiswa</h6>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer bg-c-blue">
+                            <div class="card-footer bg-c-yellow">
                                 <div class="row align-items-center">
                                     <div class="col-12">
                                     </div>
