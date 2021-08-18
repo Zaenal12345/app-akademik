@@ -23,6 +23,7 @@ class Kurikulum extends CI_Controller
         $jurusan = $this->db->order_by('id_jurusan','desc')->get('jurusan')->result('array');
         $tahun_ajar = $this->db->order_by('id_tahun_ajar','desc')->where('status','Aktif')->limit(5)->get('tahun_ajar')->result('array');
         $dosen = $this->db->order_by('id_dosen','desc')->get('dosen')->result('array');
+        $kelas = $this->db->order_by('id_kelas','desc')->get('kelas')->result('array');
 
 		$data = [
 			'data' => $admin_data,
@@ -32,6 +33,7 @@ class Kurikulum extends CI_Controller
             'jurusan' => $jurusan, 
             'tahun_ajar' => $tahun_ajar, 
             'dosen' => $dosen, 
+            'kelas' => $kelas, 
 		];
 		
 		$this->load->view('component/header',$data);
@@ -45,16 +47,19 @@ class Kurikulum extends CI_Controller
 	{
 		$jurusan_id = $this->input->post('jurusan_id');
 		$tahun_ajar_id = $this->input->post('tahun_ajar_id');
+		$kelas_id = $this->input->post('kelas_id');
 		$result = [];
 
 		
-		$result_kurikulum = $this->db->select('k.id_kurikulum,m.nama_matakuliah,m.sks,m.kode_matakuliah,t.tahun_ajar,t.id_tahun_ajar,d.nama_dosen')
+		$result_kurikulum = $this->db->select('k.id_kurikulum,m.nama_matakuliah,m.sks,m.kode_matakuliah,t.tahun_ajar,t.id_tahun_ajar,d.nama_dosen,ks.nama_kelas')
 		->from('kurikulum k')
 		->join('dosen d','d.id_dosen = k.dosen_id', 'left')
 		->join('matakuliah m', 'm.id_matakuliah = k.matakuliah_id')
 		->join('tahun_ajar t', 't.id_tahun_ajar = k.tahun_ajar_id')
 		->join('jurusan j', 'j.id_jurusan = k.jurusan_id')
+		->join('kelas ks', 'ks.id_kelas = k.kelas_id')
 		->where('j.id_jurusan',$jurusan_id)
+		->where('ks.id_kelas',$kelas_id)
 		->where('k.tahun_ajar_id',$tahun_ajar_id)
 		->get()->result();
 		
@@ -68,6 +73,7 @@ class Kurikulum extends CI_Controller
 					'nama_matakuliah' => $result_kurikulum[$i]->nama_matakuliah,
 					'sks' => $result_kurikulum[$i]->sks,
 					'tahun_ajar' => $result_kurikulum[$i]->tahun_ajar,
+					'nama_kelas' => $result_kurikulum[$i]->nama_kelas,
 					'nama_dosen' => $result_kurikulum[$i]->nama_dosen == null ? '<a href="#" data-id="'. $result_kurikulum[$i]->id_kurikulum .'" class="edit-kurikulum btn btn-warning btn-sm"><i class="feather icon-edit"></i></a>' : $result_kurikulum[$i]->nama_dosen,
 				];
 
@@ -82,17 +88,20 @@ class Kurikulum extends CI_Controller
 	{
 		$jurusan_id = $this->input->post('jurusan_id');
 		$tahun_ajar_id = $this->input->post('tahun_ajar_id');
+		$kelas_id = $this->input->post('kelas_id');
 		$result = [];
 
 		
-		$result_kurikulum = $this->db->select('k.id_kurikulum,m.nama_matakuliah,m.id_matakuliah,m.sks,m.kode_matakuliah,t.tahun_ajar,t.id_tahun_ajar,d.nama_dosen')
+		$result_kurikulum = $this->db->select('k.id_kurikulum,m.nama_matakuliah,m.id_matakuliah,m.sks,m.kode_matakuliah,t.tahun_ajar,t.id_tahun_ajar,d.nama_dosen,ks.nama_kelas')
 		->from('kurikulum k')
 		->join('dosen d','d.id_dosen = k.dosen_id', 'left')
 		->join('matakuliah m', 'm.id_matakuliah = k.matakuliah_id')
 		->join('tahun_ajar t', 't.id_tahun_ajar = k.tahun_ajar_id')
 		->join('jurusan j', 'j.id_jurusan = k.jurusan_id')
-		->where('k.tahun_ajar_id',$tahun_ajar_id)
+		->join('kelas ks', 'ks.id_kelas = k.kelas_id')
 		->where('j.id_jurusan',$jurusan_id)
+		->where('ks.id_kelas',$kelas_id)
+		->where('k.tahun_ajar_id',$tahun_ajar_id)
 		->get()->result();
 		
 		if(count($result_kurikulum) != 0){
@@ -119,6 +128,7 @@ class Kurikulum extends CI_Controller
 		$tahun_ajar_id = $this->input->post('tahun_ajar_id');
 		$kelas_id = $this->input->post('kelas_id');
 
+		$error = [];
         $data = [];
 
         for ($i=0; $i < count($this->input->post('data')) ; $i++) { 
@@ -127,18 +137,57 @@ class Kurikulum extends CI_Controller
                 'dosen_id' => null,
                 'jurusan_id' => $jurusan_id,
                 'tahun_ajar_id' => $tahun_ajar_id,
-                'kelas_id' => null,
+                'kelas_id' => $kelas_id,
             ];
         }
 
-		$this->KurikulumModel->saveDataMultiple($data);
-		
-		$message = [
-			'message' => 'Data berhasil di simpan'
-		];
+		// validasi data
+		$result_kurikulum = $this->db->select('m.id_matakuliah,m.nama_matakuliah')
+		->from('kurikulum k')
+		->join('dosen d','d.id_dosen = k.dosen_id', 'left')
+		->join('matakuliah m', 'm.id_matakuliah = k.matakuliah_id')
+		->join('tahun_ajar t', 't.id_tahun_ajar = k.tahun_ajar_id')
+		->join('jurusan j', 'j.id_jurusan = k.jurusan_id')
+		->join('kelas ks', 'ks.id_kelas = k.kelas_id')
+		->where('j.id_jurusan',$jurusan_id)
+		->where('ks.id_kelas',$kelas_id)
+		->where('k.tahun_ajar_id',$tahun_ajar_id)
+		->get()->result();
+
+		if(count($result_kurikulum) != 0){
+
+			for ($j=0; $j < count($data) ; $j++) { 
+				
+				for ($k=0; $k < count($result_kurikulum) ; $k++) { 
+					
+					if($result_kurikulum[$k]->id_matakuliah == $data[$j]['matakuliah_id']){
+						$error[] = [
+							'nama_matakuliah' => $result_kurikulum[$k]->nama_matakuliah
+						];
+					}
+				}				
+
+			}
+
+		}
+
+		if(count($error) != 0){
+			
+			$message = $error;
+
+		}else{
+
+			$this->KurikulumModel->saveDataMultiple($data);
+			
+			$message = [
+				'success' => true,
+				'message' => 'Data berhasil di simpan'
+			];
+
+		}
+
 
 		echo json_encode($message);
-		// echo json_encode($this->input->post('data'));
 
 	}
 
@@ -148,6 +197,7 @@ class Kurikulum extends CI_Controller
 		$tahun_ajar_id = $this->input->post('tahun_ajar_id');
 		$kelas_id = $this->input->post('kelas_id');
 
+		$error = [];
         $data = [];
 
         for ($i=0; $i < count($this->input->post('data')) ; $i++) { 
@@ -156,25 +206,59 @@ class Kurikulum extends CI_Controller
                 'dosen_id' => null,
                 'jurusan_id' => $jurusan_id,
                 'tahun_ajar_id' => $tahun_ajar_id,
-                'kelas_id' => null,
+                'kelas_id' => $kelas_id,
             ];
         }
 
-		$this->KurikulumModel->saveDataMultiple($data);
-		
-		$message = [
-			'message' => 'Data berhasil di simpan'
-		];
+		// validasi data
+		$result_kurikulum = $this->db->select('m.id_matakuliah,m.nama_matakuliah')
+		->from('kurikulum k')
+		->join('dosen d','d.id_dosen = k.dosen_id', 'left')
+		->join('matakuliah m', 'm.id_matakuliah = k.matakuliah_id')
+		->join('tahun_ajar t', 't.id_tahun_ajar = k.tahun_ajar_id')
+		->join('jurusan j', 'j.id_jurusan = k.jurusan_id')
+		->join('kelas ks', 'ks.id_kelas = k.kelas_id')
+		->where('j.id_jurusan',$jurusan_id)
+		->where('ks.id_kelas',$kelas_id)
+		->where('k.tahun_ajar_id',$tahun_ajar_id)
+		->get()->result();
+
+		if(count($result_kurikulum) != 0){
+
+			for ($j=0; $j < count($data) ; $j++) { 
+				
+				for ($k=0; $k < count($result_kurikulum) ; $k++) { 
+					
+					if($result_kurikulum[$k]->id_matakuliah == $data[$j]['matakuliah_id']){
+						$error[] = [
+							'nama_matakuliah' => $result_kurikulum[$k]->nama_matakuliah
+						];
+					}
+				}				
+
+			}
+
+		}
+
+		if(count($error) != 0){
+			
+			$message = $error;
+
+		}else{
+
+			$this->KurikulumModel->saveDataMultiple($data);
+			
+			$message = [
+				'success' => true,
+				'message' => 'Data berhasil di simpan'
+			];
+
+		}
 
 		echo json_encode($message);
-		// echo json_encode($this->input->post('data'));
 
 	}
 
-	public function edit()
-	{
-		
-	}
 
 	public function update()
 	{
@@ -187,11 +271,5 @@ class Kurikulum extends CI_Controller
 		]);
 	}
 
-
-	public function destroy()
-	{
-		
-
-	}
 
 }

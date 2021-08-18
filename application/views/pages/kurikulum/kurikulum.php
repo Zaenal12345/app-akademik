@@ -28,7 +28,7 @@
                     <div class="card-header">
                         <div style="margin-left:20px">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="form-group">
                                         <label for="tahun_ajar_id">Matakuliah Untuk Periode : </label>
                                         <select name="tahun_ajar_id" id="tahun_ajar_id" class="form-control">
@@ -39,7 +39,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="form-group">
                                         <label for="jurusan_id">Program Studi :</label>
                                         <select name="jurusan_id" id="jurusan_id" class="form-control">
@@ -50,9 +50,20 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="kelas_id">Kelas :</label>
+                                        <select name="kelas_id" id="kelas_id" class="form-control">
+                                            <option value="">Pilih Kelas</option>
+                                            <?php foreach($kelas as $data):?>
+                                                <option value="<?= $data['id_kelas']?>"><?= $data['nama_kelas']?></option>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-3">
                                     <div class="mt-4"></div>
-                                    <button type="button" class="btn  btn-primary" id="search-kurikulum"><i class="feather icon-search"></i></button>
+                                    <button type="button" class="btn  btn-danger" id="search-kurikulum"><i class="feather icon-search"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -60,8 +71,10 @@
 
                     <div class="card-body table-border-style">
                         <div class="btn-group mb-2 btn-action" role="group" aria-label="Basic example" style="display:none">
-                            <button type="button" class="btn  btn-primary" title="tambah data baru" data-target="#modal-kurikulum_tambah" data-toggle="modal"><i class="feather icon-plus"></i></button>
-                            <button type="button" class="btn  btn-primary" title="copy dari periode sebelumya" data-target="#modal-kurikulum_copy" data-toggle="modal"><i class="feather icon-copy"></i></button>
+                            <!-- add button -->
+                            <button type="button" class="btn btn-primary" id="add-kurikulum" title="tambah data baru" data-target="#modal-kurikulum_tambah" data-toggle="modal"><i class="feather icon-plus"></i></button>
+                            <!-- copy button -->
+                            <button type="button" class="btn  btn-primary" id="copy-kurikulum" title="copy dari periode sebelumya" data-target="#modal-kurikulum_copy" data-toggle="modal"><i class="feather icon-copy"></i></button>
                         </div>
                         <div class="table-responsive" id="tabel-kurikulum" style="display:none">
                             <table class="table" id="data-kurikulum">
@@ -79,6 +92,7 @@
                             </table>
                         </div>
                     </div>
+                    
                 </div>
             </div>
             <!-- [ basic-table ] end -->
@@ -98,6 +112,9 @@
             </div>
             <div class="modal-body">
                 
+                <!-- alert error -->
+                <div class="alert alert-danger" id="alert-error" style="display: none;"></div>
+
                 <div class="table-responsive">
                     <table class="table" id="datatable2" style="width:100%">
                         <thead>
@@ -142,9 +159,11 @@
             </div>
             <div class="modal-body">
 
+                <!-- alert error -->
+                <div class="alert alert-danger" id="alert-error2" style="display: none;"></div>
                 
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-3">
                         <div class="form-group">
                             <select name="tahun_ajar_id2" id="tahun_ajar_id2" class="form-control">
                                 <option value="">Pilih Periode</option>
@@ -154,7 +173,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-5">
+                    <div class="col-3">
                         <div class="form-group">
                             <select name="jurusan_id2" id="jurusan_id2" class="form-control">
                                 <option value="">Pilih Program Studi</option>
@@ -164,7 +183,17 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <select name="kelas_id2" id="kelas_id2" class="form-control">
+                                <option value="">Pilih Kelas</option>
+                                <?php foreach($kelas as $data):?>
+                                    <option value="<?= $data['id_kelas']?>"><?= $data['nama_kelas']?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
                         <!-- <div class="mt-4"></div> -->
                         <button type="button" class="btn  btn-primary" id="search-kurikulum2"><i class="feather icon-search"></i></button>
                     </div>

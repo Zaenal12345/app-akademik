@@ -201,7 +201,7 @@
 
                 <div class="col-md-5 col-md-offset-1">
 
-                    <form id="login-form" class="signup-form">
+                    <form id="login-form" class="signup-form" style="margin-top: -50px;">
 
                         <div class="alert alert-danger text-center" style="display:none"></div>
 
