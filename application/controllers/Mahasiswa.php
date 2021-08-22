@@ -43,7 +43,7 @@ class Mahasiswa extends CI_Controller
 		$this->datatables->select('mahasiswa.id_mahasiswa,jurusan.nama_jurusan,kelas.nama_kelas,mahasiswa.foto,mahasiswa.nim,mahasiswa.nama_mahasiswa,mahasiswa.jenis_kelamin,mahasiswa.status_mahasiswa,mahasiswa.tempat_lahir,mahasiswa.tanggal_lahir,mahasiswa.agama,mahasiswa.alamat,mahasiswa.foto,mahasiswa.tahun_angkatan');
 		$this->datatables->join('jurusan','jurusan.id_jurusan = mahasiswa.jurusan_id');
 		$this->datatables->join('kelas','kelas.id_kelas = mahasiswa.kelas_id');
-		$this->datatables->add_column('gambar','<img src="'. $base .'assets/picture/mahasiswa/$1" width="90">','foto');
+		$this->datatables->add_column('gambar','<img src="'. $base .'assets/picture/mahasiswa/$1" width="60" height="60">','foto');
 		$this->datatables->add_column('view','<a href="#" class="edit-mahasiswa btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i></a> <a href="#" class="delete-mahasiswa btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i></a>','id_mahasiswa');
 		$this->datatables->from('mahasiswa');
 		return print_r($this->datatables->generate());

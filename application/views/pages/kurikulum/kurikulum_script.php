@@ -65,6 +65,7 @@
                         '<td class="text-center">'+ res[index].kode_matakuliah +'</td>' +
                         '<td class="text-center">'+ res[index].nama_matakuliah +'</td>' +
                         '<td class="text-center">'+ res[index].sks +'</td>' +
+                        '<td class="text-center">'+ res[index].semester +'</td>' +
                         '<td class="text-center"> '+ res[index].nama_kelas+' </td>' +
                         '<td class="text-center">'+ res[index].nama_dosen + '</td>' +
                        '</tr>'; 
@@ -187,6 +188,7 @@
                                         '<td class="text-center">'+ res[index].kode_matakuliah +'</td>' +
                                         '<td class="text-center">'+ res[index].nama_matakuliah +'</td>' +
                                         '<td class="text-center">'+ res[index].sks +'</td>' +
+                                        '<td class="text-center">'+ res[index].semester +'</td>' +
                                         '<td class="text-center"> '+ res[index].nama_kelas+' </td>' +
                                         '<td class="text-center">'+ res[index].nama_dosen + '</td>' +
                                     '</tr>'; 
@@ -300,6 +302,7 @@
                                         '<td class="text-center">'+ res[index].kode_matakuliah +'</td>' +
                                         '<td class="text-center">'+ res[index].nama_matakuliah +'</td>' +
                                         '<td class="text-center">'+ res[index].sks +'</td>' +
+                                        '<td class="text-center">'+ res[index].semester +'</td>' +
                                         '<td class="text-center"> '+ res[index].nama_kelas+' </td>' +
                                         '<td class="text-center">'+ res[index].nama_dosen + '</td>' +
                                     '</tr>'; 
@@ -397,6 +400,7 @@
                                 '<td class="text-center">'+ res[index].kode_matakuliah +'</td>' +
                                 '<td class="text-center">'+ res[index].nama_matakuliah +'</td>' +
                                 '<td class="text-center">'+ res[index].sks +'</td>' +
+                                '<td class="text-center">'+ res[index].semester +'</td>' +
                                 '<td class="text-center"> '+ res[index].nama_kelas+' </td>' +
                                 '<td class="text-center">'+ res[index].nama_dosen + '</td>' +
                             '</tr>'; 

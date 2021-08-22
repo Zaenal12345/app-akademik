@@ -4,7 +4,7 @@ $(function() {
     
     // clear add form
     $('#tambah-mahasiswa').click(function() {
-        clear(); 
+        clear_add(); 
     });
     
     // setup datatable
@@ -194,7 +194,7 @@ $(function() {
                 $('#tempat_lahir_edit').val(res.tempat_lahir);
                 $('#foto_lama').val(res.foto);
                 $('#tahun_angkatan_edit').val(res.tahun_angkatan);
-
+                clear_edit();
             }
         })
     });
@@ -300,8 +300,13 @@ $(function() {
 });
 
 
-function clear(){
+
+function clear_add(){
     $('#frm-mahasiswa')[0].reset();
+    $('#nim_err,#nama_mahasiswa_err,#jenis_kelamin_err,#status_err,#tempat_lahir_err,#tanggal_lahir_err,#agama_err,#alamat_err,#tahun_angkatan_err').html('');
+}
+function clear_edit(){
+    $('#nim_edit_err,#nama_mahasiswa_edit_err,#jenis_kelamin_edit_err,#status_edit_err,#tempat_lahir_edit_err,#tanggal_lahir_edit_err,#agama_edit_err,#alamat_edit_err,tahun_angkatan_edit_err').html('');
 }
 
 </script>

@@ -83,14 +83,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="nim">NIM</label>
+                                    <label for="nim"><b>NIM :</b></label>
                                     <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM">
                                     <small id="nim_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="nama_mahasiswa">Nama Mahasiswa</label>
+                                    <label for="nama_mahasiswa"><b>Nama Mahasiswa :</b></label>
                                     <input type="text" class="form-control" id="nama_mahasiswa" name="nama_mahasiswa" placeholder="Masukkan Nama Mahasiswa">
                                     <small id="nama_mahasiswa_err" class="form-text text-danger"></small>
                                 </div>
@@ -99,9 +99,8 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="jenis_kelamin">Jenis Kelamin</label>
+                                    <label for="jenis_kelamin"><b>Jenis Kelamin :</b></label>
                                     <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
-                                        <option value="">Pilih Jenis Kelamin</option>
                                         <option value="Laki-laki">Laki-laki</option>
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
@@ -109,8 +108,15 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="agama">Agama</label>
-                                    <input type="text" class="form-control" id="agama" name="agama" placeholder="Masukkan Agama">
+                                    <label for="agama"><b>Agama :</b></label>
+                                    <select class="form-control" name="agama" id="agama">
+                                        <option value="Islam">Islam</option>
+                                        <option value="Kristen">Kristen</option>
+                                        <option value="Katolik">Katolik</option>
+                                        <option value="Hindu">Hindu</option>
+                                        <option value="Buddha">Buddha</option>
+                                    </select>
+                                    <!-- <input type="text" class="form-control" id="agama" name="agama" placeholder="Masukkan Agama"> -->
                                     <small id="agama_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
@@ -118,9 +124,8 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="jurusan_id">Program Studi</label>
+                                    <label for="jurusan_id"><b>Program Studi :</b></label>
                                     <select class="form-control" name="jurusan_id" id="jurusan_id">
-                                        <option value="">Pilih Program Studi</option>
                                         <?php foreach($jurusan as $data):?>
                                             <option value="<?= $data->id_jurusan?>"><?= $data->nama_jurusan?></option>
                                         <?php endforeach;?>
@@ -129,9 +134,8 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="kelas_id">Kelas</label>
+                                    <label for="kelas_id"><b>Kelas :</b></label>
                                     <select class="form-control" name="kelas_id" id="kelas_id">
-                                        <option value="">Pilih Kelas</option>
                                         <?php foreach($kelas as $data):?>
                                             <option value="<?= $data->id_kelas?>"><?= $data->nama_kelas?></option>
                                         <?php endforeach;?>
@@ -144,14 +148,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="tempat_lahir">Tempat Lahir</label>
+                                    <label for="tempat_lahir"><b>Tempat Lahir :</b></label>
                                     <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Masukkan Tempat Lahir">
                                     <small id="tempat_lahir_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="tanggal_lahir">Tanggal Lahir</label>
+                                    <label for="tanggal_lahir"><b>Tanggal Lahir :</b></label>
                                     <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Masukkan Tanggal Lahir">
                                     <small id="tanggal_lahir_err" class="form-text text-danger"></small>
                                 </div>
@@ -160,9 +164,8 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="status_mahasiswa">Status</label>
+                                    <label for="status_mahasiswa"><b>Status :</b></label>
                                     <select class="form-control" name="status_mahasiswa" id="status_mahasiswa">
-                                        <option>Pilih Status</option>
                                         <option value="Aktif">Aktif</option>
                                         <option value="Tidak Aktif">Tidak Aktif</option>
                                     </select>
@@ -170,7 +173,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="foto">Foto</label>
+                                    <label for="foto"><b>Foto :</b></label>
                                     <input type="file" class="form-control" id="foto" name="foto" placeholder="Masukkan Foto">
                                 </div>
                             </div>
@@ -179,14 +182,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="tahun_angkatan">Tahun Angkatan</label>
+                                    <label for="tahun_angkatan"><b>Tahun Angkatan :</b></label>
                                     <input type="text" class="form-control" id="tahun_angkatan" name="tahun_angkatan" placeholder="Tahun Angkatan">
                                     <small id="tahun_angkatan_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="alamat">Alamat</label>
+                                    <label for="alamat"><b>Alamat :</b></label>
                                     <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat">
                                     <small id="alamat_err" class="form-text text-danger"></small>
                                 </div>
@@ -231,14 +234,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="nim_edit">NIM</label>
+                                    <label for="nim_edit"><b>NIM :</b></label>
                                     <input type="text" class="form-control" id="nim_edit" name="nim_edit" placeholder="Masukkan NIM">
                                     <small id="nim_edit_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="nama_mahasiswa_edit">Nama Mahasiswa</label>
+                                    <label for="nama_mahasiswa_edit"><b>Nama Mahasiswa :</b></label>
                                     <input type="text" class="form-control" id="nama_mahasiswa_edit" name="nama_mahasiswa_edit" placeholder="Masukkan Nama Mahasiswa">
                                     <small id="nama_mahasiswa_edit_err" class="form-text text-danger"></small>
                                 </div>
@@ -247,9 +250,8 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="jenis_kelamin_edit">Jenis Kelamin</label>
+                                    <label for="jenis_kelamin_edit"><b>Jenis Kelamin :</b></label>
                                     <select class="form-control" name="jenis_kelamin_edit" id="jenis_kelamin_edit">
-                                        <option value="">Pilih Jenis Kelamin</option>
                                         <option value="Laki-laki">Laki-laki</option>
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
@@ -257,8 +259,15 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="agama_edit">Agama</label>
-                                    <input type="text" class="form-control" id="agama_edit" name="agama_edit" placeholder="Masukkan Agama">
+                                    <label for="agama_edit"><b>Agama :</b></label>
+                                    <select class="form-control" name="agama_edit" id="agama_edit">
+                                        <option value="Islam">Islam</option>
+                                        <option value="Kristen">Kristen</option>
+                                        <option value="Katolik">Katolik</option>
+                                        <option value="Hindu">Hindu</option>
+                                        <option value="Buddha">Buddha</option>
+                                    </select>
+                                    <!-- <input type="text" class="form-control" id="agama_edit" name="agama_edit" placeholder="Masukkan Agama"> -->
                                     <small id="agama_edit_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
@@ -266,9 +275,8 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="jurusan_id_edit">Program Studi</label>
+                                    <label for="jurusan_id_edit"><b>Program Studi :</b></label>
                                     <select class="form-control" name="jurusan_id_edit" id="jurusan_id_edit">
-                                        <option value="">Pilih Program Studi</option>
                                         <?php foreach($jurusan as $data):?>
                                             <option value="<?= $data->id_jurusan?>"><?= $data->nama_jurusan?></option>
                                         <?php endforeach;?>
@@ -277,9 +285,8 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="kelas_id_edit">Kelas</label>
+                                    <label for="kelas_id_edit"><b>Kelas :</b></label>
                                     <select class="form-control" name="kelas_id_edit" id="kelas_id_edit">
-                                        <option value="">Pilih Kelas</option>
                                         <?php foreach($kelas as $data):?>
                                             <option value="<?= $data->id_kelas?>"><?= $data->nama_kelas?></option>
                                         <?php endforeach;?>
@@ -292,14 +299,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="tempat_lahir_edit">Tempat Lahir</label>
+                                    <label for="tempat_lahir_edit"><b>Tempat Lahir :</b></label>
                                     <input type="text" class="form-control" id="tempat_lahir_edit" name="tempat_lahir_edit" placeholder="Masukkan Tempat Lahir">
                                     <small id="tempat_lahir_edit_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="tanggal_lahir_edit">Tanggal Lahir</label>
+                                    <label for="tanggal_lahir_edit"><b>Tanggal Lahir :</b></label>
                                     <input type="date" class="form-control" id="tanggal_lahir_edit" name="tanggal_lahir_edit" placeholder="Masukkan Tanggal Lahir">
                                     <small id="tanggal_lahir_edit_err" class="form-text text-danger"></small>
                                 </div>
@@ -308,9 +315,8 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="status_mahasiswa_edit">Status</label>
+                                    <label for="status_mahasiswa_edit"><b>Status :</b></label>
                                     <select class="form-control" name="status_mahasiswa_edit" id="status_mahasiswa_edit">
-                                        <option>Pilih Status</option>
                                         <option value="Aktif">Aktif</option>
                                         <option value="Tidak Aktif">Tidak Aktif</option>
                                     </select>
@@ -318,7 +324,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="foto">Foto</label>
+                                    <label for="foto"><b>Foto :</b></label>
                                     <input type="file" class="form-control" id="foto" name="foto" placeholder="Masukkan Foto">
                                     <input type="hidden" name="foto_lama" id="foto_lama">
                                     <small>Upload jika ingin mengganti foto.</small>
@@ -329,14 +335,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="tahun_angkatan_edit">Tahun Angkatan</label>
+                                    <label for="tahun_angkatan_edit"><b>Tahun Angkatan :</b></label>
                                     <input type="text" class="form-control" id="tahun_angkatan_edit" name="tahun_angkatan_edit" placeholder="Tahun Angkatan">
                                     <small id="tahun_angkatan_edit_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="alamat_edit">Alamat</label>
+                                    <label for="alamat_edit"><b>Alamat :</b></label>
                                     <input type="text" class="form-control" id="alamat_edit" name="alamat_edit" placeholder="Masukkan Alamat">
                                     <small id="alamat_edit_err" class="form-text text-danger"></small>
                                 </div>

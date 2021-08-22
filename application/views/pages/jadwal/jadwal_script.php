@@ -53,25 +53,32 @@
     // save all jadwal
     $('#btn-add').click(function () {
         
-        var dosen_id = $('#dosen_id').val();
-        var nama_dosen = $('#nama_dosen').val();
         var hari = $('#hari').val();
-        var matakuliah_id = $('#matakuliah_id').val();
+        var kode_matakuliah = $('#kode_matakuliah').val();
         var nama_matakuliah = $('#matakuliah_id option:selected').text();
+        var matakuliah_id = $('#matakuliah_id').val();
+        var semester = $('#semester').val();
+        var nama_dosen = $('#nama_dosen').val();
+        var dosen_id = $('#dosen_id').val();
+        var ruangan = $('#ruangan_id option:selected').text();
+        var ruangan_id = $('#ruangan_id').val();
         var jam_masuk = $('#jam_masuk').val();
         var jam_selesai = $('#jam_selesai').val();
-        var ruangan = $('#ruangan').val();
 
         $('#table-jadwal_detail tbody').append(
             '<tr>'+
                 '<td class="text-center">'+ hari +'</td>'+
+                '<td class="text-center">'+ kode_matakuliah +'</td>'+
                 '<td class="text-center">'+ nama_matakuliah +'</td>'+
+                '<td class="text-center">'+ semester +'</td>'+
                 '<td class="text-center" style="display: none;">'+ matakuliah_id +'</td>' +
                 '<td class="text-center">'+ nama_dosen +'</td>'+
                 '<td class="text-center" style="display: none;">'+ dosen_id +'</td>' +
                 '<td class="text-center">'+ ruangan +'</td>' +
+                '<td class="text-center" style="display: none;">'+ ruangan_id +'</td>' +
                 '<td class="text-center">'+ jam_masuk +'</td>' +
                 '<td class="text-center">'+ jam_selesai +'</td>' +
+                '<td class="text-center"><a href="#" class="delete-detail_kurikulum btn btn-danger btn-sm"><i class="feather icon-trash"></i></a></td>' +
             '</tr>'
         );
 
@@ -87,20 +94,22 @@
         var tahun_ajar_id = $('#tahun_ajar_id').val();
         var kelas_id = $('#kelas_id').val();
         var jurusan_id = $('#jurusan_id').val();
-        var semester = $('#semester').val();
         var data = [];
 
         $('#table-jadwal_detail tbody tr').each(function(row, tr) {
 
             var sub_data = {   
                 'hari'              : $(tr).find('td:eq(0)').text(),
-                'nama_matakuliah'   : $(tr).find('td:eq(1)').text(),
-                'matakuliah_id'     : $(tr).find('td:eq(2)').text(),
-                'nama_dosen'        : $(tr).find('td:eq(3)').text(),
-                'dosen_id'          : $(tr).find('td:eq(4)').text(),
-                'ruangan'           : $(tr).find('td:eq(5)').text(),
-                'jam_masuk'         : $(tr).find('td:eq(6)').text(),
-                'jam_selesai'       : $(tr).find('td:eq(7)').text()
+                'kode_matakuliah'   : $(tr).find('td:eq(1)').text(),
+                'nama_matakuliah'   : $(tr).find('td:eq(2)').text(),
+                'semester'          : $(tr).find('td:eq(3)').text(),
+                'matakuliah_id'     : $(tr).find('td:eq(4)').text(),
+                'nama_dosen'        : $(tr).find('td:eq(5)').text(),
+                'dosen_id'          : $(tr).find('td:eq(6)').text(),
+                'ruangan'           : $(tr).find('td:eq(7)').text(),
+                'ruangan_id'        : $(tr).find('td:eq(8)').text(),
+                'jam_masuk'         : $(tr).find('td:eq(9)').text(),
+                'jam_selesai'       : $(tr).find('td:eq(10)').text()
             }
 
             data.push(sub_data);
@@ -110,11 +119,10 @@
         var allData = {
             tahun_ajar_id: tahun_ajar_id, 
             kelas_id: kelas_id, 
-            jurusan_id: jurusan_id, 
-            semester: semester, 
+            jurusan_id: jurusan_id,
             data: data, 
         }
-        // console.log(allData);
+
         $.ajax({
             url: '<?= base_url()?>jadwal/store',
             type: 'POST',
@@ -123,7 +131,9 @@
             success:function(res){
                 
                 toastr.success('Data berhasil disimpan',{timeOut: 4000});
-                window.location.href="<?= base_url()?>jadwal";
+                setTimeout(() => {
+                    window.location.href="<?= base_url()?>jadwal";
+                }, 3000);
                 
             }
         });
@@ -143,6 +153,11 @@
 
     $('#matakuliah_id').change(function() { 
         getDosen($(this).val());
+        getSemester($(this).val());
+    });
+
+    $(document).on('click','.delete-detail_kurikulum',function() {
+        $(this).closest('tr').remove();
     });
 
     // call getMatakuliah function
@@ -165,6 +180,7 @@
                     
                     var html = '';
                     getDosen(res[0].id_matakuliah);
+                    getSemester(res[0].id_matakuliah);
 
                     for (let index = 0; index < res.length; index++) {
                        
@@ -172,6 +188,7 @@
                         
                     }
 
+        
                     $('#matakuliah_id').empty();
                     $('#matakuliah_id').append(html);
 
@@ -202,6 +219,27 @@
                 $('#dosen_id').val('');
                 $('#nama_dosen').val(res[0].nama_dosen);
                 $('#dosen_id').val(res[0].id_dosen);
+
+            }
+        })
+
+    }
+
+    function getSemester(matakuliah_id) {
+        
+        $.ajax({
+            url:'<?= base_url()?>jadwal/getSemester',
+            type:'POST',
+            dataType:'JSON',
+            data:{
+                matakuliah_id : matakuliah_id
+            },
+            success:function(res){
+
+                $('#kode_matakuliah').val('');
+                $('#semester').val('');
+                $('#kode_matakuliah').val(res.kode_matakuliah);
+                $('#semester').val(res.semester);
 
             }
         })

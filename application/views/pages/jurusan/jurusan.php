@@ -65,19 +65,18 @@
                 <form id="frm-jurusan">
 
                     <div class="form-group">
-                        <label for="kode_jurusan">Kode Jurusan</label>
+                        <label for="kode_jurusan"><b>Kode Jurusan :</b></label>
                         <input type="text" class="form-control" id="kode_jurusan" name="kode_jurusan" placeholder="Masukkan Kode Jurusan">
                         <small id="kode_jurusan-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_jurusan">Nama Jurusan</label>
+                        <label for="nama_jurusan"><b>Nama Jurusan :</b></label>
                         <input type="text" class="form-control" id="nama_jurusan" name="nama_jurusan" placeholder="Masukkan Nama Jurusan">
                         <small id="nama_jurusan-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_fakultas">Nama Fakultas</label>
+                        <label for="nama_fakultas"><b>Nama Fakultas :</b></label>
                         <select class="form-control" id="nama_fakultas" name="nama_fakultas">
-                            <option value="">Pilih Nama Fakultas</option>
                             <?php foreach($fakultas as $data):?>
                             <option value="<?= $data->id_fakultas ?>"><?= $data->nama_fakultas ?></option>
                             <?php endforeach;?>
@@ -106,20 +105,19 @@
                 <form id="frm-jurusan_edit">
 
                     <div class="form-group">
-                        <label for="kode_jurusan_edit">Kode Jurusan</label>
+                        <label for="kode_jurusan_edit"><b>Kode Jurusan :</b></label>
                         <input type="hidden" name="id_jurusan_edit" id="id_jurusan_edit">
                         <input type="text" class="form-control" name="kode_jurusan_edit" id="kode_jurusan_edit"  placeholder="Masukkan Kode Jurusan" readonly>
                         <small id="kode_jurusan_edit-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_jurusan_edit">Nama Jurusan</label>
+                        <label for="nama_jurusan_edit"><b>Nama Jurusan :</b></label>
                         <input type="text" class="form-control" name="nama_jurusan_edit" id="nama_jurusan_edit" placeholder="Masukkan Nama Jurusan">
                         <small id="nama_jurusan_edit-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_fakultas_edit">Nama Fakultas</label>
+                        <label for="nama_fakultas_edit"><b>Nama Fakultas :</b></label>
                         <select class="form-control" id="nama_fakultas_edit" name="nama_fakultas_edit">
-                            <option value="">Pilih Nama Fakultas</option>
                             <?php foreach($fakultas as $data):?>
                             <option value="<?= $data->id_fakultas ?>"><?= $data->nama_fakultas ?></option>
                             <?php endforeach;?>

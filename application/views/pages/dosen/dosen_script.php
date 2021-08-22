@@ -4,7 +4,7 @@ $(function() {
     
     // clear add form
     $('#tambah-dosen').click(function() {
-        // clear(); 
+        clear_add()
     });
     
     // setup datatable
@@ -186,20 +186,22 @@ $(function() {
             success:function(res){
                 
                 $('#modal-dosen_edit').modal('show');
-                
                 $('#id_dosen_edit').val(res.id_dosen);
                 $('#nik_edit').val(res.nik);
                 $('#nidn_edit').val(res.nidn);
                 $('#nama_dosen_edit').val(res.nama_dosen);
-                $('#alamat_edit').val(res.alamat);
+                $('#alamat_edit').val(res.alamat_dosen);
                 $('#gelar_edit').val(res.gelar);
                 $('#pendidikan_edit').val(res.pendidikan);
-                $('#jenis_kelamin_edit').val(res.jenis_kelamin);
-                $('#status_edit').val(res.status);
-                $('#agama_edit').val(res.agama);
-                $('#tanggal_lahir_edit').val(res.tanggal_lahir);
-                $('#tempat_lahir_edit').val(res.tempat_lahir);
-                $('#foto_lama').val(res.foto);
+                $('#jenis_kelamin_edit').val(res.jenis_kelamin_dosen);
+                $('#status_edit').val(res.status_dosen);
+                $('#agama_edit').val(res.agama_dosen);
+                $('#tanggal_lahir_edit').val(res.tanggal_lahir_dosen);
+                $('#tempat_lahir_edit').val(res.tempat_lahir_dosen);
+                $('#foto_lama').val(res.foto_dosen);
+
+                console.log(res);
+                clear_edit();
 
             }
         })
@@ -306,8 +308,12 @@ $(function() {
 });
 
 
-function clear(){
+function clear_add(){
     $('#frm-dosen')[0].reset();
+    $('#nik_err,#nidn_err,#nama_dosen_err,#jenis_kelamin_err,#gelar_err,#pendidikan_err,#status_err,#tempat_lahir_err,#tanggal_lahir_err,#agama_err,#alamat_err').html('');
+}
+function clear_edit(){
+    $('#nik_edit_err,#nidn_edit_err,#nama_dosen_edit_err,#jenis_kelamin_edit_err,#gelar_edit_err,#pendidikan_edit_err,#status_edit_err,#tempat_lahir_edit_err,#tanggal_lahir_edit_err,#agama_edit_err,#alamat_edit_err').html('');
 }
 
 </script>

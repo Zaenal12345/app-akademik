@@ -38,6 +38,7 @@
 				        <li <?= $sub_title == 'Mahasiswa' ? 'active' : '' ?> ><a href="<?= base_url()?>mahasiswa">Mahasiswa</a></li>
 				        <li <?= $sub_title == 'Tahun Ajar' ? 'active' : '' ?> ><a href="<?= base_url()?>tahunajar">Tahun Ajar</a></li>
 				        <li <?= $sub_title == 'Kelas' ? 'active' : '' ?> ><a href="<?= base_url()?>kelas">Kelas Kuliah</a></li>
+				        <li <?= $sub_title == 'Ruangan' ? 'active' : '' ?> ><a href="<?= base_url()?>ruangan">Ruangan</a></li>
 				        <li <?= $sub_title == 'Kurikulum' ? 'active' : '' ?> ><a href="<?= base_url()?>kurikulum">Kurikulum</a></li>
 				    </ul>
 				</li>

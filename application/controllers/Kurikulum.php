@@ -51,7 +51,7 @@ class Kurikulum extends CI_Controller
 		$result = [];
 
 		
-		$result_kurikulum = $this->db->select('k.id_kurikulum,m.nama_matakuliah,m.sks,m.kode_matakuliah,t.tahun_ajar,t.id_tahun_ajar,d.nama_dosen,ks.nama_kelas')
+		$result_kurikulum = $this->db->select('k.id_kurikulum,m.semester,m.nama_matakuliah,m.sks,m.kode_matakuliah,t.tahun_ajar,t.id_tahun_ajar,d.nama_dosen,ks.nama_kelas')
 		->from('kurikulum k')
 		->join('dosen d','d.id_dosen = k.dosen_id', 'left')
 		->join('matakuliah m', 'm.id_matakuliah = k.matakuliah_id')
@@ -74,6 +74,7 @@ class Kurikulum extends CI_Controller
 					'sks' => $result_kurikulum[$i]->sks,
 					'tahun_ajar' => $result_kurikulum[$i]->tahun_ajar,
 					'nama_kelas' => $result_kurikulum[$i]->nama_kelas,
+					'semester' => $result_kurikulum[$i]->semester,
 					'nama_dosen' => $result_kurikulum[$i]->nama_dosen == null ? '<a href="#" data-id="'. $result_kurikulum[$i]->id_kurikulum .'" class="edit-kurikulum btn btn-warning btn-sm"><i class="feather icon-edit"></i></a>' : $result_kurikulum[$i]->nama_dosen,
 				];
 

@@ -85,14 +85,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="nik">NIK</label>
+                                    <label for="nik"><b>NIK :</b></label>
                                     <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK">
                                     <small id="nik_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="nidn">NIDN</label>
+                                    <label for="nidn"><b>NIDN :</b></label>
                                     <input type="text" class="form-control" id="nidn" name="nidn" placeholder="Masukkan NIDN (opsional)">
                                     <small id="nidn_err" class="form-text text-danger"></small>
                                 </div>
@@ -101,16 +101,15 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="nama_dosen">Nama Dosen</label>
+                                    <label for="nama_dosen"><b>Nama Dosen :</b></label>
                                     <input type="text" class="form-control" id="nama_dosen" name="nama_dosen" placeholder="Masukkan Nama Dosen">
                                     <small id="nama_dosen_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="jenis_kelamin">Jenis Kelamin</label>
+                                    <label for="jenis_kelamin"><b>Jenis Kelamin :</b></label>
                                     <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
-                                        <option value="">Pilih Jenis Kelamin</option>
                                         <option value="Laki-laki">Laki-laki</option>
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
@@ -120,14 +119,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="gelar">Gelar</label>
+                                    <label for="gelar"><b>Gelar :</b></label>
                                     <input type="text" class="form-control" id="gelar" name="gelar" placeholder="Masukkan Gelar">
                                     <small id="gelar_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="pendidikan">Pendidikan Terakhir</label>
+                                    <label for="pendidikan"><b>Pendidikan Terakhir :</b></label>
                                     <input type="text" class="form-control" id="pendidikan" name="pendidikan" placeholder="Masukkan Pendidikan Terakhir">
                                     <small id="pendidikan_err" class="form-text text-danger"></small>
                                 </div>
@@ -139,14 +138,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="tempat_lahir">Tempat Lahir</label>
+                                    <label for="tempat_lahir"><b>Tempat Lahir :</b></label>
                                     <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Masukkan Tempat Lahir">
                                     <small id="tempat_lahir_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="tanggal_lahir">Tanggal Lahir</label>
+                                    <label for="tanggal_lahir"><b>Tanggal Lahir :</b></label>
                                     <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Masukkan Tanggal Lahir">
                                     <small id="tanggal_lahir_err" class="form-text text-danger"></small>
                                 </div>
@@ -155,16 +154,22 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="agama">Agama</label>
-                                    <input type="text" class="form-control" id="agama" name="agama" placeholder="Masukkan Agama">
+                                    <label for="agama"><b>Agama :</b></label>
+                                    <select class="form-control" name="agama" id="agama">
+                                        <option value="Islam">Islam</option>
+                                        <option value="Kristen">Kristen</option>
+                                        <option value="Katolik">Katolik</option>
+                                        <option value="Hindu">Hindu</option>
+                                        <option value="Buddha">Buddha</option>
+                                    </select>
+                                    <!-- <input type="text" class="form-control" id="agama" name="agama" placeholder="Masukkan Agama"> -->
                                     <small id="agama_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="status">Status</label>
+                                    <label for="status"><b>Status :</b></label>
                                     <select class="form-control" name="status" id="status">
-                                        <option>Pilih Status</option>
                                         <option value="Aktif">Aktif</option>
                                         <option value="Tidak Aktif">Tidak Aktif</option>
                                     </select>
@@ -175,14 +180,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="alamat">Alamat</label>
+                                    <label for="alamat"><b>Alamat :</b></label>
                                     <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat">
                                     <small id="alamat_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="foto">Foto</label>
+                                    <label for="foto"><b>Foto :</b></label>
                                     <input type="file" class="form-control" id="foto" name="foto" placeholder="Masukkan Foto">
                                 </div>
                             </div>
@@ -225,14 +230,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="nik_edit">NIK</label>
+                                    <label for="nik_edit"></b>NIK :</b></label>
                                     <input type="text" class="form-control" id="nik_edit" name="nik_edit" placeholder="Masukkan NIK">
                                     <small id="nik_edit_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="nidn_edit">NIDN</label>
+                                    <label for="nidn_edit"><b>NIDN :</b></label>
                                     <input type="text" class="form-control" id="nidn_edit" name="nidn_edit" placeholder="Masukkan NIDN (opsional)">
                                     <small id="nidn_edit_err" class="form-text text-danger"></small>
                                 </div>
@@ -241,16 +246,16 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="nama_dosen_edit">Nama Dosen</label>
+                                    <label for="nama_dosen_edit"><b>Nama Dosen :</b></label>
                                     <input type="text" class="form-control" id="nama_dosen_edit" name="nama_dosen_edit" placeholder="Masukkan Nama Dosen">
                                     <small id="nama_dosen_edit_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="jenis_kelamin_edit">Jenis Kelamin</label>
+                                    <label for="jenis_kelamin_edit"><b>Jenis Kelamin :</b></label>
                                     <select class="form-control" name="jenis_kelamin_edit" id="jenis_kelamin_edit">
-                                        <option value="">Pilih Jenis Kelamin</option>
+    
                                         <option value="Laki-laki">Laki-laki</option>
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
@@ -260,14 +265,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="gelar_edit">Gelar</label>
+                                    <label for="gelar_edit"><b>Gelar :</b></label>
                                     <input type="text" class="form-control" id="gelar_edit" name="gelar_edit" placeholder="Masukkan Gelar">
                                     <small id="gelar_edit_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="pendidikan_edit">Pendidikan Terakhir</label>
+                                    <label for="pendidikan_edit"><b>Pendidikan Terakhir :</b></label>
                                     <input type="text" class="form-control" id="pendidikan_edit" name="pendidikan_edit" placeholder="Masukkan Pendidikan Terakhir">
                                     <small id="pendidikan_edit_err" class="form-text text-danger"></small>
                                 </div>
@@ -279,14 +284,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="tempat_lahir_edit">Tempat Lahir</label>
+                                    <label for="tempat_lahir_edit"><b>Tempat Lahir :</b></label>
                                     <input type="text" class="form-control" id="tempat_lahir_edit" name="tempat_lahir_edit" placeholder="Masukkan Tempat Lahir">
                                     <small id="tempat_lahir_edit_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="tanggal_lahir_edit">Tanggal Lahir</label>
+                                    <label for="tanggal_lahir_edit"><b>Tanggal Lahir :</b></label>
                                     <input type="date" class="form-control" id="tanggal_lahir_edit" name="tanggal_lahir_edit" placeholder="Masukkan Tanggal Lahir">
                                     <small id="tanggal_lahir_edit_err" class="form-text text-danger"></small>
                                 </div>
@@ -295,16 +300,22 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="agama_edit">Agama</label>
-                                    <input type="text" class="form-control" id="agama_edit" name="agama_edit" placeholder="Masukkan Agama">
+                                    <label for="agama_edit"><b>Agama :</b></label>
+                                    <select class="form-control" name="agama_edit" id="agama_edit">
+                                        <option value="Islam">Islam</option>
+                                        <option value="Kristen">Kristen</option>
+                                        <option value="Katolik">Katolik</option>
+                                        <option value="Hindu">Hindu</option>
+                                        <option value="Buddha">Buddha</option>
+                                    </select>
+                                    <!-- <input type="text" class="form-control" id="agama_edit" name="agama_edit" placeholder="Masukkan Agama"> -->
                                     <small id="agama_edit_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="status_edit">Status</label>
+                                    <label for="status_edit"><b>Status :</b></label>
                                     <select class="form-control" name="status_edit" id="status_edit">
-                                        <option>Pilih Status</option>
                                         <option value="Aktif">Aktif</option>
                                         <option value="Tidak Aktif">Tidak Aktif</option>
                                     </select>
@@ -315,14 +326,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="alamat_edit">Alamat</label>
+                                    <label for="alamat_edit"><b>Alamat :</b></label>
                                     <input type="text" class="form-control" id="alamat_edit" name="alamat_edit" placeholder="Masukkan Alamat">
                                     <small id="alamat_edit_err" class="form-text text-danger"></small>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="foto">Foto</label>
+                                    <label for="foto"><b>Foto :</b></label>
                                     <input type="file" class="form-control" id="foto" name="foto" placeholder="Masukkan Foto">
                                     <input type="hidden" name="foto_lama" id="foto_lama">
                                     <small>Upload jika ingin mengganti foto.</small>

@@ -129,7 +129,8 @@
 					$('#id_fakultas_edit').val(res.id_fakultas);
 					$('#kode_fakultas_edit').val(res.kode_fakultas);
 					$('#nama_fakultas_edit').val(res.nama_fakultas);
-					console.log(res.id);
+					// console.log(res.id);
+					$('#kode_fakultas_edit-err,#nama_fakultas_edit-err').html('');
 
 				}
 			});

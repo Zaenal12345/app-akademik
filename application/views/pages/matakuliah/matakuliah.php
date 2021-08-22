@@ -36,6 +36,7 @@
                                         <th class="text-center" style="text-transform: capitalize;">Kode Matakuliah</th>
                                         <th class="text-center" style="text-transform: capitalize;">Nama Matakuliah</th>
                                         <th class="text-center" style="text-transform: capitalize;">SKS</th>
+                                        <th class="text-center" style="text-transform: capitalize;">Semester</th>
                                         <th class="text-center" style="text-transform: capitalize;">Aksi</th>
                                     </tr>
                                 </thead>
@@ -65,19 +66,24 @@
                 <form id="frm-matakuliah">
 
                     <div class="form-group">
-                        <label for="kode_matakuliah">Kode Matakuliah</label>
+                        <label for="kode_matakuliah"><b>Kode Matakuliah :</b></label>
                         <input type="text" class="form-control" id="kode_matakuliah" name="kode_matakuliah" placeholder="Masukkan Kode Matakuliah">
                         <small id="kode_matakuliah-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_matakuliah">Nama Matakuliah</label>
+                        <label for="nama_matakuliah"><b>Nama Matakuliah :</b></label>
                         <input type="text" class="form-control" id="nama_matakuliah" name="nama_matakuliah" placeholder="Masukkan Nama Matakuliah">
                         <small id="nama_matakuliah-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="sks">SKS</label>
+                        <label for="sks"><b>SKS :</b></label>
                         <input type="text" class="form-control" id="sks" name="sks" placeholder="Masukkan SKS">
                         <small id="sks-err" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="semester"><b>Semester :</b></label>
+                        <input type="text" class="form-control" id="semester" name="semester" placeholder="Masukkan SKS">
+                        <small id="semester-err" class="form-text text-danger"></small>
                     </div>
                 
             </div>
@@ -101,20 +107,25 @@
                 <form id="frm-matakuliah_edit">
 
                     <div class="form-group">
-                        <label for="kode_matakuliah_edit">Kode Matakuliah</label>
+                        <label for="kode_matakuliah_edit"><b>Kode Matakuliah :</b></label>
                         <input type="hidden" name="id_matakuliah_edit" id="id_matakuliah_edit">
                         <input type="text" class="form-control" name="kode_matakuliah_edit" id="kode_matakuliah_edit"  placeholder="Masukkan Kode Matakuliah" readonly>
                         <small id="kode_matakuliah_edit-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_matakuliah_edit">Nama Matakuliah</label>
+                        <label for="nama_matakuliah_edit"><b>Nama Matakuliah :</b></label>
                         <input type="text" class="form-control" name="nama_matakuliah_edit" id="nama_matakuliah_edit" placeholder="Masukkan Nama Matakuliah">
                         <small id="nama_matakuliah_edit-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="sks_edit">SKS</label>
+                        <label for="sks_edit"><b>SKS :</b></label>
                         <input type="text" class="form-control" name="sks_edit" id="sks_edit" placeholder="Masukkan SKS">
                         <small id="sks_edit-err" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="semester_edit"><b>Semester :</b></label>
+                        <input type="text" class="form-control" id="semester_edit" name="semester_edit" placeholder="Masukkan SKS">
+                        <small id="semester_edit-err" class="form-text text-danger"></small>
                     </div>
                 
             </div>

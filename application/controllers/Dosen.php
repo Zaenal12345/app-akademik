@@ -61,16 +61,30 @@ class Dosen extends CI_Controller
 	public function store()
 	{
 		// set up validation
-		$this->form_validation->set_rules('nik','NIK','required|is_unique[dosen.nik]|max_length[20]');
-		$this->form_validation->set_rules('nidn','NIDN','is_unique[dosen.nidn]|max_length[20]');
-		$this->form_validation->set_rules('nama_dosen','Nama Dosen','required|max_length[100]');
-		$this->form_validation->set_rules('jenis_kelamin','Jenis Kelamin','required|max_length[10]');
-		$this->form_validation->set_rules('gelar','Gelar','required|max_length[50]');
-		$this->form_validation->set_rules('pendidikan','Pendidikan','required|max_length[100]');
-		$this->form_validation->set_rules('status','Status','required|max_length[20]');
-		$this->form_validation->set_rules('tempat_lahir','Tempat Lahir','required|max_length[100]');
+		$this->form_validation->set_rules('nik','NIK','required|is_unique[dosen.nik]|max_length[20]|is_natural_no_zero',[
+			'is_natural_no_zero' => 'NIK yang dimasukkan harus berupa angka (1,2,3 ..)',
+			'max_length' => 'NIK yang dimasukkan melebihi batas maksimum'
+		]);
+		$this->form_validation->set_rules('nidn','NIDN','is_unique[dosen.nidn]|max_length[20]|is_natural_no_zero',[
+			'is_natural_no_zero' => 'NIDN yang dimasukkan harus berupa angka (1,2,3 ..)',
+			'max_length' => 'NIDN yang dimasukkan melebihi batas maksimum'
+		]);
+		$this->form_validation->set_rules('nama_dosen','Nama Dosen','required|max_length[100]',[
+			'max_length' => 'Nama Dosen yang dimasukkan melebihi batas maksimum'
+		]);
+		$this->form_validation->set_rules('jenis_kelamin','Jenis Kelamin','required');
+		$this->form_validation->set_rules('gelar','Gelar','required|max_length[50]',[
+			'max_length' => 'Gelar yang dimasukkan melebihi batas maksimum'
+		]);
+		$this->form_validation->set_rules('pendidikan','Pendidikan Terakhir','required|max_length[100]',[
+			'max_length' => 'Pendidikan Terakhir yang dimasukkan melebihi batas maksimum'
+		]);
+		$this->form_validation->set_rules('status','Status','required');
+		$this->form_validation->set_rules('tempat_lahir','Tempat Lahir','required|max_length[100]',[
+			'max_length' => 'Tempat Lahir yang dimasukkan melebihi batas maksimum'
+		]);
 		$this->form_validation->set_rules('tanggal_lahir','Tanggal Lahir','required');
-		$this->form_validation->set_rules('agama','Agama','required|max_length[20]');
+		$this->form_validation->set_rules('agama','Agama','required');
 		$this->form_validation->set_rules('alamat','Alamat','required');
 
 		$this->form_validation->set_message('required','Field %s tidak boleh kosong');

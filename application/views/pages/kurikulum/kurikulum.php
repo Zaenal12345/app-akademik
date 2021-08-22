@@ -83,6 +83,7 @@
                                         <th class="text-center" style="text-transform: capitalize;">Kode Matakuliah</th>
                                         <th class="text-center" style="text-transform: capitalize;">Nama Matakuliah</th>
                                         <th class="text-center" style="text-transform: capitalize;">SKS</th>
+                                        <th class="text-center" style="text-transform: capitalize;">Semester</th>
                                         <th class="text-center" style="text-transform: capitalize;">Kelas</th>
                                         <th class="text-center" style="text-transform: capitalize;">Dosen Pengampuh</th>
                                     </tr>
@@ -123,6 +124,7 @@
                                 <th class="text-center" style="text-transform: capitalize;">Kode Matakuliah</th>
                                 <th class="text-center" style="text-transform: capitalize;">Nama Matakuliah</th>
                                 <th class="text-center" style="text-transform: capitalize;">SKS</th>
+                                <th class="text-center" style="text-transform: capitalize;">Semester</th>
                                 <th class="text-center" style="text-transform: capitalize;"><input type="checkbox" name="select_all"></th>
                             </tr>
                         </thead>
@@ -133,6 +135,7 @@
                                     <td class="text-center"><?= $data['kode_matakuliah']?></td>
                                     <td class="text-center"><?= $data['nama_matakuliah']?></td>
                                     <td class="text-center"><?= $data['sks']?></td>
+                                    <td class="text-center"><?= $data['semester']?></td>
                                     <td class="text-center"><input type="checkbox"></td>
                                 </tr>
                             <?php endforeach;?>
@@ -207,6 +210,7 @@
                                 <th class="text-center" style="text-transform: capitalize;">Kode Matakuliah</th>
                                 <th class="text-center" style="text-transform: capitalize;">Nama Matakuliah</th>
                                 <th class="text-center" style="text-transform: capitalize;">SKS</th>
+                                <th class="text-center" style="text-transform: capitalize;">Semester</th>
                                 <th class="text-center" style="text-transform: capitalize;"><input type="checkbox" name="select_all2"></th>
                             </tr>
                         </thead>

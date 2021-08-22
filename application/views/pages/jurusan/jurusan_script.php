@@ -138,7 +138,7 @@
                     $('#kode_jurusan_edit').val(res.kode_jurusan);
                     $('#nama_jurusan_edit').val(res.nama_jurusan);
                     $('#nama_fakultas_edit').val(res.fakultas_id);
-                    // console.log(res);
+                    $('#kode_jurusan_edit-err,#nama_jurusan_edit-err, #nama_fakultas_edit-err').html('');
 
                 }
             });

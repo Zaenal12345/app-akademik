@@ -38,7 +38,7 @@ class Jadwal extends CI_Controller
 
 	public function show(){
 
-		$this->datatables->select('jadwal.hari,jadwal.ruangan,jadwal.jam_masuk,jadwal.jam_selesai,tahun_ajar.tahun_ajar,matakuliah.nama_matakuliah,dosen.nama_dosen,kelas.nama_kelas,jurusan.nama_jurusan,jadwal.semester,jadwal.id_jadwal');
+		$this->datatables->select('jadwal.hari,jadwal.ruangan,jadwal.jam_masuk,jadwal.jam_selesai,tahun_ajar.tahun_ajar,matakuliah.nama_matakuliah,dosen.nama_dosen,kelas.nama_kelas,jurusan.nama_jurusan,matakuliah.semester,jadwal.id_jadwal');
 		$this->datatables->from('jadwal');
 		$this->datatables->join('tahun_ajar','tahun_ajar.id_tahun_ajar = jadwal.tahun_ajar_id');
 		$this->datatables->join('matakuliah','matakuliah.id_matakuliah = jadwal.matakuliah_id');
@@ -58,11 +58,12 @@ class Jadwal extends CI_Controller
 		$admin_data = $this->AuthModel->getDataByUsername($this->session->userdata('username'));
 		$data = [
 			'data' => $admin_data,
-			'title' => 'Jadwal',
-			'sub_title' => '',
 			'kelas' => $this->db->get('kelas')->result(),
 			'jurusan' => $this->db->get('jurusan')->result(),
+			'ruangan' => $this->db->get('ruangan')->result(),
 			'tahun_ajar' => $this->db->order_by('id_tahun_ajar','desc')->get('tahun_ajar')->result(),
+			'title' => 'Jadwal',
+			'sub_title' => '',
 		];
 		
 		$this->load->view('component/header',$data);
@@ -78,7 +79,6 @@ class Jadwal extends CI_Controller
 		$tahun_ajar_id= $this->input->post('tahun_ajar_id'); 
 		$kelas_id= $this->input->post('kelas_id'); 
 		$jurusan_id= $this->input->post('jurusan_id'); 
-		$semester= $this->input->post('semester'); 
 
 		$data = [];
 		for ($i=0; $i < count($this->input->post('data')) ; $i++) { 
@@ -89,10 +89,9 @@ class Jadwal extends CI_Controller
 				'dosen_id' =>$this->input->post('data')[$i]['dosen_id'], 
 				'kelas_id' =>$kelas_id,
 				'jurusan_id' =>$jurusan_id,
-				'semester' =>$semester,
 				'jam_masuk' =>$this->input->post('data')[$i]['jam_masuk'],
 				'jam_selesai' =>$this->input->post('data')[$i]['jam_selesai'],
-				'ruangan' =>$this->input->post('data')[$i]['ruangan'],
+				'ruangan' =>$this->input->post('data')[$i]['ruangan_id'],
 				'tahun_ajar_id' =>$tahun_ajar_id,
 			];
 
@@ -120,7 +119,7 @@ class Jadwal extends CI_Controller
 		$kelas_id = $this->input->post('kelas_id');
 		$jurusan_id = $this->input->post('jurusan_id');
 
-		$matakuliah = $this->db->select('DISTINCT(m.id_matakuliah),m.nama_matakuliah')
+		$matakuliah = $this->db->select('DISTINCT(m.id_matakuliah),m.nama_matakuliah,m.semester,m.kode_matakuliah')
 		->from('kurikulum kl')
 		->join('matakuliah m','m.id_matakuliah = kl.matakuliah_id')
 		->join('tahun_ajar t','t.id_tahun_ajar = kl.tahun_ajar_id')
@@ -156,6 +155,14 @@ class Jadwal extends CI_Controller
 		->get()->result();
 
 		echo json_encode($dosen);
+
+	}
+
+	public function getSemester(){
+
+		$matakuliah_id = $this->input->post('matakuliah_id');
+		$matakuliah = $this->db->get_where('matakuliah',['id_matakuliah' => $matakuliah_id])->row();
+		echo json_encode($matakuliah);
 
 	}
 }

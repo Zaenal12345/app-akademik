@@ -64,12 +64,12 @@
             <div class="modal-body">
                 <form id="frm-fakultas">
                     <div class="form-group">
-                        <label for="kode_fakultas">Kode Fakultas</label>
+                        <label for="kode_fakultas"><b>Kode Fakultas :</b></label>
                         <input type="text" class="form-control" id="kode_fakultas" name="kode_fakultas" placeholder="Masukkan Kode Fakultas">
                         <small id="kode_fakultas-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_fakultas">Nama Fakultas</label>
+                        <label for="nama_fakultas"><b>Nama Fakultas :</b></label>
                         <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas" placeholder="Masukkan Nama Fakultas">
                         <small id="nama_fakultas-err" class="form-text text-danger"></small>
                     </div>
@@ -94,13 +94,13 @@
             <div class="modal-body">
                 <form id="frm-fakultas_edit">
                     <div class="form-group">
-                        <label for="kode_fakultas_edit">Kode Fakultas</label>
+                        <label for="kode_fakultas_edit"><b>Kode Fakultas :</b></label>
                         <input type="hidden" name="id_fakultas_edit" id="id_fakultas_edit">
                         <input type="text" class="form-control" name="kode_fakultas_edit" id="kode_fakultas_edit"  placeholder="Masukkan Kode Fakultas" readonly>
                         <small id="kode_fakultas_edit-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_fakultas_edit">Nama Fakultas</label>
+                        <label for="nama_fakultas_edit"><b>Nama Fakultas :</b></label>
                         <input type="text" class="form-control" name="nama_fakultas_edit" id="nama_fakultas_edit" placeholder="Masukkan Nama Fakultas">
                         <small id="nama_fakultas_edit-err" class="form-text text-danger"></small>
                     </div>
