@@ -1,0 +1,159 @@
+jquery ajax method :
+=============
+- $(selector).load(URL,data,callback);
+
+- $.get (URL,callback);
+$('#btn_tampil').click(function(){
+    $.get('info.php',function(data, status){
+        alert('Data : '+data+'\nStatus: '+status);
+    });
+});
+
+- $.post(URL,data,callback);
+$.post('info.php',{nama : 'Setiawan Dimas'},
+    function(data, status){
+        alert('Data : '+data+'\nStatus: '+status);
+    });
+});
+
+//===================================================
+- $.ajax({URL,data,cache,success});
+var data = $('#form_mahasiswa').serialize();
+$.ajax({
+    type	: 'POST',
+    url	: "tambah.php",
+    data: data,
+    cache	: false,
+    success	: function(data){
+        $('#tampil_data').load("tampil.php");
+    }
+});
+
+//===================================================
+$.ajax({
+    type: 'POST',
+    url: "aksi.php",
+    data: data,
+    success: function() {
+        $('.tampildata').load("tampil.php");
+    }
+});
+
+//===================================================
+$.ajax({
+    type: {POST or GET or PUT etc.},
+    url:  {server.url},
+    data: {someData: true},
+    statusCode: {
+        404: function(responseObject, textStatus, jqXHR) {
+            // No content found (404)
+            // This code will be executed if the server returns a 404 response
+        },
+        503: function(responseObject, textStatus, errorThrown) {
+            // Service Unavailable (503)
+            // This code will be executed if the server returns a 503 response
+        }           
+    }
+})
+.done(function(data){
+    alert(data);
+})
+.fail(function(jqXHR, textStatus){
+    alert('Something went wrong: ' + textStatus);
+})
+.always(function(jqXHR, textStatus) {
+   alert('Ajax request was finished')
+});
+
+//===================================================
+$('#ajax_form').submit(function(event){
+  event.preventDefault();
+  var $form = $(this);
+
+  $.ajax({
+      type: 'POST',
+      url: $form.attr('action'),
+      data: $form.serialize(),
+      success: function(data) {
+        // Do something with the response
+      },
+      error: function(error) {
+        // Do something with the error
+      }
+  });
+});
+
+//===================================================
+(function($) {
+  
+  // $(document).ready(function() {
+
+  'use strict';
+  
+  // cache the desired selectors
+  var $body    = $('body');
+  var $list    = $('.m-info');
+  var $message = $('.m-message');
+  var $modal   = $('.modal');
+  var $loader  = $('.loader');
+  var $framework;
+
+  $('.boxes a').on('click', function(e) {
+
+    // prevent the default behavior of the link
+    e.preventDefault();
+
+    // get the text of the link
+    $framework = $(this).text();
+
+    // execute the AJAX request
+    $.ajax({
+      // where the data live
+      url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/Demo.json',
+      // what is their type
+      dataType: 'json',
+      // show the loader before making the request 
+      beforeSend: function() {
+        $loader.show();
+      }
+    }).done(successFunction)
+      .fail(failFunction)
+      .always(alwaysFunction);
+  }); 
+
+  // success function
+  function successFunction(data) {
+  }
+  
+  // fail function
+  function failFunction(request, textStatus, errorThrown) {
+    $message.text('An error occurred during your request: ' + request.status + ' ' + textStatus + ' ' + errorThrown);
+  }
+  
+  // always function
+  function alwaysFunction() {
+  }
+  
+
+})(jQuery);
+
+
+AJAX API CONSUME
+================
+
+$.ajax({
+    type: 'GET',
+    url: 'http://{{web_services}}/api/rest-server/siswa/view/1/null/null/null/null',
+    dataType: 'json',
+    headers : {
+    'Content-Type': 'application/json',
+    'api_auth_key': 'xxxxxxxx'
+    }
+}).fail(function(xhr, status, error) {
+console.log(xhr);
+    alert('fail');
+}).done(function(data) {
+    console.log(data);
+})
+
+echo date('d F Y', strtotime('1994-02-15')); // Hasil 15 February 1994

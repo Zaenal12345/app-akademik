@@ -36,7 +36,7 @@ class Matakuliah extends CI_Controller
 	{
 		$this->datatables->select('id_matakuliah,kode_matakuliah,nama_matakuliah,sks,semester');
 		$this->datatables->from('matakuliah');
-		$this->datatables->add_column('view','<a href="#" class="edit-matakuliah btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i></a> <a href="#" class="delete-matakuliah btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i></a>','id_matakuliah');
+		$this->datatables->add_column('view','<a href="#" class="edit-matakuliah btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-matakuliah btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_matakuliah');
 		return print_r($this->datatables->generate());	
 	}
 

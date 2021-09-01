@@ -2,6 +2,17 @@
     
     $(function() {
 
+	
+		$(".js-select2-fakultas").select2({
+			placeholder: "Pilih Fakultas",
+			dropdownParent: $("#modal-jurusan")
+		});
+
+		$(".js-select2-fakultas2").select2({
+			placeholder: "Pilih Fakultas",
+			dropdownParent: $("#modal-jurusan_edit")
+		});
+
         // clear add form
         $('#tambah-jurusan').click(function() {
             clear(); 
@@ -137,7 +148,7 @@
                     $('#id_jurusan_edit').val(res.id_jurusan);
                     $('#kode_jurusan_edit').val(res.kode_jurusan);
                     $('#nama_jurusan_edit').val(res.nama_jurusan);
-                    $('#nama_fakultas_edit').val(res.fakultas_id);
+                    $('#nama_fakultas_edit').val(res.fakultas_id).trigger('change');
                     $('#kode_jurusan_edit-err,#nama_jurusan_edit-err, #nama_fakultas_edit-err').html('');
 
                 }

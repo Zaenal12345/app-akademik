@@ -1,3 +1,56 @@
+<style>
+
+    .ui-helper-hidden-accessible{
+        display: none;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+        display: block;
+        padding-left: 8px;
+        padding-right: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .select2-container .select2-selection--single {
+        box-sizing: border-box;
+        cursor: pointer;
+        display: block;
+        height: 43px;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #444;
+        line-height: 38px;
+        border:0px !important;
+        outline:0px !important!
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        border-color: #888 transparent transparent transparent;
+        border-style: solid;
+        border-width: 5px 4px 0 4px;
+        height: 0;
+        left: 50%;
+        margin-left: -4px;
+        margin-top: 5px;
+        position: absolute;
+        top: 50%;
+        width: 0;
+    }
+
+    .select2-container--default .select2-selection--single {
+        background-color: #fff;
+        border:none;
+        border-bottom: 1px solid #ced4da;
+        border-radius: 1px;
+    }
+    
+</style>
+
 <!-- [ Main Content ] start -->
 <section class="pcoded-main-container">
     <div class="pcoded-content">
@@ -25,7 +78,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="float-right"><a href="#" data-toggle="modal" data-target="#modal-jurusan" class="btn btn-primary" id="tambah-jurusan"><i class="feather icon-plus"></i></a></h5>
+                        <h5 class="float-right"><a href="#" data-toggle="modal" data-target="#modal-jurusan" class="btn btn-primary" id="tambah-jurusan"><i class="feather icon-plus"></i> Tambah Data</a></h5>
                         <div style="clear: both;"></div>
                     </div>
                     <div class="card-body table-border-style">
@@ -76,7 +129,8 @@
                     </div>
                     <div class="form-group">
                         <label for="nama_fakultas"><b>Nama Fakultas :</b></label>
-                        <select class="form-control" id="nama_fakultas" name="nama_fakultas">
+                        <select class="form-control js-select2-fakultas" id="nama_fakultas" name="nama_fakultas" style="width:100%">
+                            <option value=""></option>
                             <?php foreach($fakultas as $data):?>
                             <option value="<?= $data->id_fakultas ?>"><?= $data->nama_fakultas ?></option>
                             <?php endforeach;?>
@@ -86,8 +140,8 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i></button>
-                <button type="submit" class="btn btn-primary"><i class="feather icon-save"></i></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i> Tutup</button>
+                <button type="submit" class="btn btn-primary"><i class="feather icon-save"></i> Simpan</button>
                 </form>
             </div>
         </div>
@@ -117,7 +171,8 @@
                     </div>
                     <div class="form-group">
                         <label for="nama_fakultas_edit"><b>Nama Fakultas :</b></label>
-                        <select class="form-control" id="nama_fakultas_edit" name="nama_fakultas_edit">
+                        <select class="form-control js-select2-fakultas2" id="nama_fakultas_edit" name="nama_fakultas_edit" style="width:100%">
+                            <option value=""></option>
                             <?php foreach($fakultas as $data):?>
                             <option value="<?= $data->id_fakultas ?>"><?= $data->nama_fakultas ?></option>
                             <?php endforeach;?>
@@ -127,8 +182,8 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn  btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i></button>
-                <button type="submit" class="btn  btn-primary"><i class="feather icon-save"></i></button>
+                <button type="button" class="btn  btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i> Tutup</button>
+                <button type="submit" class="btn  btn-primary"><i class="feather icon-save"></i> Simpan</button>
                 </form>
             </div>
         </div>

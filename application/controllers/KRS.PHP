@@ -23,6 +23,8 @@ class KRS extends CI_Controller
 			'data' => $admin_data,
 			'title' => 'KRS',
 			'sub_title' => '',
+            'mahasiswa' => $this->db->get('mahasiswa')->result(),
+            'tahun_ajar' => $this->db->get('tahun_ajar')->result(),
 		];
 
 		$this->load->view('component/header',$data);
@@ -34,7 +36,7 @@ class KRS extends CI_Controller
 
     public function show()
     {
-        $this->datatables->select('krs.semester,krs.sks_matakuliah,mahasiswa.nim,mahasiswa.nama_mahasiswa,dosen.nama_dosen,tahun_ajar.tahun_ajar, matakuliah.kode_matakuliah, matakuliah.nama_matakuliah,krs.nama_kelas,krs.nama_jurusan');
+        $this->datatables->select('mahasiswa.nim,mahasiswa.nama_mahasiswa,dosen.nama_dosen,tahun_ajar.tahun_ajar, matakuliah.kode_matakuliah, matakuliah.nama_matakuliah,krs.nama_kelas,krs.nama_jurusan,matakuliah.semester, matakuliah.sks');
 		$this->datatables->from('krs');
 		$this->datatables->join('mahasiswa','mahasiswa.id_mahasiswa = krs.mahasiswa_id');
 		$this->datatables->join('matakuliah','matakuliah.id_matakuliah = krs.matakuliah_id');
@@ -52,7 +54,10 @@ class KRS extends CI_Controller
 		
 		$data = [
 			'data' => $admin_data,
-			'title' => 'dashboard',
+			'title' => 'KRS',
+			'sub_title' => '',
+            'mahasiswa' => $this->db->get('mahasiswa')->result(),
+            'tahun_ajar' => $this->db->where('status','Aktif')->get('tahun_ajar')->result(),
 		];
 
 		$this->load->view('component/header',$data);
@@ -61,17 +66,39 @@ class KRS extends CI_Controller
 		$this->load->view('component/footer',$data);
 		$this->load->view('pages/krs/krs_script',$data);
     }
+    
+    public function create2()
+    {
+        $this->check->user_login();
+		// get admin data
+		$admin_data = $this->AuthModel->getDataByUsername($this->session->userdata('username'));
+		
+		$data = [
+			'data' => $admin_data,
+			'title' => 'KRS',
+			'sub_title' => '',
+            'jurusan' => $this->db->get('jurusan')->result(),
+            'kelas' => $this->db->get('kelas')->result(),
+            'mahasiswa' => $this->db->get('mahasiswa')->result(),
+            'tahun_ajar' => $this->db->where('status','Aktif')->get('tahun_ajar')->result(),
+		];
+
+		$this->load->view('component/header',$data);
+		$this->load->view('component/sidebar',$data);
+		$this->load->view('pages/krs/krs_create2',$data);
+		$this->load->view('component/footer',$data);
+		$this->load->view('pages/krs/krs_script',$data);
+    }
 
     public function store(){
 
-        $id_mahasiswa = $this->input->post('id_mahasiswa');
-        $nama_mahasiswa = $this->input->post('nama_mahasiswa');
-        $semester = $this->input->post('semester');
-        $nama_kelas = $this->input->post('nama_kelas');
-        $nama_jurusan = $this->input->post('nama_jurusan');
-        $tahun_ajar = $this->input->post('tahun_ajar');
-        $id_tahun_ajar = $this->input->post('id_tahun_ajar');
-        $total_sks = $this->input->post('total_sks');
+        $id_mahasiswa   = $this->input->post('id_mahasiswa');
+        $nama_jurusan   = $this->input->post('nama_jurusan');
+        $jurusan_id     = $this->input->post('jurusan_id');
+        $nama_kelas     = $this->input->post('nama_kelas');
+        $kelas_id       = $this->input->post('kelas_id');
+        $tahun_ajar_id  = $this->input->post('tahun_ajar_id');
+        $semester       = $this->input->post('semester');
 
         $data = [];
 
@@ -82,9 +109,9 @@ class KRS extends CI_Controller
                 'nama_kelas' => $nama_kelas,
                 'nama_jurusan' => $nama_jurusan,
                 'matakuliah_id' => $this->input->post('data')[$i]['id_matakuliah'],
-                'sks_matakuliah' => $this->input->post('data')[$i]['sks'],
-                'semester' => $semester,
-                'tahun_ajar_id' => $id_tahun_ajar,
+                // 'sks_matakuliah' => $this->input->post('data')[$i]['sks'],
+                // 'semester' => $semester,
+                'tahun_ajar_id' => $tahun_ajar_id,
                 'dosen_id' => $this->input->post('data')[$i]['id_dosen'],
             ];
 
@@ -95,91 +122,201 @@ class KRS extends CI_Controller
 
     }
 
+    public function store2(){
+
+        $matakuliah_id   = $this->input->post('matakuliah_id');
+        $nama_jurusan   = $this->input->post('nama_jurusan');
+        $jurusan_id     = $this->input->post('jurusan_id');
+        $nama_kelas     = $this->input->post('nama_kelas');
+        $kelas_id       = $this->input->post('kelas_id');
+        $tahun_ajar_id  = $this->input->post('tahun_ajar_id');
+        $semester       = $this->input->post('semester');
+        $dosen_id       = $this->input->post('dosen_id');
+
+        $data = [];
+
+        for ($i=0; $i < count($this->input->post('data')) ; $i++) { 
+            
+            $data[] = [
+                'mahasiswa_id' => $this->input->post('data')[$i]['id_mahasiswa'],
+                'nama_kelas' => $nama_kelas,
+                'nama_jurusan' => $nama_jurusan,
+                'matakuliah_id' => $matakuliah_id,
+                'tahun_ajar_id' => $tahun_ajar_id,
+                'dosen_id' => $dosen_id,
+            ];
+
+        }   
+
+        $this->KRSModel->saveDataMultiple($data);
+        echo json_encode($data);
+
+    }
+
+    public function edit()
+    {
+        $nim = $this->input->post('nim');
+		$tahun_ajar_id = $this->input->post('tahun_ajar_id');
+		$result = [];
+
+		
+		$this->db->select('k.id_krs,m.semester,m.nama_matakuliah,m.sks,m.kode_matakuliah,t.tahun_ajar,t.id_tahun_ajar,d.nama_dosen,ks.nama_kelas,m.id_matakuliah,d.id_dosen,mhs.id_mahasiswa,mhs.nim,mhs.nama_mahasiswa');
+		$this->db->from('krs k');
+		$this->db->join('dosen d','d.id_dosen = k.dosen_id', 'left');
+		$this->db->join('matakuliah m', 'm.id_matakuliah = k.matakuliah_id');
+		$this->db->join('tahun_ajar t', 't.id_tahun_ajar = k.tahun_ajar_id');
+		$this->db->join('mahasiswa mhs', 'mhs.id_mahasiswa = k.mahasiswa_id');
+		$this->db->join('jurusan j', 'j.id_jurusan = mhs.jurusan_id');
+		$this->db->join('kelas ks', 'ks.id_kelas = mhs.kelas_id');
+		$this->db->where('t.id_tahun_ajar',$tahun_ajar_id);
+		$this->db->where('mhs.id_mahasiswa',$nim);
+        
+		$result_krs = $this->db->get()->result();
+		
+		if(count($result_krs) != 0){
+
+			for ($i=0; $i < count($result_krs) ; $i++) { 
+				
+				$result[] = [
+					'id_krs' => $result_krs[$i]->id_krs,
+					'kode_matakuliah' => $result_krs[$i]->kode_matakuliah,
+					'nama_matakuliah' => $result_krs[$i]->nama_matakuliah,
+					'sks' => $result_krs[$i]->sks,
+					'id_matakuliah' => $result_krs[$i]->id_matakuliah,
+					'id_dosen' => $result_krs[$i]->id_dosen,
+					'tahun_ajar' => $result_krs[$i]->tahun_ajar,
+					'nama_kelas' => $result_krs[$i]->nama_kelas,
+					'semester' => $result_krs[$i]->semester,
+					'nama_dosen' => $result_krs[$i]->nama_dosen == null ? '-' : $result_krs[$i]->nama_dosen,
+				];
+
+			}
+
+		}
+
+        // var_dump($result_krs);
+		// echo json_encode($result);
+
+        $data = [
+			'data' => $admin_data,
+			'title' => 'KRS',
+			'sub_title' => '',
+            'krs' => $this->db->get('jurusan')->result(),
+		];
+        
+        $this->load->view('component/header',$data);
+		$this->load->view('component/sidebar',$data);
+		$this->load->view('pages/krs/p_krs',$data);
+		$this->load->view('component/footer',$data);
+		$this->load->view('pages/krs/krs_script',$data);
+
+    }
+
     // =======================================================
     public function getMahasiswa(){
 
-        // $data = $this->db->select('mahasiswa.nim,mahasiswa.nama_mahasiswa,mahasiswa.id_mahasiswa,kelas.nama_kelas,jurusan.nama_jurusan')
-        // ->from('mahasiswa')
-        // ->join('kelas','mahasiswa.kelas_id = kelas.id_kelas')
-        // ->join('jurusan','mahasiswa.jurusan_id = jurusan.id_jurusan')
-        // ->get()->result();
+        // get id mahasiswa
+        $id_mahasiswa = $this->input->post('id');
 
-        // for ($i=0; $i < count($data); $i++) { 
-        //     $result[$i] = [
-        //         'label' => $data[$i]->nim,
-        //         'value' => $data[$i]->nim,
-        //         'result' => $data[$i]->nama_mahasiswa,
-        //         'result2' => $data[$i]->id_mahasiswa,
-        //         'result3' => $data[$i]->nama_kelas,
-        //         'result4' => $data[$i]->nama_jurusan,
-        //     ];
-        // }
-        // echo json_encode($result);
+        // get nama kelas dan nama jurusan by id mahasiswa
+        $data = $this->db->select('kelas.nama_kelas,jurusan.nama_jurusan,jurusan.id_jurusan,kelas.id_kelas')
+        ->from('mahasiswa')
+        ->join('kelas','mahasiswa.kelas_id = kelas.id_kelas')
+        ->join('jurusan','mahasiswa.jurusan_id = jurusan.id_jurusan')
+        ->where('mahasiswa.id_mahasiswa',$id_mahasiswa)
+        ->get()->result();
 
-        if (isset($_GET['term'])) {
-            
-            $data = $this->db->select('mahasiswa.nim as label,mahasiswa.nim as value,mahasiswa.nama_mahasiswa as result ,mahasiswa.id_mahasiswa as result2 ,kelas.nama_kelas as result3 ,jurusan.nama_jurusan as result4')
-            ->from('mahasiswa')
-            ->join('kelas','mahasiswa.kelas_id = kelas.id_kelas')
-            ->join('jurusan','mahasiswa.jurusan_id = jurusan.id_jurusan')
-            ->like('mahasiswa.nim', $_GET['term'] , 'both')
-            ->order_by('mahasiswa.id_mahasiswa', 'ASC')
-            ->limit(5)
-            ->get()->result();
-
-            echo json_encode($data);
-        }
+        echo json_encode($data);
     }
 
-    public function getTahunAjar(){
+    public function getMatakuliah()
+    {
+        $jurusan_id = $this->input->post('jurusan_id');
+		$tahun_ajar_id = $this->input->post('tahun_ajar_id');
+		$kelas_id = $this->input->post('kelas_id');
+		$semester = $this->input->post('semester');
+		$result = [];
 
-        if (isset($_GET['term'])) {
-            
-            $data = $this->db->select('tahun_ajar.id_tahun_ajar as result, tahun_ajar.tahun_ajar as label, tahun_ajar.tahun_ajar as value ')
-            ->like('tahun_ajar', $_GET['term'] , 'both')
-            ->order_by('id_tahun_ajar', 'ASC')
-            ->limit(5)
-            ->where('status','Aktif')
-            ->get('tahun_ajar')->result();
-
-            echo json_encode($data);
+		
+		$this->db->select('k.id_kurikulum,m.semester,m.nama_matakuliah,m.sks,m.kode_matakuliah,t.tahun_ajar,t.id_tahun_ajar,d.nama_dosen,ks.nama_kelas,m.id_matakuliah,d.id_dosen');
+		$this->db->from('kurikulum k');
+		$this->db->join('dosen d','d.id_dosen = k.dosen_id', 'left');
+		$this->db->join('matakuliah m', 'm.id_matakuliah = k.matakuliah_id');
+		$this->db->join('tahun_ajar t', 't.id_tahun_ajar = k.tahun_ajar_id');
+		$this->db->join('jurusan j', 'j.id_jurusan = k.jurusan_id');
+		$this->db->join('kelas ks', 'ks.id_kelas = k.kelas_id');
+		$this->db->where('j.id_jurusan',$jurusan_id);
+		$this->db->where('ks.id_kelas',$kelas_id);
+        if($tahun_ajar_id != null){
+            $this->db->where('k.tahun_ajar_id',$tahun_ajar_id);
         }
+        if($semester != null){
+            $this->db->where('m.semester',$semester);
+        }
+        
+		$result_kurikulum = $this->db->get()->result();
+		
+		if(count($result_kurikulum) != 0){
 
+			for ($i=0; $i < count($result_kurikulum) ; $i++) { 
+				
+				$result[] = [
+					'id_kurikulum' => $result_kurikulum[$i]->id_kurikulum,
+					'kode_matakuliah' => $result_kurikulum[$i]->kode_matakuliah,
+					'nama_matakuliah' => $result_kurikulum[$i]->nama_matakuliah,
+					'sks' => $result_kurikulum[$i]->sks,
+					'id_matakuliah' => $result_kurikulum[$i]->id_matakuliah,
+					'id_dosen' => $result_kurikulum[$i]->id_dosen,
+					'tahun_ajar' => $result_kurikulum[$i]->tahun_ajar,
+					'nama_kelas' => $result_kurikulum[$i]->nama_kelas,
+					'semester' => $result_kurikulum[$i]->semester,
+					'nama_dosen' => $result_kurikulum[$i]->nama_dosen == null ? '-' : $result_kurikulum[$i]->nama_dosen,
+				];
+
+			}
+
+		}
+
+		echo json_encode($result);
     }
 
-    public function getMatakuliah(){
+    public function getDetailMatakuliah()
+    {
+        $matakuliah_id = $this->input->post('matakuliah_id');
+		$result = [];
 
-        if (isset($_GET['term'])) {
-            $data = $this->db->like('kode_matakuliah', $_GET['term'] , 'both')->order_by('id_matakuliah', 'ASC')->limit(5)->get('matakuliah')->result();
-            if (count($data) > 0) {
-            foreach ($data as $row)
-                $arr_result[] = [
-                    'label' => $row->kode_matakuliah,
-                    'value' => $row->kode_matakuliah,
-                    'result' => $row->id_matakuliah,
-                    'result2' => $row->nama_matakuliah,
-                    'result3' => $row->sks,
-                ];
-                echo json_encode($arr_result);
-            }
+		
+		$this->db->select('k.id_kurikulum,m.semester,m.nama_matakuliah,m.sks,m.kode_matakuliah,t.tahun_ajar,t.id_tahun_ajar,d.nama_dosen,ks.nama_kelas,m.id_matakuliah,d.id_dosen');
+		$this->db->from('kurikulum k');
+		$this->db->join('dosen d','d.id_dosen = k.dosen_id', 'left');
+		$this->db->join('matakuliah m', 'm.id_matakuliah = k.matakuliah_id');
+		$this->db->join('tahun_ajar t', 't.id_tahun_ajar = k.tahun_ajar_id');
+		$this->db->join('jurusan j', 'j.id_jurusan = k.jurusan_id');
+		$this->db->join('kelas ks', 'ks.id_kelas = k.kelas_id');
+		$this->db->where('m.id_matakuliah',$matakuliah_id);
+		$result_kurikulum = $this->db->get()->result();
+		
+		if(count($result_kurikulum) != 0){
 
-        }
+			for ($i=0; $i < count($result_kurikulum) ; $i++) { 
+				
+				$result[] = [
+					'kode_matakuliah' => $result_kurikulum[$i]->kode_matakuliah,
+					'nama_matakuliah' => $result_kurikulum[$i]->nama_matakuliah,
+					'sks' => $result_kurikulum[$i]->sks,
+					'id_matakuliah' => $result_kurikulum[$i]->id_matakuliah,
+					'id_dosen' => $result_kurikulum[$i]->id_dosen,
+					'tahun_ajar' => $result_kurikulum[$i]->tahun_ajar,
+					'nama_kelas' => $result_kurikulum[$i]->nama_kelas,
+					'semester' => $result_kurikulum[$i]->semester,
+					'nama_dosen' => $result_kurikulum[$i]->nama_dosen == null ? '-' : $result_kurikulum[$i]->nama_dosen,
+				];
 
-    }
+			}
 
-    public function getDosen(){
+		}
 
-        if (isset($_GET['term'])) {
-
-            $data = $this->db->select('dosen.nama_dosen as label, dosen.nama_dosen as value, dosen.id_dosen as result')
-            ->like('nama_dosen', $_GET['term'] , 'both')
-            ->order_by('id_dosen', 'ASC')
-            ->limit(5)->get('dosen')->result();
-
-            echo json_encode($data);
-
-        }
-
+		echo json_encode($result);
     }
 
 

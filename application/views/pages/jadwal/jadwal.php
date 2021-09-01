@@ -27,7 +27,8 @@
                 <div class="card">
                     <div class="card-header">
                         <!-- <h5 class="float-right"><a href="#" data-toggle="modal" data-target="#modal-fakultas" class="btn btn-primary" id="tambah-fakultas"><i class="feather icon-plus"></i></a></h5> -->
-                        <h5 class="float-right"><a href="<?= base_url()?>jadwal/create" class="btn btn-primary"><i class="feather icon-plus"></i></a></h5>
+                        <!-- <h5 class="float-right"><a href="<?= base_url()?>jadwal/create" class="btn btn-primary"><i class="feather icon-plus"></i></a></h5> -->
+                        <h5><a href="<?= base_url()?>jadwal/create" class="btn btn-primary">Tambah Data</a></h5>
                         <div style="clear: both;"></div>
                     </div>
                     <div class="card-body table-border-style">

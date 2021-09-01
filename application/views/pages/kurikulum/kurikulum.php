@@ -1,3 +1,55 @@
+<style>
+
+    .ui-helper-hidden-accessible{
+        display: none;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+        display: block;
+        padding-left: 8px;
+        padding-right: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .select2-container .select2-selection--single {
+        box-sizing: border-box;
+        cursor: pointer;
+        display: block;
+        height: 43px;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #444;
+        line-height: 38px;
+        border:0px !important;
+        outline:0px !important!
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        border-color: #888 transparent transparent transparent;
+        border-style: solid;
+        border-width: 5px 4px 0 4px;
+        height: 0;
+        left: 50%;
+        margin-left: -4px;
+        margin-top: 5px;
+        position: absolute;
+        top: 50%;
+        width: 0;
+    }
+
+    .select2-container--default .select2-selection--single {
+        background-color: #fff;
+        border:none;
+        border-bottom: 1px solid #ced4da;
+        border-radius: 1px;
+    }
+    
+</style>
 
 <!-- [ Main Content ] start -->
 <section class="pcoded-main-container">
@@ -30,8 +82,8 @@
                             <div class="row">
                                 <div class="col-3">
                                     <div class="form-group">
-                                        <label for="tahun_ajar_id">Matakuliah Untuk Periode : </label>
-                                        <select name="tahun_ajar_id" id="tahun_ajar_id" class="form-control">
+                                        <label for="tahun_ajar_id"><b>Matakuliah Untuk Periode : </b></label>
+                                        <select name="tahun_ajar_id" id="tahun_ajar_id" class="form-control js-select2-tahun_ajar">
                                             <option value="">Pilih Periode</option>
                                             <?php foreach($tahun_ajar as $data):?>
                                                 <option value="<?= $data['id_tahun_ajar']?>"><?= $data['tahun_ajar']?></option>
@@ -41,8 +93,8 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group">
-                                        <label for="jurusan_id">Program Studi :</label>
-                                        <select name="jurusan_id" id="jurusan_id" class="form-control">
+                                        <label for="jurusan_id"><b>Program Studi :</b></label>
+                                        <select name="jurusan_id" id="jurusan_id" class="form-control js-select2-jurusan">
                                             <option value="">Pilih Program Studi</option>
                                             <?php foreach($jurusan as $data):?>
                                                 <option value="<?= $data['id_jurusan']?>"><?= $data['nama_jurusan']?></option>
@@ -52,8 +104,8 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group">
-                                        <label for="kelas_id">Kelas :</label>
-                                        <select name="kelas_id" id="kelas_id" class="form-control">
+                                        <label for="kelas_id"><b>Kelas :</b></label>
+                                        <select name="kelas_id" id="kelas_id" class="form-control js-select2-kelas">
                                             <option value="">Pilih Kelas</option>
                                             <?php foreach($kelas as $data):?>
                                                 <option value="<?= $data['id_kelas']?>"><?= $data['nama_kelas']?></option>

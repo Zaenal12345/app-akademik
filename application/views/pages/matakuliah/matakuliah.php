@@ -25,7 +25,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="float-right"><a href="#" data-toggle="modal" data-target="#modal-matakuliah" class="btn btn-primary" id="tambah-matakuliah"><i class="feather icon-plus"></i></a></h5>
+                        <h5 class="float-right"><a href="#" data-toggle="modal" data-target="#modal-matakuliah" class="btn btn-primary" id="tambah-matakuliah"><i class="feather icon-plus"></i> Tambah Data</a></h5>
                         <div style="clear: both;"></div>
                     </div>
                     <div class="card-body table-border-style">
@@ -88,8 +88,8 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i></button>
-                <button type="submit" class="btn btn-primary"><i class="feather icon-save"></i></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i> Tutup</button>
+                <button type="submit" class="btn btn-primary"><i class="feather icon-save"></i> Simpan</button>
                 </form>
             </div>
         </div>
@@ -130,8 +130,8 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn  btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i></button>
-                <button type="submit" class="btn  btn-primary"><i class="feather icon-save"></i></button>
+                <button type="button" class="btn  btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i> Tutup</button>
+                <button type="submit" class="btn  btn-primary"><i class="feather icon-save"></i> Simpan</button>
                 </form>
             </div>
         </div>

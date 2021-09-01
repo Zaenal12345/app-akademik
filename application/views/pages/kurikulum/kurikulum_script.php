@@ -1,5 +1,22 @@
 <script>
 
+    // select2 initialization
+	$(document).ready(function domReady() {
+		
+		$(".js-select2-kelas").select2({
+			placeholder: "Pilih Kelas",
+		});
+
+		$(".js-select2-tahun_ajar").select2({
+			placeholder: "Pilih Tahun Ajaran",
+		});
+
+		$(".js-select2-jurusan").select2({
+			placeholder: "Pilih Jurusan",
+		});
+		
+	});
+
     // add button
     $('#add-kurikulum').click(function() {
         // unchecked all checkbox

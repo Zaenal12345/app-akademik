@@ -23,6 +23,7 @@ class Nilai extends CI_Controller
 			'data' => $admin_data,
 			'title' => 'Nilai',
 			'sub_title' => '',
+            'mahasiswa' => $this->db->get('mahasiswa')->result(),
 		];
 
 		$this->load->view('component/header',$data);
@@ -52,6 +53,10 @@ class Nilai extends CI_Controller
 			'data' => $admin_data,
 			'title' => 'Nilai',
 			'sub_title' => '',
+            'matakuliah' => $this->db->get('matakuliah')->result(),
+            'kelas' => $this->db->get('kelas')->result(),
+            'jurusan' => $this->db->get('jurusan')->result(),
+            'tahun_ajar' => $this->db->get('tahun_ajar')->result(),
 		];
 
 		$this->load->view('component/header',$data);
@@ -63,19 +68,36 @@ class Nilai extends CI_Controller
 
     public function store(){
 
-        $id_jurusan = $this->input->post('id_jurusan');
-        $id_kelas = $this->input->post('id_kelas');
-        $id_matakuliah = $this->input->post('id_matakuliah');
-        $id_tahun_ajar = $this->input->post('id_tahun_ajar');
+        $id_jurusan = $this->input->post('jurusan_id');
+        $id_kelas = $this->input->post('kelas_id');
+        $id_matakuliah = $this->input->post('matakuliah_id');
+        $id_tahun_ajar = $this->input->post('tahun_ajar_id');
         $semester = $this->input->post('semester');
         
         $data = [];
-        for ($i=0; $i < count($this->input->post('mahasiswa_id')); $i++) { 
-            $data[] = [
+        $count = count($this->input->post('mahasiswa_id'));
+
+        // for ($i=0; $i <$count; $i++) { 
+        //     $data[] = [
+        //         'mahasiswa_id' => $this->input->post('mahasiswa_id')[$i],
+        //         'matakuliah_id' => $id_matakuliah,
+        //         'tahun_ajar_id' => $id_tahun_ajar,
+        //         'absen' => $this->input->post('absen')[$i],
+        //         'tugas' => $this->input->post('tugas')[$i],
+        //         'uts' => $this->input->post('uts')[$i],
+        //         'uas' => $this->input->post('uas')[$i],
+        //         'nilai' => $this->input->post('nilai')[$i],
+        //         'grade' => $this->input->post('grade')[$i],
+        //         'keterangan' => $this->input->post('grade')[$i] != 'E' ? 'Lulus' : 'Belum Lulus',
+        //     ];
+        // }
+
+        for ($i=0; $i <$count; $i++) { 
+
+            $this->db->insert('nilai',[
                 'mahasiswa_id' => $this->input->post('mahasiswa_id')[$i],
                 'matakuliah_id' => $id_matakuliah,
                 'tahun_ajar_id' => $id_tahun_ajar,
-                'semester' => $semester,
                 'absen' => $this->input->post('absen')[$i],
                 'tugas' => $this->input->post('tugas')[$i],
                 'uts' => $this->input->post('uts')[$i],
@@ -83,14 +105,14 @@ class Nilai extends CI_Controller
                 'nilai' => $this->input->post('nilai')[$i],
                 'grade' => $this->input->post('grade')[$i],
                 'keterangan' => $this->input->post('grade')[$i] != 'E' ? 'Lulus' : 'Belum Lulus',
-            ];
-
+            ]);
 
         }
 
-        $this->NilaiModel->saveMultipleData($data);
+
+        // $this->NilaiModel->saveMultipleData($data);
         echo json_encode([
-            'message' => 'Data berhasil di simpan.'
+            'message' => 'Data berhasil disimpan',
         ]);
 
     }
@@ -120,52 +142,97 @@ class Nilai extends CI_Controller
         echo json_encode($list);
 
     }
-    // ===============================================================
-    public function getTahunAjar(){
 
-        if (isset($_GET['term'])) {
+    public function transkipNilai()
+    {
+        $data_nilai = [];
+        $sks_tempuh = 0;
+        $sks_fix = 0;
+        $ipk = 0;
+        $id_mahasiswa = $this->input->post('nim');
+        $matakuliah = $this->db->get('matakuliah')->result();
+        $mahasiswa = $this->db->select('mhs.*,kls.nama_kelas,j.nama_jurusan')
+        ->from('mahasiswa mhs')
+        ->join('kelas kls','kls.id_kelas = mhs.kelas_id')
+        ->join('jurusan j','j.id_jurusan = mhs.jurusan_id')
+        ->where('mhs.id_mahasiswa',$id_mahasiswa)
+        ->get()->result(); 
+
+        $nilai = $this->db->where('mahasiswa_id',$id_mahasiswa)->get('nilai')->result();
+
+        for ($i=0; $i < count($matakuliah) ; $i++) { 
             
-            $data = $this->db->select('tahun_ajar.id_tahun_ajar as result, tahun_ajar.tahun_ajar as label, tahun_ajar.tahun_ajar as value ')
-            ->like('tahun_ajar', $_GET['term'] , 'both')
-            ->order_by('id_tahun_ajar', 'ASC')
-            ->limit(5)
-            ->where('status','Aktif')
-            ->get('tahun_ajar')->result();
+            $data_nilai[] = [
+                'id_matakuliah' => $matakuliah[$i]->id_matakuliah,
+                'kode_matakuliah' => $matakuliah[$i]->kode_matakuliah,
+                'nama_matakuliah' => $matakuliah[$i]->nama_matakuliah,
+                'sks' => $matakuliah[$i]->sks,
+                'semester' => $matakuliah[$i]->semester,
+                'grade' => 0,
+                'bobot' => 0,
+                'jumlah' => 0,
+            ];
 
-            echo json_encode($data);
+            $sks_tempuh+= $matakuliah[$i]->sks;
         }
 
-    }
+        for ($j=0; $j < count($data_nilai) ; $j++) { 
+            
+            for ($k=0; $k < count($nilai); $k++) { 
+                
+                if($nilai[$k]->matakuliah_id == $data_nilai[$j]['id_matakuliah']){
+                    $data_nilai[$j]['grade'] = $nilai[$k]->grade;
+                    
+                    if($nilai[$k]->grade == "A"){
+                        $data_nilai[$j]['bobot'] = 4;
+                    }else if($nilai[$k]->grade == "B"){
+                        $data_nilai[$j]['bobot'] = 3;
+                    }else if($nilai[$k]->grade == "C"){
+                        $data_nilai[$j]['bobot'] = 2;
+                    }else if($nilai[$k]->grade == "D"){
+                        $data_nilai[$j]['bobot'] = 1;
+                    }else if($nilai[$k]->grade == "E"){
+                        $data_nilai[$j]['bobot'] = 0;
+                    }
 
-    public function getMatakuliah(){
+                }
 
-        if (isset($_GET['term'])) {
-            $data = $this->db->select('nama_matakuliah as label, nama_matakuliah as value, id_matakuliah as result')
-            ->like('nama_matakuliah', $_GET['term'] , 'both')
-            ->order_by('id_matakuliah', 'ASC')
-            ->limit(5)->get('matakuliah')->result();
-            echo json_encode($data);
+            }
+
         }
 
-    }
+        for ($l=0; $l < count($data_nilai) ; $l++) { 
+            
+            if($data_nilai[$l]['bobot'] != 0){
 
-    public function getJurusan(){
+                $data_nilai[$l]['jumlah'] = ($data_nilai[$l]['bobot'] * $data_nilai[$l]['sks']);
+                $sks_fix+=$data_nilai[$l]['sks'];
+            }
 
-        if (isset($_GET['term'])) {
-            $data = $this->db->select('nama_jurusan as label, nama_jurusan as value, id_jurusan as result')
-            ->like('nama_jurusan', $_GET['term'] , 'both')->order_by('id_jurusan', 'ASC')->limit(5)->get('jurusan')->result();
-            echo json_encode($data);
         }
 
-    }
+        // echo json_encode($data);
 
-    public function getKelas(){
+        $this->check->user_login();
+		// get admin data
+		$admin_data = $this->AuthModel->getDataByUsername($this->session->userdata('username'));
+		
+		$data = [
+			'data' => $admin_data,
+			'title' => 'Nilai',
+			'sub_title' => '',
+			'transkip' => $data_nilai,
+			'mahasiswa' => $mahasiswa,
+			'sks_tempuh' => $sks_tempuh,
+			'sks_fix' => $sks_fix,
+			'ipk' => $ipk,
+		];
 
-        if (isset($_GET['term'])) {
-            $data = $this->db->select('nama_kelas as label, nama_kelas as value, id_kelas as result')
-            ->like('nama_kelas', $_GET['term'] , 'both')->order_by('id_kelas', 'ASC')->limit(5)->get('kelas')->result();
-            echo json_encode($data);
-        }
+		$this->load->view('component/header',$data);
+		$this->load->view('component/sidebar',$data);
+		$this->load->view('pages/nilai/transkip_nilai',$data);
+		$this->load->view('component/footer',$data);
+		$this->load->view('pages/nilai/nilai_script',$data);
 
     }
 
