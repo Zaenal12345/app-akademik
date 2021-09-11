@@ -81,7 +81,7 @@
                         <!-- <h5 class="float-right"><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-kelas">Tambah Data</a></h5> -->
                         <!-- <h5 class="float-right"><a href="<?= base_url()?>nilai/create" class="btn btn-primary"><i class="feather icon-plus"></i></a></h5> -->
                         <!-- <h5 class=""><a href="<?= base_url()?>nilai/create" class="btn btn-primary">Tambah Data</a></h5> -->
-                        <div class="btn-group">
+                        <div class="btn-group float-right">
 							<button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manajemen Data</button>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="<?= base_url()?>krs/create">Tambah Data</a>

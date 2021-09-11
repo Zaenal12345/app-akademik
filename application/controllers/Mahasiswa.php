@@ -14,6 +14,7 @@ class Mahasiswa extends CI_Controller
 		$this->load->model('AuthModel');
 		$this->load->model('JurusanModel');
 		$this->load->model('KelasModel');
+		$this->load->library('wsfeeder');
 	}
 
 	public function index()
@@ -247,6 +248,91 @@ class Mahasiswa extends CI_Controller
     private function _hapus_file($file)
     {
         return unlink(FCPATH.'/assets/picture/mahasiswa/'.$file);
+    }
+
+	public function singkronisasi()
+    {
+        $data = $this->wsfeeder->getAllMahasiswa();
+        $data_mahasiswa = $this->db->get('mahasiswa')->result();
+
+		if(count($data_mahasiswa) != 0){
+
+            // masukkan record terbaru
+			$newrecorord = 0;
+            for ($i=0; $i < count($data->data); $i++) { 
+                
+				$temp = $this->db->where('nim',$data->data[$i]->nim)->get('mahasiswa')->result();
+				if (count($temp) == 0) {
+					$newrecorord++;
+					$this->db->insert('mahasiswa',[
+						'nim' => $data->data[$i]->nim,
+						'nama_mahasiswa' => $data->data[$i]->nama_mahasiswa,
+						'jenis_kelamin' => $data->data[$i]->jenis_kelamin,
+						'tanggal_lahir' => $data->data[$i]->tanggal_lahir,
+						'tempat_lahir' => "",
+						'jurusan_id' => "2",
+						'kelas_id' => "1",
+						'agama' => $data->data[$i]->nama_agama,
+						'status_mahasiswa' => $data->data[$i]->nama_status_mahasiswa,
+						'alamat' => "",
+						'foto' => "default.jpg",
+						'tahun_angkatan' => $data->data[$i]->nama_periode_masuk,
+					]);
+
+				}
+
+            }
+
+			if ($newrecorord != 0) {
+				
+				$message = [
+					'message' => 'Singkronisasi berhasil!',
+					'success' => true,
+				];
+
+			}else{
+
+				$message = [
+					'message' => 'Data telah uptodate!',
+					'success' => true,
+				];
+
+			}
+
+        }else{
+
+            // insert semua data yang ada
+            $index=1;
+            for ($i=0; $i < count($data->data); $i++) { 
+                
+                $this->db->insert('mahasiswa',[
+                    'id_mahasiswa' => $index,
+                    'nim' => $data->data[$i]->nim,
+                    'nama_mahasiswa' => $data->data[$i]->nama_mahasiswa,
+                    'jenis_kelamin' => $data->data[$i]->jenis_kelamin,
+                    'tanggal_lahir' => $data->data[$i]->tanggal_lahir,
+                    'tempat_lahir' => "",
+                    'jurusan_id' => "2",
+                    'kelas_id' => "1",
+                    'agama' => $data->data[$i]->nama_agama,
+                    'status_mahasiswa' => $data->data[$i]->nama_status_mahasiswa,
+                    'alamat' => "",
+                    'foto' => "default.jpg",
+                    'tahun_angkatan' => $data->data[$i]->nama_periode_masuk,
+                ]);
+
+                $index++;
+
+            }
+			
+			$message = [
+				'message' => 'Singkronisasi berhasil!',
+				'success' => true,
+			];
+			
+        }
+        
+        echo json_encode($message);
     }
 
 }

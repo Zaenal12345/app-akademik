@@ -79,7 +79,7 @@
                 <div class="card">
                     <div class="card-header">
                         <!-- <h5 class="float-right"><a href="<?= base_url()?>krs/create" class="btn btn-primary" title="Tambah KRS"><i class="feather icon-plus"></i></a></h5> -->
-                        <div class="btn-group mb-2 mr-2">
+                        <div class="btn-group mb-2 mr-2 float-right">
 							<button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manajemen Data</button>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="<?= base_url()?>krs/create">Tambah KRS Personal</a>

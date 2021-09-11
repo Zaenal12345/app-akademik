@@ -2,6 +2,31 @@
 
 $(function() {
     
+    $(".js-select2-jenis_kelamin").select2({
+        placeholder: "Pilih Jenis Kelamin",
+        dropdownParent: $("#modal-mahasiswa")
+    });
+
+    $(".js-select2-agama").select2({
+        placeholder: "Pilih Agama",
+        dropdownParent: $("#modal-mahasiswa")
+    });
+
+    $(".js-select2-jurusan_id").select2({
+        placeholder: "Pilih Jurusan",
+        dropdownParent: $("#modal-mahasiswa")
+    });
+
+    $(".js-select2-kelas_id").select2({
+        placeholder: "Pilih Kelas",
+        dropdownParent: $("#modal-mahasiswa")
+    });
+
+    $(".js-select2-status_mahasiswa").select2({
+        placeholder: "Pilih Status Mahasiswa",
+        dropdownParent: $("#modal-mahasiswa")
+    });
+
     // clear add form
     $('#tambah-mahasiswa').click(function() {
         clear_add(); 
@@ -293,6 +318,39 @@ $(function() {
             }
 
         });
+
+    });
+
+    // singkronisasi data mahasiswa
+    $('#singkronisasi-mahasiswa').click(function() {
+
+       if(confirm('Apakah anda ingin melakukan singkronisasi data?')){
+
+        $.ajax({
+            url:'<?= base_url()?>mahasiswa/singkronisasi',
+            type:'POST',
+            dataType:'JSON',
+            beforeSend:function() {
+                $('.alert-singkronisasi').show('slow');
+                $(this).prop('disabled', true);
+            },
+            success:function(res) {
+                
+                if(res.success){
+
+                    $('.alert-singkronisasi').hide('slow');
+                    $(this).prop('disabled', false);
+                    $('#data-mahasiswa').DataTable().ajax.reload();
+                    toastr.success(res.message,{timeOut: 4000});
+
+                }
+
+            }
+        })
+        
+       }else{
+           return false;
+       }
 
     });
 

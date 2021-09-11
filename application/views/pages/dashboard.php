@@ -29,7 +29,7 @@
                             <div class="card-body">
                                 <h6 class="text-white">Total Mahasiswa</h6>
                                 <h2 class="text-white"><?= $mahasiswa?></h2>
-                                <p class="m-b-0"><a href="" style="color:white">lihat detail<i class="feather icon-more-horizontal m-l-10"></a></i></p>
+                                <p class="m-b-0"><a href="<?= base_url()?>mahasiswa" style="color:white">lihat detail<i class="feather icon-more-horizontal m-l-10"></a></i></p>
                                 <i class="card-icon fas fa-user-graduate"></i>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                             <div class="card-body">
                                 <h6 class="text-white">Total Dosen</h6>
                                 <h2 class="text-white"><?= $dosen?></h2>
-                                <p class="m-b-0"><a href="" style="color:white">lihat detail<i class="feather icon-more-horizontal m-l-10"></a></i></p>
+                                <p class="m-b-0"><a href="<?= base_url()?>dosen" style="color:white">lihat detail<i class="feather icon-more-horizontal m-l-10"></a></i></p>
                                 <i class="card-icon fas fa-user-tie"></i>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                             <div class="card-body">
                                 <h6 class="text-white">Total Fakultas</h6>
                                 <h2 class="text-white"><?= $fakultas?></h2>
-                                <p class="m-b-0"><a href="" style="color:white">lihat detail<i class="feather icon-more-horizontal m-l-10"></a></i></p>
+                                <p class="m-b-0"><a href="<?= base_url()?>fakultas" style="color:white">lihat detail<i class="feather icon-more-horizontal m-l-10"></a></i></p>
                                 <i class="card-icon fas fa-ellipsis-v"></i>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                             <div class="card-body">
                                 <h6 class="text-white">Total Jurusan</h6>
                                 <h2 class="text-white"><?= $jurusan?></h2>
-                                <p class="m-b-0"><a href="" style="color:white">lihat detail<i class="feather icon-more-horizontal m-l-10"></a></i></p>
+                                <p class="m-b-0"><a href="<?= base_url()?>jurusan" style="color:white">lihat detail<i class="feather icon-more-horizontal m-l-10"></a></i></p>
                                 <i class="card-icon fas fa-layer-group"></i>
                             </div>
                         </div>

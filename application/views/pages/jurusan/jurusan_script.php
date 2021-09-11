@@ -1,7 +1,6 @@
 <script>
     
     $(function() {
-
 	
 		$(".js-select2-fakultas").select2({
 			placeholder: "Pilih Fakultas",

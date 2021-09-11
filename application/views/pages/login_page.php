@@ -243,7 +243,7 @@
 
 
 
-    <footer >
+    <footer style="background-color: #ff5252 !important;">
 
         <div class="container">
 

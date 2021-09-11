@@ -11,13 +11,19 @@
 <nav class="pcoded-navbar menu-light ">
 	<div class="navbar-wrapper">
 		<div class="navbar-content scroll-div ">
-			
+
 			<div class="">
 				<div class="main-menu-header">
 					<img class="img-radius" src="<?= base_url('assets/')?>logo.png" alt="User-Profile-Image">
 					<div class="user-details">
-						<div id="more-details"><?= strtoupper($data->username); ?></div>
+						<div id="more-details"><?= strtoupper($data->username);?>&nbsp;&nbsp;<i class="fa fa-caret-down"></i></div>
 					</div>
+				</div>
+				<div class="collapse" id="nav-user-link">
+					<ul class="list-unstyled">
+						<li class="list-group-item"><a href="user-profile.html"><i class="feather icon-user m-r-5"></i>Profile</a></li>
+						<li class="list-group-item"><a href="<?= base_url()?>auth/logout" onclick="return confirm('Apakah anda ingin logout?')"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
+					</ul>
 				</div>
 			</div>
 			
@@ -42,16 +48,10 @@
 				        <li <?= $sub_title == 'Kurikulum' ? 'active' : '' ?> ><a href="<?= base_url()?>kurikulum">Kurikulum</a></li>
 				    </ul>
 				</li>
-				<li class="nav-item <?= $title == 'Kegiatan' ? 'active' : '' ?>">
+				<!-- <li class="nav-item <?= $title == 'Kegiatan' ? 'active' : '' ?>">
 				    <a href="<?= base_url()?>KegiatanMahasiswa" class="nav-link"><span class="pcoded-micon"><i class="feather icon-calendar"></i></span><span class="pcoded-mtext">Kegiatan Mahasiswa</span></a>
-				</li>
-
-				<!-- ============================================================= -->
-				<!-- KRS & Nilai -->
-				<!-- ============================================================= -->
-				<!-- <li class="nav-item pcoded-menu-caption">
-				    <label>KRS & Nilai</label>
 				</li> -->
+
 
 				<li class="nav-item  <?= $title == 'Jadwal' ? 'active' : '' ?>">
 				    <a href="<?= base_url() ?>jadwal" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Penjadwalan</span></a>
@@ -61,6 +61,9 @@
 				</li>
 				<li class="nav-item  <?= $title == 'Nilai' ? 'active' : '' ?>">
 				    <a href="<?= base_url()?>nilai" class="nav-link "><span class="pcoded-micon"><i class="feather icon-align-justify"></i></span><span class="pcoded-mtext">Nilai</span></a>
+				</li>
+				<li class="nav-item  <?= $title == 'PD DIKTI' ? 'active' : '' ?>">
+				    <a href="<?= base_url()?>dikti" class="nav-link "><span class="pcoded-micon"><i class="feather icon-align-justify"></i></span><span class="pcoded-mtext">PD DIKTI</span></a>
 				</li>
 
 
@@ -86,31 +89,6 @@
 	</div>
 
 	<div class="collapse navbar-collapse">
-		
-		<ul class="navbar-nav ml-auto">
-
-			<li>
-				<div class="dropdown drp-user">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<i class="feather icon-user"></i>
-					</a>
-					<div class="dropdown-menu dropdown-menu-right profile-notification">
-						<div class="pro-head" style="background-color: #ff5252">
-							<img src="<?= base_url('assets/')?>logo.png" class="img-radius" alt="User-Profile-Image">
-							<span><?= strtoupper($data->username); ?></span>
-							<!-- <a href="auth-signin.html" class="dud-logout" title="Logout">
-								<i class="feather icon-log-out"></i>
-							</a> -->
-						</div>
-						<ul class="pro-body">
-							<li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-							<li><a href="<?= base_url()?>auth/logout" class="dropdown-item"><i class="feather  icon-log-out"></i> Logout</a></li>
-							<!-- <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li> -->
-						</ul>
-					</div>
-				</div>
-			</li>
-		</ul>
 	</div>				
 </header>
 <!-- [ Header ] end -->
