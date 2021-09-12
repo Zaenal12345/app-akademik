@@ -35,6 +35,7 @@
 				type: 'donut',
 			},
 			series: [44, 55, 41, 17, 15],
+			// colors: ["#4680ff", "#0e9e4a", "#00acc1", "#ffba57", "#ff5252"],
 			colors: ["#4680ff", "#0e9e4a", "#00acc1", "#ffba57", "#ff5252"],
 			legend: {
 				show: true,
