@@ -70,7 +70,7 @@
 
             <div class="col-xl-12 col-md-12">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-6">
                         
                         <div class="card feed-card">
                             <div class="card-header">
@@ -120,6 +120,16 @@
                             </div>
                         </div>
 
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Pie Charts donut</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="pie-chart-2" style="width:100%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
