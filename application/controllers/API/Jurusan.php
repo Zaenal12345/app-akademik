@@ -30,5 +30,10 @@ class Jurusan extends CI_Controller
         echo json_encode($result);
     }
 
+    public function getProdi(){
+        $data = $this->wsfeeder->getJurusan();
+        echo json_encode($data);
+    }
+
 
 }

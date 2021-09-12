@@ -130,7 +130,7 @@ class Wsfeeder
 
   public function getAllMahasiswa(){
       $this->login();
-      $hsl=$this->runws(array('act'=>'GetListMahasiswa','token'=>$this->token));
+      $hsl=$this->runws(array('act'=>'GetListMahasiswa','token'=>$this->token, 'order' => "id_periode"));
       $hsl=json_decode($hsl);
       return $hsl;
   }
@@ -173,6 +173,17 @@ class Wsfeeder
       $hsl=$this->runws(array('act'=>'GetListMahasiswa','token'=>$this->token, 'filter' => "nama_status_mahasiswa = 'Cuti'" ));
       $hsl=json_decode($hsl);
       return $hsl;
+  }
+
+  public function getJurusan()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act' => 'GetProdi',
+        'token' => $this->token,
+      ]);
+
+      return json_decode($hsl);
   }
   
 

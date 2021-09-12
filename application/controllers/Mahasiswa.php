@@ -36,14 +36,13 @@ class Mahasiswa extends CI_Controller
 		$this->load->view('component/footer',$data);
 		$this->load->view('pages/mahasiswa/mahasiswa_script');
 	}
-
 	
 	public function show()
 	{
 		$base = base_url();
 		$this->datatables->select('mahasiswa.id_mahasiswa,jurusan.nama_jurusan,kelas.nama_kelas,mahasiswa.foto,mahasiswa.nim,mahasiswa.nama_mahasiswa,mahasiswa.jenis_kelamin,mahasiswa.status_mahasiswa,mahasiswa.tempat_lahir,mahasiswa.tanggal_lahir,mahasiswa.agama,mahasiswa.alamat,mahasiswa.foto,mahasiswa.tahun_angkatan');
-		$this->datatables->join('jurusan','jurusan.id_jurusan = mahasiswa.jurusan_id');
-		$this->datatables->join('kelas','kelas.id_kelas = mahasiswa.kelas_id');
+		$this->datatables->join('jurusan','jurusan.id_jurusan = mahasiswa.jurusan_id', 'left');
+		$this->datatables->join('kelas','kelas.id_kelas = mahasiswa.kelas_id', 'left');
 		$this->datatables->add_column('gambar','<img src="'. $base .'assets/picture/mahasiswa/$1" width="60" height="60">','foto');
 		$this->datatables->add_column('view','<a href="#" class="edit-mahasiswa btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i></a> <a href="#" class="delete-mahasiswa btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i></a>','id_mahasiswa');
 		$this->datatables->from('mahasiswa');
@@ -303,27 +302,48 @@ class Mahasiswa extends CI_Controller
 
             // insert semua data yang ada
             $index=1;
+			$jurusan = $this->db->get('jurusan')->result();
+			$temp_jurusan = null;
+
+			// insert seluruh data dari server 
             for ($i=0; $i < count($data->data); $i++) { 
                 
-                $this->db->insert('mahasiswa',[
-                    'id_mahasiswa' => $index,
-                    'nim' => $data->data[$i]->nim,
-                    'nama_mahasiswa' => $data->data[$i]->nama_mahasiswa,
-                    'jenis_kelamin' => $data->data[$i]->jenis_kelamin,
-                    'tanggal_lahir' => $data->data[$i]->tanggal_lahir,
-                    'tempat_lahir' => "",
-                    'jurusan_id' => "2",
-                    'kelas_id' => "1",
-                    'agama' => $data->data[$i]->nama_agama,
-                    'status_mahasiswa' => $data->data[$i]->nama_status_mahasiswa,
-                    'alamat' => "",
-                    'foto' => "default.jpg",
-                    'tahun_angkatan' => $data->data[$i]->nama_periode_masuk,
-                ]);
+                if($data->data[$i]->id_periode != 19971 && $data->data[$i]->id_periode != 19972 && $data->data[$i]->id_periode != 19981 && $data->data[$i]->id_periode != 19982 && $data->data[$i]->id_periode != 19991 && $data->data[$i]->id_periode != 19992 && $data->data[$i]->id_periode != 20001 && $data->data[$i]->id_periode != 20002 && $data->data[$i]->id_periode != 20011 && $data->data[$i]->id_periode != 20012 && $data->data[$i]->id_periode != 20021 && $data->data[$i]->id_periode != 20022 && $data->data[$i]->id_periode != 20031 && $data->data[$i]->id_periode != 20032 && $data->data[$i]->id_periode != 20041 && $data->data[$i]->id_periode != 20042 && $data->data[$i]->id_periode != 20051 && $data->data[$i]->id_periode != 20052 && $data->data[$i]->id_periode != 20061 && $data->data[$i]->id_periode != 20062){
 
-                $index++;
+					if(count($data->data) != 0){
 
-            }
+						for ($j=0; $j < count($jurusan) ; $j++) { 
+							
+							if($data->data[$i]->nama_program_studi == $jurusan[$j]->nama_jurusan){
+									$temp_jurusan = $jurusan[$j]->id_jurusan;
+							}
+	
+						}
+		
+					}
+
+					$this->db->insert('mahasiswa',[
+						'id_mahasiswa' => $index,
+						'nim' => $data->data[$i]->nim,
+						'nama_mahasiswa' => $data->data[$i]->nama_mahasiswa,
+						'jenis_kelamin' => $data->data[$i]->jenis_kelamin,
+						'tanggal_lahir' => $data->data[$i]->tanggal_lahir,
+						'tempat_lahir' => "",
+						'jurusan_id' => $temp_jurusan,
+						'kelas_id' => null,
+						'agama' => $data->data[$i]->nama_agama,
+						'status_mahasiswa' => $data->data[$i]->nama_status_mahasiswa,
+						'alamat' => "",
+						'foto' => "default.jpg",
+						'tahun_angkatan' => $data->data[$i]->nama_periode_masuk,
+					]);
+	
+					$index++;
+
+				}
+
+
+			}
 			
 			$message = [
 				'message' => 'Singkronisasi berhasil!',
@@ -334,5 +354,6 @@ class Mahasiswa extends CI_Controller
         
         echo json_encode($message);
     }
+	
 
 }

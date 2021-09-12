@@ -70,7 +70,7 @@
 
             <div class="col-xl-12 col-md-12">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-5">
                         
                         <div class="card feed-card">
                             <div class="card-header">
@@ -90,102 +90,36 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="row m-b-30">
-                                    <div class="col-auto p-r-0">
-                                        <i class="fas fa-user-check bg-c-blue feed-icon"></i>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#!">
-                                            <h6 class="m-b-5">Mahasiswa Aktif : </h6>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row m-b-30">
-                                    <div class="col-auto p-r-0">
-                                        <i class="fas fa-user-graduate bg-c-red feed-icon"></i>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#!">
-                                            <h6 class="m-b-5">Mahasiswa Lulus :</h6>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row m-b-30">
-                                    <div class="col-auto p-r-0">
-                                        <i class="fas fa-user-clock bg-c-green feed-icon"></i>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#!">
-                                            <h6 class="m-b-5">Mahasiswa Cuti : </h6>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row m-b-20">
-                                    <div class="col-auto p-r-0">
-                                        <i class="fas fa-user-slash bg-c-red feed-icon"></i>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#!">
-                                            <h6 class="m-b-5">Mahasiswa Non Aktif : </h6>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row m-b-20">
-                                    <div class="col-auto p-r-0">
-                                        <i class="fas fa-user-times bg-c-red feed-icon"></i>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#!">
-                                            <h6 class="m-b-5">Mahasiswa Keluar : </h6>
-                                        </a>
-                                    </div>
-                                </div>
+                                <table class="table">
+                                    <tr>
+                                        <th>Mahasiswa Aktif</th>
+                                        <td>:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mahasiswa Non Aktif </th>
+                                        <td>:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mahasiswa Lulus </th>
+                                        <td>:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mahasiswa Cuti </th>
+                                        <td>:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mahasiswa Keluar </th>
+                                        <td>:</td>
+                                        <td></td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
 
-                    </div>
-                    <div class="col-8">
-                        <div class="card latest-update-card">
-                            <div class="card-header">
-                                <h5>Pengumuman/Kegiatan Kampus</h5>
-                                <div class="card-header-right">
-                                    <div class="btn-group card-option">
-                                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="feather icon-more-horizontal"></i>
-                                        </button>
-                                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                            <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
-                                            <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
-                                            <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
-                                            <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="latest-update-box">
-                                    <?php foreach($kegiatan as $data):?>
-                                        <div class="row p-t-30 p-b-30">
-                                            <div class="col-auto text-right update-meta">
-                                                <!-- <i class="feather icon-twitter bg-twitter update-icon"></i> -->
-                                                <p class="text-muted m-b-0 d-inline-flex"><?php 
-                                                    echo "<small>" . date_diff(date_create($data->tanggal_awal),date_create(date('Y-m-d')))->format('%a'). " hari yang <br> lalu </small>" ; 
-                                                ?>&nbsp;</p>
-                                                <img src="<?= base_url()?>assets/picture/activity/<?= $data->gambar_utama?>" width="40" class="rounded" alt="Cinque Terre">
-                                            </div>
-                                            <div class="col">
-                                                <h6><?= $data->nama_kegiatan?></h6>
-                                                <p class="text-muted m-b-0"><?= $data->deskripsi?></p>
-                                            </div>
-                                        </div>
-                                    <?php endforeach;?>
-        
-                                </div>
-                                <div class="text-center">
-                                    <a href="<?= base_url()?>KegiatanMahasiswa" class="b-b-primary text-primary">View all Projects</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

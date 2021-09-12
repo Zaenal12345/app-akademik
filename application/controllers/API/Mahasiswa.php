@@ -14,6 +14,17 @@ class Mahasiswa extends CI_Controller
     public function index()
     {
         $data = $this->wsfeeder->getAllMahasiswa();
+        $index = 0;
+        // insert seluruh data dari server 
+        for($i=0; $i < count($data->data); $i++) { 
+                
+            if($data->data[$i]->id_periode != 19971 && $data->data[$i]->id_periode != 19972 && $data->data[$i]->id_periode != 19981 && $data->data[$i]->id_periode != 19982 && $data->data[$i]->id_periode != 19991 && $data->data[$i]->id_periode != 19992 && $data->data[$i]->id_periode != 20001 && $data->data[$i]->id_periode != 20002 && $data->data[$i]->id_periode != 20011 && $data->data[$i]->id_periode != 20012 && $data->data[$i]->id_periode != 20021 && $data->data[$i]->id_periode != 20022 && $data->data[$i]->id_periode != 20031 && $data->data[$i]->id_periode != 20032 && $data->data[$i]->id_periode != 20041 && $data->data[$i]->id_periode != 20042 && $data->data[$i]->id_periode != 20051 && $data->data[$i]->id_periode != 20052 && $data->data[$i]->id_periode != 20061 && $data->data[$i]->id_periode != 20062){
+
+                $index++;
+
+            }
+
+        }
         // $data_mahasiswa = $this->db->get('mahasiswa')->result();
 
         // if(count($data_mahasiswa) != 0){
@@ -55,7 +66,7 @@ class Mahasiswa extends CI_Controller
         // echo json_encode($message);
 
         // $data = $this->db->get('mahasiswa');
-        echo json_encode($data);
+        echo json_encode($index);
 
     }
 

@@ -24,7 +24,11 @@ class Dashboard extends CI_Controller
 		$jurusan = count($this->db->get('jurusan')->result());
 		$dosen = count($this->db->get('dosen')->result());
 
-		$kegiatan = $this->db->limit(7)->get('kegiatan_mahasiswa')->result();
+		$aktif = count($this->db->where('status_mahasiswa','Aktif')->get('mahasiswa')->result());
+		$lulus = count($this->db->where('status_mahasiswa','Lulus')->get('mahasiswa')->result());
+		$cuti = count($this->db->where('status_mahasiswa','Cuti')->get('mahasiswa')->result());
+		$non_aktif = count($this->db->where('status_mahasiswa','Non Aktif')->get('mahasiswa')->result());
+		$keluar = count($this->db->where('status_mahasiswa','Mengundurkan diri')->get('mahasiswa')->result()) + count($this->db->where('status_mahasiswa','Dikeluarkan')->get('mahasiswa')->result());
 
 		$data = [
 			'data' => $admin_data,
@@ -34,7 +38,6 @@ class Dashboard extends CI_Controller
 			'fakultas' => $fakultas,
 			'jurusan' => $jurusan,
 			'dosen' => $dosen,
-			'kegiatan' => $kegiatan
 		];
 
 		$this->load->view('component/header',$data);
