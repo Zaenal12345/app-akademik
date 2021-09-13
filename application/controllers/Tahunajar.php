@@ -44,7 +44,7 @@ class Tahunajar extends CI_Controller
 	public function store()
 	{
 		// set up validation form
-		$this->form_validation->set_rules('tahun_ajar','Tahun Ajar','required|is_unique[tahun_ajar.tahun_ajar]|max_length[15]',[
+		$this->form_validation->set_rules('tahun_ajar','Tahun Ajar','required|is_unique[tahun_ajar.tahun_ajar]|max_length[30]',[
 			'required' => 'Field tahun ajar harus di isi.',
 			'is_unique' => 'Tahun ajar yang dimasukkan sudah ada.',
 			'max_length' => 'Karaktek yang dimasukkan melebihi batas maksimum'
@@ -91,7 +91,7 @@ class Tahunajar extends CI_Controller
 	public function update()
 	{
 		// set up validation form
-		$this->form_validation->set_rules('tahun_ajar_edit','Tahun Ajar','required|max_length[15]',[
+		$this->form_validation->set_rules('tahun_ajar_edit','Tahun Ajar','required|max_length[30]',[
 			'required' => 'Field tahun ajar harus di isi.',
 			'max_length' => 'Karaktek yang dimasukkan melebihi batas maksimum'
 		]);

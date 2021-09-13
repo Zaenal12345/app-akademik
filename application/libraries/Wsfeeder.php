@@ -128,6 +128,13 @@ class Wsfeeder
 	   }
 	}
 
+  public function getAllDosen(){
+      $this->login();
+      $hsl=$this->runws(array('act'=>'GetListDosen ','token'=>$this->token, 'order' => "id_periode"));
+      $hsl=json_decode($hsl);
+      return $hsl;
+  }
+
   public function getAllMahasiswa(){
       $this->login();
       $hsl=$this->runws(array('act'=>'GetListMahasiswa','token'=>$this->token, 'order' => "id_periode"));
@@ -171,6 +178,14 @@ class Wsfeeder
   {
       $this->login();
       $hsl=$this->runws(array('act'=>'GetListMahasiswa','token'=>$this->token, 'filter' => "nama_status_mahasiswa = 'Cuti'" ));
+      $hsl=json_decode($hsl);
+      return $hsl;
+  }
+  
+  public function getMahasiswaNonAktif()
+  {
+      $this->login();
+      $hsl=$this->runws(array('act'=>'GetListMahasiswa','token'=>$this->token, 'filter' => "nama_status_mahasiswa = 'Non Aktif'" ));
       $hsl=json_decode($hsl);
       return $hsl;
   }

@@ -62,12 +62,12 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Data Matakuliah</h5>
+                            <h5 class="m-b-10">Data Mahasiswa</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="<?= base_url()?>dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="#">Data Matakuliah</a></li>
+                            <li class="breadcrumb-item"><a href="#">Data Mahasiswa</a></li>
                         </ul>
                     </div>
                 </div>

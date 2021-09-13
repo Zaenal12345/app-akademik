@@ -35,7 +35,7 @@
                     <div class="card-body table-border-style">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md">
+                                <div class="col-md-8">
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
@@ -51,7 +51,7 @@
                                                         :&nbsp;&nbsp;&nbsp;<div class="btn-group">
                                                             <button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih Aksi</button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="<?= base_url()?>krs/create">Download Data</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/mahasiswa">Download Data</a>
                                                                 <a class="dropdown-item" href="#">Export Data Ke PD DIKTI</a>
                                                             </div>
                                                         </div>
@@ -63,7 +63,7 @@
                                                         :&nbsp;&nbsp;&nbsp;<div class="btn-group">
                                                             <button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih Aksi</button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="<?= base_url()?>krs/create">Download Data</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/dosen">Download Data</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -74,7 +74,7 @@
                                                         :&nbsp;&nbsp;&nbsp;<div class="btn-group">
                                                             <button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih Aksi</button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="<?= base_url()?>krs/create">Download Data</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/kurikulum">Download Data</a>
                                                                 <a class="dropdown-item" href="#">Export Data Ke PD DIKTI</a>
                                                             </div>
                                                         </div>
@@ -86,7 +86,7 @@
                                                         :&nbsp;&nbsp;&nbsp;<div class="btn-group">
                                                             <button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih Aksi</button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="<?= base_url()?>krs/create">Download Data</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/lulusan">Download Data</a>
                                                                 <a class="dropdown-item" href="#">Export Data Ke PD DIKTI</a>
                                                             </div>
                                                         </div>
@@ -98,7 +98,7 @@
                                                         :&nbsp;&nbsp;&nbsp;<div class="btn-group">
                                                             <button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih Aksi</button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="<?= base_url()?>krs/create">Download Data</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/krs">Download Data</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -109,7 +109,7 @@
                                                         :&nbsp;&nbsp;&nbsp;<div class="btn-group">
                                                             <button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih Aksi</button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="<?= base_url()?>krs/create">Download Data</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/nilai">Download Data</a>
                                                                 <a class="dropdown-item" href="#">Export Data Ke PD DIKTI</a>a>
                                                             </div>
                                                         </div>
@@ -121,7 +121,7 @@
                                                         :&nbsp;&nbsp;&nbsp;<div class="btn-group">
                                                             <button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih Aksi</button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="<?= base_url()?>krs/create">Download Data</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/status_mahasiswa_aktif">Download Data</a>
                                                                 <a class="dropdown-item" href="#">Export Data Ke PD DIKTI</a>
                                                             </div>
                                                         </div>
@@ -133,11 +133,11 @@
                                                         :&nbsp;&nbsp;&nbsp;<div class="btn-group">
                                                             <button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih Aksi</button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="<?= base_url()?>krs/create">Aktif</a>
-                                                                <a class="dropdown-item" href="#">Non Aktif</a>
-                                                                <a class="dropdown-item" href="#">Cuti</a>
-                                                                <a class="dropdown-item" href="#">Lulus</a>
-                                                                <a class="dropdown-item" href="#">Keluar</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/status_mahasiswa_aktif">Aktif</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/status_mahasiswa_non_aktif">Non Aktif</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/status_mahasiswa_cuti">Cuti</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/status_mahasiswa_lulus">Lulus</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/status_mahasiswa_keluar">Keluar</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -146,7 +146,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="col-md">
+                                <div class="col-md-4">
                                     <br>
                                     <h5>Catatan :</h5>
                                     <ul>

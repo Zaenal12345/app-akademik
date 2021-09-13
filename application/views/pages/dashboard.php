@@ -124,7 +124,7 @@
                     <div class="col-6">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Pie Charts donut</h5>
+                                <h5>Grafik Jumlah Mahasiswa Berdasarkan Jurusan</h5>
                             </div>
                             <div class="card-body">
                                 <div id="pie-chart-2" style="width:100%"></div>
