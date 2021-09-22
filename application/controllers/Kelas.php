@@ -34,7 +34,7 @@ class Kelas extends CI_Controller
 
 	public function show()
 	{
-		$this->datatables->select('id_kelas,kode_kelas,nama_kelas');
+		$this->datatables->select('id_kelas,kode_kelas,nama_kelas,status_kelas');
 		$this->datatables->from('kelas');
 		$this->datatables->add_column('view','<a href="#" class="edit-kelas btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i></a> <a href="#" class="delete-kelas btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i></a>','id_kelas');
 		return print_r($this->datatables->generate());
@@ -68,6 +68,7 @@ class Kelas extends CI_Controller
         	$data = [
 				'kode_kelas' => $this->input->post('kode_kelas'),
 				'nama_kelas' => $this->input->post('nama_kelas'),
+				'status_kelas' => $this->input->post('status'),
 			];
 
 			$this->KelasModel->saveData($data);
@@ -116,6 +117,7 @@ class Kelas extends CI_Controller
         	$data = [
 				'kode_kelas' => $this->input->post('kode_kelas_edit'),
 				'nama_kelas' => $this->input->post('nama_kelas_edit'),
+				'status_kelas' => $this->input->post('status_edit'),
 			];
 
 			$this->KelasModel->updateData($data,$id);

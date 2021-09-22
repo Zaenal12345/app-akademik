@@ -42,6 +42,7 @@
 			columns:[
 				{"data": "kode_kelas", class:"text-center"},
 				{"data": "nama_kelas", class:"text-center"},
+				{"data": "status_kelas", class:"text-center"},
 				{"data": "view", class:"text-center"}
 			],
 
@@ -129,6 +130,7 @@
 					$('#id_kelas_edit').val(res.id_kelas);
 					$('#kode_kelas_edit').val(res.kode_kelas);
 					$('#nama_kelas_edit').val(res.nama_kelas);
+					$('#status_edit').val(res.status_kelas);
 					console.log(res);
 
 				}

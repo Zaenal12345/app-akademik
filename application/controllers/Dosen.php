@@ -9,13 +9,125 @@ class Dosen extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->check->user_login();
 		$this->load->model('DosenModel');
 		$this->load->model('AuthModel');
 	}
 
+	public function singkronisasi()
+	{
+		$data = 'http://localhost:8080/api/list_dosen';
+		$result = $this->http_request($data);
+		// ubah string JSON menjadi array
+		$result = json_decode($result, TRUE);
+		// echo print_r($result);die();
+		$data_dosen = $this->db->get('dosen')->result();
+
+		if(count($data_dosen) == 0){
+
+			for ($i=0; $i < count($result['data']); $i++) { 
+				if($result['data'][$i]['status_kepegawaian'] != "Pegawai"){
+					$this->db->insert('dosen',[
+						'nama_dosen' => $result['data'][$i]['nama_dosen'],
+						'nik' => $result['data'][$i]['nik'],
+						'nidn' => $result['data'][$i]['nidn'],
+						'pendidikan' => $result['data'][$i]['pendidikan_terakhir'],
+						'gelar' => $result['data'][$i]['gelar'],
+						'tempat_lahir_dosen' => $result['data'][$i]['tempat_lahir'],
+						'tanggal_lahir_dosen' => $result['data'][$i]['tanggal_lahir'],
+						'jenis_kelamin_dosen' => $result['data'][$i]['jenis_kelamin'],
+						'agama_dosen' => $result['data'][$i]['agama'],
+						'alamat_dosen' => $result['data'][$i]['alamat'],
+						'status_dosen' => $result['data'][$i]['status'],
+					]);
+				}
+			}
+
+		}else{
+
+			// update jumlah record
+			if(count($result['data']) > count($data_dosen)){
+
+				for ($i=0; $i < count($result['data']); $i++) { 
+					
+					if($result['data'][$i]['nik'] != "" || $result['data'][$i]['nik'] != null){
+						$temp = $this->db->where('nik',$result['data'][$i]['nik'])->get('dosen')->result();
+					}else if($result['data'][$i]['nidn'] != "" || $result['data'][$i]['nidn'] != null){
+						$temp = $this->db->where('nidn',$result['data'][$i]['nidn'])->get('dosen')->result();
+					}
+					
+					if(count($temp) == 0 ){
+						$this->db->insert('dosen',[
+							'nama_dosen' => $result['data'][$i]['nama_dosen'],
+							'nik' => $result['data'][$i]['nik'],
+							'nidn' => $result['data'][$i]['nidn'],
+							'pendidikan' => $result['data'][$i]['pendidikan_terakhir'],
+							'gelar' => $result['data'][$i]['gelar'],
+							'tempat_lahir_dosen' => $result['data'][$i]['tempat_lahir'],
+							'tanggal_lahir_dosen' => $result['data'][$i]['tanggal_lahir'],
+							'jenis_kelamin_dosen' => $result['data'][$i]['jenis_kelamin'],
+							'agama_dosen' => $result['data'][$i]['agama'],
+							'alamat_dosen' => $result['data'][$i]['alamat'],
+							'status_dosen' => $result['data'][$i]['status'],
+						]);
+					}
+
+				}
+
+			}else{
+
+				// cek perubahan record
+				for ($k=0; $k < count($result['data']); $k++) { 
+					
+					if($result['data'][$k]['nik'] != "" || $result['data'][$k]['nik'] != null){
+						$temp = $this->db->where('nik',$result['data'][$k]['nik'])->get('dosen')->result();
+					}else if($result['data'][$k]['nidn'] != "" || $result['data'][$k]['nidn'] != null){
+						$temp = $this->db->where('nidn',$result['data'][$k]['nidn'])->get('dosen')->result();
+					}
+
+
+
+				} 
+
+			}
+
+		}
+
+		$this->check->user_login();
+		$base = base_url();
+		$this->datatables->select('id_dosen,nidn,nik,nama_dosen,jenis_kelamin_dosen,gelar,pendidikan,status_dosen,tempat_lahir_dosen,tanggal_lahir_dosen,agama_dosen,alamat_dosen,foto_dosen');
+		$this->datatables->add_column('gambar','<img src="'. $base .'assets/picture/dosen/$1" width="90">','foto_dosen');
+		$this->datatables->add_column('view','<a href="#" class="edit-dosen btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-dosen btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_dosen');
+		$this->datatables->from('dosen');
+		return print_r($this->datatables->generate());
+		
+	}
+
+	public function http_request($url){
+		// persiapkan curl
+		$ch = curl_init(); 
+	
+		// set url 
+		curl_setopt($ch, CURLOPT_URL, $url);
+		
+		// set user agent    
+		curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+	
+		// return the transfer as a string 
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+	
+		// $output contains the output string 
+		$output = curl_exec($ch); 
+	
+		// tutup curl 
+		curl_close($ch);      
+	
+		// mengembalikan hasil curl
+		return $output;
+	}
+
 	public function index()
 	{
+		$this->check->user_login();
 		// get admin data
 		$admin_data = $this->AuthModel->getDataByUsername($this->session->userdata('username'));
 
@@ -34,6 +146,7 @@ class Dosen extends CI_Controller
 
 	public function show()
 	{
+		$this->check->user_login();
 		$base = base_url();
 		$this->datatables->select('id_dosen,nidn,nik,nama_dosen,jenis_kelamin_dosen,gelar,pendidikan,status_dosen,tempat_lahir_dosen,tanggal_lahir_dosen,agama_dosen,alamat_dosen,foto_dosen');
 		$this->datatables->add_column('gambar','<img src="'. $base .'assets/picture/dosen/$1" width="90">','foto_dosen');
@@ -44,6 +157,7 @@ class Dosen extends CI_Controller
 
 	public function create()
 	{
+		$this->check->user_login();
 		// get admin data
 		$admin_data = $this->AuthModel->getDataByUsername($this->session->userdata('username'));
 
@@ -60,6 +174,7 @@ class Dosen extends CI_Controller
 
 	public function store()
 	{
+		$this->check->user_login();
 		// set up validation
 		$this->form_validation->set_rules('nik','NIK','required|is_unique[dosen.nik]|max_length[20]|is_natural_no_zero',[
 			'is_natural_no_zero' => 'NIK yang dimasukkan harus berupa angka (1,2,3 ..)',
@@ -144,6 +259,7 @@ class Dosen extends CI_Controller
 
 	public function edit()
 	{
+		$this->check->user_login();
 		$id =  $this->input->post('id');
 		$data = $this->DosenModel->editData($id);
 		echo json_encode($data);
@@ -151,6 +267,7 @@ class Dosen extends CI_Controller
 
 	public function update()
 	{
+		$this->check->user_login();
 		// set up validation
 		$this->form_validation->set_rules('nik_edit','NIK','required|max_length[20]');
 		$this->form_validation->set_rules('nidn_edit','NIDN','max_length[20]');
@@ -222,6 +339,7 @@ class Dosen extends CI_Controller
 
 	public function destroy()
 	{
+		$this->check->user_login();
 		$data = $this->DosenModel->editData($this->input->post('id'));
 
 		if ($data->foto != 'default.jpg') {
@@ -237,7 +355,7 @@ class Dosen extends CI_Controller
 	// this method for upload picture file 
 
 	private function _upload(){
-
+		$this->check->user_login();
         $config['allowed_types']    = 'jpg|jpeg|png';
         $config['max_size']         = 0;
         $config['file_name']        = uniqid();
@@ -254,6 +372,7 @@ class Dosen extends CI_Controller
     // this method for delete picture file 
     private function _hapus_file($file)
     {
+		$this->check->user_login();
         return unlink(FCPATH.'/assets/picture/dosen/'.$file);
     }
 

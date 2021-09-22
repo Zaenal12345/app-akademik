@@ -1,21 +1,12 @@
 <?php
 class Wsfeeder
 {
-     private $url='http://45.118.112.106:8082/ws/sandbox2.php';
-     private $token;
-     private $mCi;
-     private $user='041031';
-     private $pass='dakota8abdg';
-     private $args;
-
-	// function __construct()
-	// {
-  //     $this->url = $url;      
-  //     $this->user = $user;
-  //     $this->pass = $pass; 
-  //     $this->error = '';
-      
-	// }
+  private $url='http://45.118.112.106:8082/ws/sandbox2.php';
+  private $token;
+  private $mCi;
+  private $user='041031';
+  private $pass='dakota8abdg';
+  private $args;
 
   public function login()
   {
@@ -37,7 +28,7 @@ class Wsfeeder
          return $hsl;
 	}
 
- public function cek_hsl($hsl)
+  public function cek_hsl($hsl)
   {    
          
     $tmp='';
@@ -128,12 +119,19 @@ class Wsfeeder
 	   }
 	}
 
+  /**
+   * FUNGSI UNTUK GET LIST DOSEN
+   */
   public function getAllDosen(){
       $this->login();
-      $hsl=$this->runws(array('act'=>'GetListDosen ','token'=>$this->token, 'order' => "id_periode"));
+      $hsl=$this->runws(array('act'=>'GetListDosen ','token'=>$this->token, 'filter' => ''));
       $hsl=json_decode($hsl);
       return $hsl;
   }
+
+  /**
+   * FUNGSI BERKENAAN DENGAN GET LIST MAHASISWA
+   */
 
   public function getAllMahasiswa(){
       $this->login();
@@ -158,6 +156,7 @@ class Wsfeeder
       return $hsl;
   }
 
+  // mahasiswa dengan status mengundurkan diri
   public function getMahasiswaKeluar1()
   {
       $this->login();
@@ -166,6 +165,7 @@ class Wsfeeder
       return $hsl;
   }
 
+  // mahasiswa dengan status dikeluarkan
   public function getMahasiswaKeluar2()
   {
       $this->login();
@@ -190,6 +190,62 @@ class Wsfeeder
       return $hsl;
   }
 
+  // get biodata mahasiswa
+  public function getBiodataData()
+  {
+      $this->login();
+      $hsl=$this->runws(array('act'=>'GetBiodataMahasiswa','token'=>$this->token, 'filter' => "id_mahasiswa = 'ee44163e-3be2-4c7e-ba90-9a86f1f47718'"));
+      $hsl=json_decode($hsl);
+      return $hsl;
+    }
+    
+  // get jenis pendaftaran
+  public function getJenisPendaftaran()
+  {
+    $this->login();
+    $hsl=$this->runws(array('act'=>'GetJenisPendaftaran','token'=>$this->token));
+    $hsl=json_decode($hsl);
+    return $hsl;
+  }
+  
+  // get jenis pendaftaran
+  public function getPembiayaan()
+  {
+    $this->login();
+    $hsl=$this->runws(array('act'=>'GetPembiayaan','token'=>$this->token));
+    $hsl=json_decode($hsl);
+    return $hsl;
+  }
+
+  // insert biodata mahasiswa
+  public function insertBiodataMahasiswa($data)
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act' => 'InsertBiodataMahasiswa',
+        'token' => $this->token,
+        'record' => $data
+      ]);
+
+      return json_decode($hsl);
+  }
+
+  // insert mahasiswa
+  public function insertRiwayatPendidikanMahasiswa($data)
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act' => 'InsertRiwayatPendidikanMahasiswa',
+        'token' => $this->token,
+        'record' => $data
+      ]);
+
+      return json_decode($hsl);
+  }
+
+  /**
+   * GET JURUSAN
+   */
   public function getJurusan()
   {
       $this->login();
@@ -200,8 +256,81 @@ class Wsfeeder
 
       return json_decode($hsl);
   }
+
+
+  /**
+   * GET KRS
+   */
+  public function getKRS()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act' => 'GetKRSMahasiswa',
+        'token' => $this->token,
+        'filter' => "angkatan >='2011'"
+      ]);
+
+      return json_decode($hsl);
+  }
+
+  /**
+   * GET Wilayah
+   */
+  public function getWilayah()
+  {
+    $this->login();
+      $hsl = $this->runws([
+        'act' => 'GetWilayah',
+        'token' => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
+
+  /**
+   * GET Agama
+   */
+  public function getAgama()
+  {
+    $this->login();
+      $hsl = $this->runws([
+        'act' => 'GetAgama',
+        'token' => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
+  
+  /**
+   * GET Profil PT
+  */
+  public function getProfilPT()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'GetProfilPT',
+        'token'   => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
+
+  /**
+   * GET Semester
+  */
+  public function getSemester()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'GetSemester',
+        'token'   => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
   
 
 }
 
+// "id_mahasiswa": "ee44163e-3be2-4c7e-ba90-9a86f1f47718"
 ?>

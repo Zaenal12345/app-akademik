@@ -161,8 +161,8 @@
                                 <div class="form-group">
                                     <label for="jenis_kelamin"><b>Jenis Kelamin :</b></label>
                                     <select class="form-control js-select2-jenis_kelamin" style="width:100%" name="jenis_kelamin" id="jenis_kelamin">
-                                        <option value="Laki-laki">Laki-laki</option>
-                                        <option value="Perempuan">Perempuan</option>
+                                        <option value="L">Laki-laki</option>
+                                        <option value="P">Perempuan</option>
                                     </select>
                                 </div>
                             </div>
@@ -315,8 +315,8 @@
                                 <div class="form-group">
                                     <label for="jenis_kelamin_edit"><b>Jenis Kelamin :</b></label>
                                     <select class="form-control" name="jenis_kelamin_edit" id="jenis_kelamin_edit">
-                                        <option value="Laki-laki">Laki-laki</option>
-                                        <option value="Perempuan">Perempuan</option>
+                                        <option value="L">Laki-laki</option>
+                                        <option value="P">Perempuan</option>
                                     </select>
                                 </div>
                             </div>

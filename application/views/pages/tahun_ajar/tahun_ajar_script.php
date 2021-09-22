@@ -40,6 +40,7 @@
 				type: "POST"
 			},
 			columns:[
+				{"data": "kode_tahun_ajar", class:"text-center"},
 				{"data": "tahun_ajar", class:"text-center"},
 				{"data": "status", class:"text-center"},
 				{"data": "view", class:"text-center"}
@@ -68,6 +69,12 @@
 					} 
 
 					if (res.error) {
+
+						if (res.kode_tahun_ajar_err != "") {
+							$('#kode_tahun_ajar-err').html(res.kode_tahun_ajar_err);
+						} else {
+							$('#kode_tahun_ajar-err').html('');
+						}
 
 						if (res.tahun_ajar_err != "") {
 							$('#tahun_ajar-err').html(res.tahun_ajar_err);
@@ -128,6 +135,7 @@
 					$('#modal-tahun_ajar_edit').modal('show');
 					$('#id_tahun_ajar_edit').val(res.id_tahun_ajar);
 					$('#tahun_ajar_edit').val(res.tahun_ajar);
+					$('#kode_tahun_ajar_edit').val(res.kode_tahun_ajar);
 					$('#status_edit').val(res.status);
 					console.log(res);
 
@@ -157,6 +165,12 @@
 					} 
 
 					if (res.error) {
+
+						if (res.kode_tahun_ajar_edit_err != "") {
+							$('#kode_tahun_ajar_edit-err').html(res.kode_tahun_ajar_edit_err);
+						} else {
+							$('#kode_tahun_ajar_edit-err').html('');
+						}
 
 						if (res.tahun_ajar_edit_err != "") {
 							$('#tahun_ajar_edit-err').html(res.tahun_ajar_edit_err);

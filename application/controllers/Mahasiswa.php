@@ -225,7 +225,6 @@ class Mahasiswa extends CI_Controller
 		echo json_encode($message);
 	}
 
-
 	// this method for upload picture file 
 
 	private function _upload(){
@@ -355,5 +354,127 @@ class Mahasiswa extends CI_Controller
         echo json_encode($message);
     }
 	
+	// insert data mahasiswa ke feeder pddikti
+	public function insertMahasiswa()
+    {
+        $data_biodata_mahasiswa = [
+			'nama_mahasiswa'		=> $this->input->post('nama_mahasiswa'),
+			'jenis_kelamin'			=> $this->input->post('jenis_kelamin'),
+			'tempat_lahir'			=> $this->input->post('tempat_lahir'),
+			'tanggal_lahir'			=> $this->input->post('tanggal_lahir'),
+			'id_agama'				=> $this->input->post('id_agama'),
+			'nik'					=> $this->input->post('nik'),
+			'nisn'					=> $this->input->post('nisn'),
+			'npwp'					=> $this->input->post('npwp'),
+			'kewarganegaraan'		=> $this->input->post('kewarganegaraan'),
+			'jalan'					=> $this->input->post('jalan'),
+			'dusun'					=> $this->input->post('dusun'),
+			'rt'					=> $this->input->post('rt'),
+			'rw'					=> $this->input->post('rw'),
+			'kelurahan'				=> $this->input->post('kelurahan'),
+			'kode_pos'				=> $this->input->post('kode_pos'),
+			'id_wilayah'			=> $this->input->post('id_wilayah'),
+			'id_jenis_tinggal'		=> $this->input->post('id_jenis_tinggal'),
+			'id_alat_transportasi'	=> $this->input->post('id_alat_transportasi'),
+			'telepon'				=> $this->input->post('telepon'),
+			'handphone'				=> $this->input->post('handphone'),
+			'email'					=> $this->input->post('email'),
+			'penerima_kps'			=> $this->input->post('penerima_kps'),
+			'nomor_kps'				=> $this->input->post('nomor_kps'),
+			'nik_ayah'				=> $this->input->post('nik_ayah'),
+			'nama_ayah'				=> $this->input->post('nama_ayah'),
+			'tanggal_lahir_ayah'	=> $this->input->post('tanggal_lahir_ayah'),
+			'id_pendidikan_ayah'	=> $this->input->post('id_pendidikan_ayah'),
+			'id_pekerjaan_ayah'		=> $this->input->post('id_pekerjaan_ayah'),
+			'id_penghasilan_ayah'	=> $this->input->post('id_penghasilan_ayah'),
+			'nik_ibu'				=> $this->input->post('nik_ibu'),
+			'nama_ibu_kandung'		=> $this->input->post('nama_ibu_kandung'),
+			'tanggal_lahir_ibu'		=> $this->input->post('tanggal_lahir_ibu'),
+			'id_pendidikan_ibu'		=> $this->input->post('id_pendidikan_ibu'),
+			'id_pekerjaan_ibu'		=> $this->input->post('id_pekerjaan_ibu'),
+			'id_penghasilan_ibu'	=> $this->input->post('id_penghasilan_ibu'),
+			'nama_wali'				=> $this->input->post('nama_wali'),
+			'tanggal_lahir_wali'	=> $this->input->post('tanggal_lahir_wali'),
+			'id_pendidikan_wali'	=> $this->input->post('id_pendidikan_wali'),
+			'id_pekerjaan_wali'		=> $this->input->post('id_pekerjaan_wali'),
+			'id_penghasilan_wali'	=> $this->input->post('id_penghasilan_wali'),
+			'id_kebutuhan_khusus_mahasiswa'	=> $this->input->post('id_kebutuhan_khusus_mahasiswa'),
+			'id_kebutuhan_khusus_ayah'		=> $this->input->post('id_kebutuhan_khusus_ayah'),
+			'id_kebutuhan_khusus_ibu'		=> $this->input->post('id_kebutuhan_khusus_ibu'),
+		];
+
+        $result_biodata = $this->wsfeeder->insertBiodataMahasiswa($data_biodata_mahasiswa);
+
+		$data_mahasiswa = [
+			// "id_mahasiswa" => "ee44163e-3be2-4c7e-ba90-9a86f1f47718",
+			"id_mahasiswa" => $result_biodata->data['id_mahasiswa'],
+			"nim" => "2020202020",
+			"id_jenis_daftar" => "1",
+			"id_periode_masuk" => "20213",
+			"tanggal_daftar" => "2018-01-01",
+			"id_perguruan_tinggi" => "8d96c84e-eb26-4436-906c-33b286d9d49d",
+			"id_prodi" => "7da00522-2fbd-487d-91ae-5486b46f70b4",
+			"id_pembiayaan" => "3",
+			"biaya_masuk" => 0
+		];
+
+		$result_mahasiswa = $this->wsfeeder->insertRiwayatPendidikanMahasiswa($data_mahasiswa);
+
+        echo json_encode($result_mahasiswa);
+    }
+
+	public function getBiodata()
+	{
+		$data = $this->wsfeeder->getBiodataData();
+        echo json_encode($data->data);
+	}
+
+	public function getProfilPT()
+	{
+		$data = $this->wsfeeder->getProfilPT();
+        return json_encode($data);
+	}
+
+	public function getJenisPendaftaran()
+	{
+		$data = $this->wsfeeder->getJenisPendaftaran();
+        return json_encode($data);
+	}
+
+	public function getAgama()
+    {
+        $data = $this->wsfeeder->getAgama();
+        echo json_encode($data);
+    }
+
+	public function getWilayah()
+    {
+        $data = $this->wsfeeder->getWilayah();
+        echo json_encode($data);
+    }
+
+	public function getJurusan()
+    {
+        $data = $this->wsfeeder->getJurusan();
+        echo json_encode($data);
+    }
+
+	public function getPembiayaan()
+    {
+        $data = $this->wsfeeder->getPembiayaan();
+        echo json_encode($data);
+    }
+
+	public function getMahasiswaAktif()
+    {
+        $data = $this->wsfeeder->getMahasiswaAktif();
+        echo json_encode($data);
+    }
+
+	public function getSemester()
+    {
+        $data = $this->wsfeeder->getSemester();
+        echo json_encode($data);
+    }
 
 }

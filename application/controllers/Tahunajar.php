@@ -34,7 +34,7 @@ class Tahunajar extends CI_Controller
 
 	public function show()
 	{
-		$this->datatables->select('id_tahun_ajar,tahun_ajar,status');
+		$this->datatables->select('kode_tahun_ajar,id_tahun_ajar,tahun_ajar,status');
 		$this->db->order_by("status", "asc");
 		$this->datatables->from('tahun_ajar');
 		$this->datatables->add_column('view','<a href="#" class="edit-tahun_ajar btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i></a> <a href="#" class="delete-tahun_ajar btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i></a>','id_tahun_ajar');
@@ -49,6 +49,11 @@ class Tahunajar extends CI_Controller
 			'is_unique' => 'Tahun ajar yang dimasukkan sudah ada.',
 			'max_length' => 'Karaktek yang dimasukkan melebihi batas maksimum'
 		]);
+		
+		$this->form_validation->set_rules('kode_tahun_ajar','Kode Tahun Ajar','required|is_unique[tahun_ajar.kode_tahun_ajar]',[
+			'required' => 'Field kode tahun ajar harus di isi.',
+		]);
+
 		$this->form_validation->set_rules('status','Status','required',[
 			'required' => 'Field tahun ajar harus di isi.',
 		]);
@@ -59,6 +64,7 @@ class Tahunajar extends CI_Controller
             $message = [
             	'error' => true,
             	'tahun_ajar_err' => form_error('tahun_ajar'),
+            	'kode_tahun_ajar_err' => form_error('kode_tahun_ajar'),
             	'status_err' => form_error('status'),
             ];
 
@@ -66,6 +72,7 @@ class Tahunajar extends CI_Controller
         else{
 
         	$data = [
+				'kode_tahun_ajar' => $this->input->post('kode_tahun_ajar'),
 				'tahun_ajar' => $this->input->post('tahun_ajar'),
 				'status' => $this->input->post('status'),
 			];
@@ -106,6 +113,7 @@ class Tahunajar extends CI_Controller
             $message = [
             	'error' => true,
             	'tahun_ajar_edit_err' => form_error('tahun_ajar_edit'),
+            	'kode_tahun_ajar_edit_err' => form_error('kode_tahun_ajar_edit'),
             	'status_edit_err' => form_error('status_edit'),
             ];
 
@@ -116,6 +124,7 @@ class Tahunajar extends CI_Controller
         	$data = [
 				'tahun_ajar' => $this->input->post('tahun_ajar_edit'),
 				'status' => $this->input->post('status_edit'),
+				'kode_tahun_ajar' => $this->input->post('kode_tahun_ajar_edit'),
 			];
 
 			$this->TahunajarModel->updateData($data,$id);

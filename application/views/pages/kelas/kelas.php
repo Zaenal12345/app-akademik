@@ -36,6 +36,7 @@
                                     <tr>
                                         <th class="text-center" style="text-transform: capitalize;">Kode Kelas</th>
                                         <th class="text-center" style="text-transform: capitalize;">Nama Kelas</th>
+                                        <th class="text-center" style="text-transform: capitalize;">Status</th>
                                         <th class="text-center" style="text-transform: capitalize;">Aksi</th>
                                     </tr>
                                 </thead>
@@ -73,6 +74,14 @@
                         <input type="text" class="form-control" id="nama_kelas" name="nama_kelas" placeholder="Masukkan Nama Kelas">
                         <small id="nama_kelas-err" class="form-text text-danger"></small>
                     </div>
+                    <div class="form-group">
+                        <label for="nama_kelas">Status</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="Aktif">Aktif</option>
+                            <option value="Tidak Aktif">Tidak Aktif</option>
+                        </select>
+                        <small id="status_edit-err" class="form-text text-danger"></small>
+                    </div>
                 
             </div>
             <div class="modal-footer">
@@ -103,6 +112,14 @@
                         <label for="nama_kelas_edit">Nama Kelas</label>
                         <input type="text" class="form-control" name="nama_kelas_edit" id="nama_kelas_edit" placeholder="Masukkan Nama Kelas">
                         <small id="nama_kelas_edit-err" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama_kelas">Status</label>
+                        <select name="status_edit" id="status_edit" class="form-control">
+                            <option value="Aktif">Aktif</option>
+                            <option value="Tidak Aktif">Tidak Aktif</option>
+                        </select>
+                        <small id="status_edit-err" class="form-text text-danger"></small>
                     </div>
                 
             </div>

@@ -24,59 +24,51 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-	$(function() {
-		$('.fixed-button').hide();
-	});
+$(function() {
+	$('.fixed-button').hide();
+});
 
+<?php if($title == 'dashboard'):?>
 	$(function() {
 		var options = {
+			showAlways: true,
+			decimalsInFloat: undefined,
+			series: [{
+				data: [
+					<?php foreach($data_grafik_jumlah_mahasiswa as $data):?>
+						"<?php echo $data->jumlah?>",
+					<?php endforeach;?>
+				]
+			}],
 			chart: {
-				height: 320,
-				type: 'donut',
-			},
-			series: [44, 55, 41, 17, 15],
-			// colors: ["#4680ff", "#0e9e4a", "#00acc1", "#ffba57", "#ff5252"],
-			colors: ["#4680ff", "#0e9e4a", "#00acc1", "#ffba57", "#ff5252"],
-			legend: {
-				show: true,
-				position: 'bottom',
+				type: 'bar',
+				height: 350
 			},
 			plotOptions: {
-				pie: {
-					donut: {
-						labels: {
-							show: true,
-							name: {
-								show: true
-							},
-							value: {
-								show: true
-							}
-						}
-					}
+				bar: {
+					borderRadius: 4,
+					horizontal: true,
 				}
 			},
 			dataLabels: {
-				enabled: true,
-				dropShadow: {
-					enabled: false,
-				}
+				enabled: false
 			},
-			responsive: [{
-				breakpoint: 480,
-				options: {          
-					legend: {
-						position: 'bottom'
-					}
-				}
-			}]
-		}
+			xaxis: {
+				categories: [
+					<?php foreach($data_grafik_jumlah_mahasiswa as $data):?>
+						"<?php echo $data->nama_jurusan?>",
+					<?php endforeach;?>
+				],
+			}
+		};
 		var chart = new ApexCharts(
-			document.querySelector("#pie-chart-2"),
+			document.querySelector("#bar-chart-1"),
 			options
 		);
 		chart.render();
+
 	});
+<?php endif;?>
 </script>
 
 </body>

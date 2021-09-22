@@ -84,7 +84,7 @@
                         <div class="btn-group float-right">
 							<button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manajemen Data</button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="<?= base_url()?>krs/create">Tambah Data</a>
+								<a class="dropdown-item" href="<?= base_url()?>nilai/create">Tambah Data</a>
 								<!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-perbaikan_nilai">Perbaikan Nilai</a> -->
 								<a class="dropdown-item" href="#">Perbaikan Nilai</a>
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-transkip_nilai">Cek Transkip Nilai</a>

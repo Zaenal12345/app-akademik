@@ -34,6 +34,7 @@
                             <table class="table" id="data-tahun_ajar">
                                 <thead>
                                     <tr>
+                                        <th class="text-center" style="text-transform: capitalize;">Kode Tahun Ajar</th>
                                         <th class="text-center" style="text-transform: capitalize;">Tahun Ajar</th>
                                         <th class="text-center" style="text-transform: capitalize;">Status</th>
                                         <th class="text-center" style="text-transform: capitalize;">Aksi</th>
@@ -63,6 +64,12 @@
             </div>
             <div class="modal-body">
                 <form id="frm-tahun_ajar">
+
+                    <div class="form-group">
+                        <label for="kode_tahun_ajar">Kode Tahun Ajar</label>
+                        <input type="text" class="form-control" id="kode_tahun_ajar" name="kode_tahun_ajar" placeholder="Masukkan Kode Tahun Ajar">
+                        <small id="kode_tahun_ajar-err" class="form-text text-danger"></small>
+                    </div>
                     <div class="form-group">
                         <label for="tahun_ajar">Tahun Ajar</label>
                         <input type="text" class="form-control" id="tahun_ajar" name="tahun_ajar" placeholder="Masukkan Tahun Ajar">
@@ -71,7 +78,6 @@
                     <div class="form-group">
                         <label for="nama_kelas">Status</label>
                         <select name="status" id="status" class="form-control">
-                            <option value="">Pilih Status Tahun Ajar</option>
                             <option value="Aktif">Aktif</option>
                             <option value="Tidak Aktif">Tidak Aktif</option>
                         </select>
@@ -97,6 +103,13 @@
             </div>
             <div class="modal-body">
                 <form id="frm-tahun_ajar_edit">
+
+                    <div class="form-group">
+                        <label for="kode_tahun_ajar_edit">Kode Tahun Ajar</label>
+                        <input type="text" class="form-control" id="kode_tahun_ajar_edit" name="kode_tahun_ajar_edit" placeholder="Masukkan Tahun Ajar">
+                        <small id="kode_tahun_ajar_edit-err" class="form-text text-danger"></small>
+                    </div>
+
                     <div class="form-group">
                         <label for="tahun_ajar_edit">Tahun Ajar</label>
                         <input type="hidden" name="id_tahun_ajar_edit" id="id_tahun_ajar_edit">
@@ -106,7 +119,6 @@
                     <div class="form-group">
                         <label for="status_edit">Status</label>
                         <select name="status_edit" id="status_edit" class="form-control">
-                            <option value="">Pilih Status Tahun Ajar</option>
                             <option value="Aktif">Aktif</option>
                             <option value="Tidak Aktif">Tidak Aktif</option>
                         </select>

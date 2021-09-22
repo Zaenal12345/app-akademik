@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include_once(APPPATH.'libraries/REST_Controller.php');
 
-class Jurusan extends REST_Controller
+class Dosen extends REST_Controller
 {
 
     public function __construct()
@@ -24,17 +24,13 @@ class Jurusan extends REST_Controller
 
     public function index_post()
     {
-        $this->db->select('jurusan.*, fakultas.nama_fakultas');
-		$this->db->from('jurusan');
-		$this->db->join('fakultas','fakultas.id_fakultas = jurusan.fakultas_id');
-        $data = $this->db->get()->result(); 
+        $data = $this->wsfeeder->getAllDosen();
 
         $result['data'] = $data;
-        $result['length'] = count($data);
-        $result['message'] = count($data) != 0 ? "Data has been retrieved !" : "Data not found" ;
+        // $result['length'] = count($data);
+        // $result['message'] = count($data) != 0 ? "Data has been retrieved !" : "Data not found" ;
         
         $this->response($result, 200);
     }
-
 
 }

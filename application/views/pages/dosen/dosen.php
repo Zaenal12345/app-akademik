@@ -27,15 +27,15 @@
                 <div class="card">
                     <div class="card-header">
                         <!-- <h5 class="float-right"><a href="<?= base_url()?>dosen/create" class="btn btn-primary" id="tambah-dosen">Tambah Data</a></h5> -->
-                        <h5 class="float-right"><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-dosen" id="tambah-dosen"><i class="feather icon-plus"></i> Tambah Data</a></h5>
-                        <div style="clear: both;"></div>
+                        <!-- <h5 class="float-right"><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-dosen" id="tambah-dosen"><i class="feather icon-plus"></i> Tambah Data</a></h5>
+                        <div style="clear: both;"></div> -->
                     </div>
                     <div class="card-body table-border-style">
                         <div class="table-responsive">
                             <table class="table" id="data-dosen">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" style="text-transform: capitalize;">Foto</th>
+                                        <!-- <th class="text-center" style="text-transform: capitalize;">Foto</th>  -->
                                         <th class="text-center" style="text-transform: capitalize;">NIK</th>
                                         <th class="text-center" style="text-transform: capitalize;">NIDN</th>
                                         <th class="text-center" style="text-transform: capitalize;">Nama Dosen</th>
@@ -43,7 +43,7 @@
                                         <th class="text-center" style="text-transform: capitalize;">Pendidikan</th>
                                         <th class="text-center" style="text-transform: capitalize;">Status</th>
                                         <th class="text-center" style="text-transform: capitalize;">Jenis Kelamin</th>
-                                        <th class="text-center" style="text-transform: capitalize;">Aksi</th>
+                                        <!-- <th class="text-center" style="text-transform: capitalize;">Aksi</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>

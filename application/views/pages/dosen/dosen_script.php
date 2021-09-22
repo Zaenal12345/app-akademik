@@ -37,11 +37,11 @@ $(function() {
         serverSide: true,
         ordering:false,
         ajax:{
-            url: "<?= base_url()?>dosen/show",
+            url: "<?= base_url()?>dosen/singkronisasi",
             type: "POST"
         },
         columns:[
-            {"data": "gambar", class:"text-center"},
+            // {"data": "gambar", class:"text-center"},
             {"data": "nik", class:"text-center"},
             {"data": "nidn", class:"text-center"},
             {"data": "nama_dosen", class:"text-center"},
@@ -49,7 +49,7 @@ $(function() {
             {"data": "pendidikan", class:"text-center"},
             {"data": "status_dosen", class:"text-center"},
             {"data": "jenis_kelamin_dosen", class:"text-center"},
-            {"data": "view", class:"text-center"}
+            // {"data": "view", class:"text-center"}
         ],
 
     });
@@ -303,8 +303,8 @@ $(function() {
         });
 
     });
-
-
+    
+    
 });
 
 

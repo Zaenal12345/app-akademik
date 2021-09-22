@@ -70,7 +70,7 @@
 
             <div class="col-xl-12 col-md-12">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-5">
                         
                         <div class="card feed-card">
                             <div class="card-header">
@@ -94,40 +94,40 @@
                                     <tr>
                                         <th>Mahasiswa Aktif</th>
                                         <td>:</td>
-                                        <td></td>
+                                        <td><?= $jumlah_mahasiswa_aktif?></td>
                                     </tr>
                                     <tr>
                                         <th>Mahasiswa Non Aktif </th>
                                         <td>:</td>
-                                        <td></td>
+                                        <td><?= $jumlah_mahasiswa_non_aktif?></td>
                                     </tr>
                                     <tr>
                                         <th>Mahasiswa Lulus </th>
                                         <td>:</td>
-                                        <td></td>
+                                        <td><?= $jumlah_mahasiswa_lulus?></td>
                                     </tr>
                                     <tr>
                                         <th>Mahasiswa Cuti </th>
                                         <td>:</td>
-                                        <td></td>
+                                        <td><?= $jumlah_mahasiswa_cuti?></td>
                                     </tr>
                                     <tr>
                                         <th>Mahasiswa Keluar </th>
                                         <td>:</td>
-                                        <td></td>
+                                        <td><?= $jumlah_mahasiswa_keluar?></td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-6">
+                    <div class="col-7">
                         <div class="card">
                             <div class="card-header">
                                 <h5>Grafik Jumlah Mahasiswa Berdasarkan Jurusan</h5>
                             </div>
                             <div class="card-body">
-                                <div id="pie-chart-2" style="width:100%"></div>
+                                <div id="bar-chart-1" style="width:100%"></div>
                             </div>
                         </div>
                     </div>
