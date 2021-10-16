@@ -37,6 +37,9 @@
                                         <th class="text-center" style="text-transform: capitalize;">Nama Matakuliah</th>
                                         <th class="text-center" style="text-transform: capitalize;">SKS</th>
                                         <th class="text-center" style="text-transform: capitalize;">Semester</th>
+                                        <th class="text-center" style="text-transform: capitalize;">Jurusan</th>
+                                        <th class="text-center" style="text-transform: capitalize;">Jenis</th>
+                                        <th class="text-center" style="text-transform: capitalize;">Status</th>
                                         <th class="text-center" style="text-transform: capitalize;">Aksi</th>
                                     </tr>
                                 </thead>
@@ -84,6 +87,28 @@
                         <label for="semester"><b>Semester :</b></label>
                         <input type="text" class="form-control" id="semester" name="semester" placeholder="Masukkan SKS">
                         <small id="semester-err" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="jurusan"><b>Jurusan :</b></label>
+                        <select name="jurusan" id="jurusan" class="form-control">
+                            <option></option>
+                            <?php foreach($jurusan as $data):?>
+                                <option value="<?= $data->id_jurusan?>"><?= $data->nama_jurusan?></option>
+                            <?php endforeach;?>
+                        </select>
+                        <small id="jurusan-err" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="jenis"><b>Jenis :</b></label>
+                        <select name="jenis" id="jenis" class="form-control">
+                            <option></option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                        <small id="jenis-err" class="form-text text-danger"></small>
                     </div>
                 
             </div>

@@ -14,6 +14,11 @@
 		$(".js-select2-jurusan").select2({
 			placeholder: "Pilih Jurusan",
 		});
+
+		$("#dosen_id").select2({
+			placeholder: "Pilih Dosen",
+            dropdownParent: $("#modal-kurikulum_ubah")
+		});
 		
 	});
 

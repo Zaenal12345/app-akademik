@@ -161,7 +161,7 @@
                     <div class="form-group">
                         <label for="kode_jurusan_edit"><b>Kode Jurusan :</b></label>
                         <input type="hidden" name="id_jurusan_edit" id="id_jurusan_edit">
-                        <input type="text" class="form-control" name="kode_jurusan_edit" id="kode_jurusan_edit"  placeholder="Masukkan Kode Jurusan" readonly>
+                        <input type="text" class="form-control" name="kode_jurusan_edit" id="kode_jurusan_edit"  placeholder="Masukkan Kode Jurusan">
                         <small id="kode_jurusan_edit-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">

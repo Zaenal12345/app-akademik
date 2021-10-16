@@ -12,17 +12,7 @@ class Dosen extends REST_Controller
 
     }
 
-    // GET
-	public function index_get(){
-
-		$data_siswa = array(
-			"error_message" => "something wrong"
-		);
-
-		$this->response($data_siswa, 500);
-	}
-
-    public function index_post()
+    public function index_get()
     {
         $data = $this->wsfeeder->getAllDosen();
 

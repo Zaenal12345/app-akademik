@@ -23,6 +23,7 @@ class Nilai extends CI_Controller
 			'data' => $admin_data,
 			'title' => 'Nilai',
 			'sub_title' => '',
+            'matakuliah' => $this->db->get('matakuliah')->result(),
             'mahasiswa' => $this->db->get('mahasiswa')->result(),
 		];
 
@@ -35,7 +36,7 @@ class Nilai extends CI_Controller
 
     public function show()
     {
-        $this->datatables->select('nilai.id_nilai,nilai.nilai,nilai.standard_nilai,nilai.grade,nilai.keterangan,mahasiswa.nim,mahasiswa.nama_mahasiswa,matakuliah.kode_matakuliah,matakuliah.nama_matakuliah,nilai.absen,nilai.tugas,nilai.uts,nilai.uas');
+        $this->datatables->select('nilai.id_nilai,nilai.nilai,nilai.standard_nilai,nilai.grade,nilai.keterangan,mahasiswa.nim,mahasiswa.nama_mahasiswa,matakuliah.kode_matakuliah,matakuliah.nama_matakuliah');
 		$this->datatables->from('nilai');
 		$this->datatables->join('mahasiswa','mahasiswa.id_mahasiswa = nilai.mahasiswa_id');
 		$this->datatables->join('matakuliah','matakuliah.id_matakuliah = nilai.matakuliah_id');
@@ -77,31 +78,11 @@ class Nilai extends CI_Controller
         $data = [];
         $count = count($this->input->post('mahasiswa_id'));
 
-        // for ($i=0; $i <$count; $i++) { 
-        //     $data[] = [
-        //         'mahasiswa_id' => $this->input->post('mahasiswa_id')[$i],
-        //         'matakuliah_id' => $id_matakuliah,
-        //         'tahun_ajar_id' => $id_tahun_ajar,
-        //         'absen' => $this->input->post('absen')[$i],
-        //         'tugas' => $this->input->post('tugas')[$i],
-        //         'uts' => $this->input->post('uts')[$i],
-        //         'uas' => $this->input->post('uas')[$i],
-        //         'nilai' => $this->input->post('nilai')[$i],
-        //         'grade' => $this->input->post('grade')[$i],
-        //         'keterangan' => $this->input->post('grade')[$i] != 'E' ? 'Lulus' : 'Belum Lulus',
-        //     ];
-        // }
-
         for ($i=0; $i <$count; $i++) { 
 
             $this->db->insert('nilai',[
                 'mahasiswa_id' => $this->input->post('mahasiswa_id')[$i],
                 'matakuliah_id' => $id_matakuliah,
-                'tahun_ajar_id' => $id_tahun_ajar,
-                'absen' => $this->input->post('absen')[$i],
-                'tugas' => $this->input->post('tugas')[$i],
-                'uts' => $this->input->post('uts')[$i],
-                'uas' => $this->input->post('uas')[$i],
                 'nilai' => $this->input->post('nilai')[$i],
                 'grade' => $this->input->post('grade')[$i],
                 'keterangan' => $this->input->post('grade')[$i] != 'E' ? 'Lulus' : 'Belum Lulus',
@@ -109,8 +90,6 @@ class Nilai extends CI_Controller
 
         }
 
-
-        // $this->NilaiModel->saveMultipleData($data);
         echo json_encode([
             'message' => 'Data berhasil disimpan',
         ]);
@@ -131,8 +110,8 @@ class Nilai extends CI_Controller
 
         // get list mahasiswa
         $list = $this->db->select('DISTINCT(mahasiswa.nim),mahasiswa.nama_mahasiswa,mahasiswa.id_mahasiswa')
-        ->from('mahasiswa')
-        ->join('krs','krs.mahasiswa_id = mahasiswa.id_mahasiswa')
+        ->from('krs')
+        ->join('mahasiswa','krs.mahasiswa_id = mahasiswa.id_mahasiswa')
         ->join('jurusan','jurusan.id_jurusan = mahasiswa.jurusan_id')
         ->where('mahasiswa.kelas_id',$id_kelas)
         ->where('mahasiswa.jurusan_id',$id_jurusan)
@@ -233,6 +212,62 @@ class Nilai extends CI_Controller
 		$this->load->view('pages/nilai/transkip_nilai',$data);
 		$this->load->view('component/footer',$data);
 		$this->load->view('pages/nilai/nilai_script',$data);
+
+    }
+
+    public function perbaikan_nilai()
+    {
+        $this->check->user_login();
+		// get admin data
+		$admin_data = $this->AuthModel->getDataByUsername($this->session->userdata('username'));
+		
+		$data = [
+			'data' => $admin_data,
+			'title' => 'Nilai',
+			'sub_title' => '',
+			'mahasiswa' => $this->db->get('mahasiswa')->result(),
+		];
+
+		$this->load->view('component/header',$data);
+		$this->load->view('component/sidebar',$data);
+		$this->load->view('pages/nilai/nilai_perubahan',$data);
+		$this->load->view('component/footer',$data);
+		$this->load->view('pages/nilai/nilai_script',$data);
+
+    }
+
+    public function getNilai()
+    {
+        $mahasiswa_id = $this->input->post('mahasiswa_id');
+        $matakuliah_id = $this->input->post('matakuliah_id');
+
+        $data = $this->db->select('*')->from('nilai')
+        ->where('mahasiswa_id',$mahasiswa_id)
+        ->where('matakuliah_id',$matakuliah_id)
+        ->get()->result();
+
+        echo json_encode($data);
+    }
+
+    public function ubahNilai()
+    {
+        $mahasiswa_id = $this->input->post('nim2');
+        $matakuliah_id = $this->input->post('matakuliah_id');
+        $nilai_edit = $this->input->post('nilai_edit');
+        $grade_edit = $this->input->post('grade_edit');
+
+        $this->db->set([
+            'nilai' => $nilai_edit,
+            'grade' => $grade_edit,
+            'keterangan' => $grade_edit != 'E' ? 'Lulus' : 'Tidak Lulus',
+        ])
+        ->where('matakuliah_id',$matakuliah_id)
+        ->where('mahasiswa_id',$mahasiswa_id)
+        ->update('nilai');
+
+        echo json_encode([
+            'message' => 'Data berhasil di ubah',
+        ]);
 
     }
 

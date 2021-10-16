@@ -19,7 +19,6 @@ class Dosen extends CI_Controller
 		$result = $this->http_request($data);
 		// ubah string JSON menjadi array
 		$result = json_decode($result, TRUE);
-		// echo print_r($result);die();
 		$data_dosen = $this->db->get('dosen')->result();
 
 		if(count($data_dosen) == 0){
@@ -56,19 +55,21 @@ class Dosen extends CI_Controller
 					}
 					
 					if(count($temp) == 0 ){
-						$this->db->insert('dosen',[
-							'nama_dosen' => $result['data'][$i]['nama_dosen'],
-							'nik' => $result['data'][$i]['nik'],
-							'nidn' => $result['data'][$i]['nidn'],
-							'pendidikan' => $result['data'][$i]['pendidikan_terakhir'],
-							'gelar' => $result['data'][$i]['gelar'],
-							'tempat_lahir_dosen' => $result['data'][$i]['tempat_lahir'],
-							'tanggal_lahir_dosen' => $result['data'][$i]['tanggal_lahir'],
-							'jenis_kelamin_dosen' => $result['data'][$i]['jenis_kelamin'],
-							'agama_dosen' => $result['data'][$i]['agama'],
-							'alamat_dosen' => $result['data'][$i]['alamat'],
-							'status_dosen' => $result['data'][$i]['status'],
-						]);
+						if($result['data'][$i]['status_kepegawaian'] != "Pegawai"){
+							$this->db->insert('dosen',[
+								'nama_dosen' => $result['data'][$i]['nama_dosen'],
+								'nik' => $result['data'][$i]['nik'],
+								'nidn' => $result['data'][$i]['nidn'],
+								'pendidikan' => $result['data'][$i]['pendidikan_terakhir'],
+								'gelar' => $result['data'][$i]['gelar'],
+								'tempat_lahir_dosen' => $result['data'][$i]['tempat_lahir'],
+								'tanggal_lahir_dosen' => $result['data'][$i]['tanggal_lahir'],
+								'jenis_kelamin_dosen' => $result['data'][$i]['jenis_kelamin'],
+								'agama_dosen' => $result['data'][$i]['agama'],
+								'alamat_dosen' => $result['data'][$i]['alamat'],
+								'status_dosen' => $result['data'][$i]['status'],
+							]);
+						}
 					}
 
 				}
@@ -84,8 +85,6 @@ class Dosen extends CI_Controller
 						$temp = $this->db->where('nidn',$result['data'][$k]['nidn'])->get('dosen')->result();
 					}
 
-
-
 				} 
 
 			}
@@ -94,8 +93,7 @@ class Dosen extends CI_Controller
 
 		$this->check->user_login();
 		$base = base_url();
-		$this->datatables->select('id_dosen,nidn,nik,nama_dosen,jenis_kelamin_dosen,gelar,pendidikan,status_dosen,tempat_lahir_dosen,tanggal_lahir_dosen,agama_dosen,alamat_dosen,foto_dosen');
-		$this->datatables->add_column('gambar','<img src="'. $base .'assets/picture/dosen/$1" width="90">','foto_dosen');
+		$this->datatables->select('id_dosen,nidn,nik,nama_dosen,jenis_kelamin_dosen,gelar,pendidikan,status_dosen,tempat_lahir_dosen,tanggal_lahir_dosen,agama_dosen,alamat_dosen');
 		$this->datatables->add_column('view','<a href="#" class="edit-dosen btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-dosen btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_dosen');
 		$this->datatables->from('dosen');
 		return print_r($this->datatables->generate());

@@ -45,6 +45,9 @@
                 {"data": "nama_matakuliah", class:"text-center"},
                 {"data": "sks", class:"text-center"},
                 {"data": "semester", class:"text-center"},
+                {"data": "nama_jurusan", class:"text-center"},
+                {"data": "jenis", class:"text-center"},
+                {"data": "status_matakuliah", class:"text-center"},
                 {"data": "view", class:"text-center"}
             ],
 

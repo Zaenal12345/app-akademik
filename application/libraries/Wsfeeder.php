@@ -124,7 +124,7 @@ class Wsfeeder
    */
   public function getAllDosen(){
       $this->login();
-      $hsl=$this->runws(array('act'=>'GetListDosen ','token'=>$this->token, 'filter' => ''));
+      $hsl=$this->runws(array('act'=>'DetailBiodataDosen ','token'=>$this->token, 'filter' => ''));
       $hsl=json_decode($hsl);
       return $hsl;
   }
@@ -250,7 +250,21 @@ class Wsfeeder
   {
       $this->login();
       $hsl = $this->runws([
-        'act' => 'GetProdi',
+        'act' => 'GetAllProdi',
+        'token' => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
+ 
+  /**
+   * GET FAKULTAS
+   */
+  public function getFakultas()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act' => 'GetFakultas',
         'token' => $this->token,
       ]);
 
@@ -267,7 +281,8 @@ class Wsfeeder
       $hsl = $this->runws([
         'act' => 'GetKRSMahasiswa',
         'token' => $this->token,
-        'filter' => "angkatan >='2011'"
+        'limit' => 10
+        // 'filter' => "angkatan >='2011'"
       ]);
 
       return json_decode($hsl);
@@ -328,6 +343,174 @@ class Wsfeeder
 
       return json_decode($hsl);
   }
+
+  /**
+   * GET Kurikulum
+  */
+  public function getKurikulum()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'GetListKurikulum',
+        'token'   => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
+
+  public function getPeriode()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'GetPeriode',
+        'token'   => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
+  
+  
+  public function getListMataKuliah()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'GetDetailMataKuliah',
+        'token'   => $this->token,
+        // 'filter'   => "nama_mata_kuliah='STATISTIKA DASAR'",
+        // 'filter'   => "nama_mata_kuliah='S1 Teknik Informatika'",
+      ]);
+
+      return json_decode($hsl);
+  }
+  
+  public function getListMataKuliah2($prodi)
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'GetListMataKuliah',
+        'token'   => $this->token,
+        // 'filter'   => "nama_mata_kuliah='STATISTIKA DASAR'",
+        'filter'   => "nama_program_studi='". $prodi ."'",
+        'limit'    => 1,
+      ]);
+
+      return json_decode($hsl);
+  }
+  
+  public function insertMatakuliah($data)
+  {
+      $this->login();
+      for ($i=0; $i <count($data) ; $i++) { 
+        $hsl = $this->runws([
+          'act'     => 'InsertMataKuliah',
+          'token'   => $this->token,
+          'record'  => $data[$i]
+        ]);
+      }
+
+      return json_decode($hsl);
+  }
+  
+  
+  public function insertKurikulum()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'InsertKurikulum',
+        'token'   => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
+
+  public function getMatakuliahKurikulum()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'GetMatkulKurikulum',
+        'token'   => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
+  
+  public function insertMatakuliahKurikulum()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'InsertMatkulKurikulum',
+        'token'   => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
+
+  // get nilai
+  public function getNilai()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'GetDetailNilaiPerkuliahanKelas',
+        'token'   => $this->token,
+        'limit'   => 5000,
+        'filter' => "angkatan >= '2007'"
+      ]);
+
+      return json_decode($hsl);
+  }
+
+  // get aktivitas
+  public function getListPerkuliahanMahasiswa()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'GetListPerkuliahanMahasiswa',
+        'token'   => $this->token,
+        'filter' => " angkatan >= '2007'"
+      ]);
+
+      return json_decode($hsl);
+  }
+  
+  // insert aktivitas
+  public function insertPerkuliahanMahasiswa()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'InsertPerkuliahanMahasiswa',
+        'token'   => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
+  
+  // get lulusan
+  public function getListMahasiswaLulusDO()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'GetListMahasiswaLulusDO',
+        'token'   => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
+  
+  // insert lulusan
+  public function insertMahasiswaLulusDO()
+  {
+      $this->login();
+      $hsl = $this->runws([
+        'act'     => 'InsertMahasiswaLulusDO',
+        'token'   => $this->token,
+      ]);
+
+      return json_decode($hsl);
+  }
+
+
+
+
   
 
 }

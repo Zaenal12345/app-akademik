@@ -79,14 +79,14 @@
                                         <tbody>
                                             <?php $no=1;foreach($transkip as $data):?>
                                                 <tr>
-                                                    <td><?= $no?></td>
-                                                    <td><?= $data['kode_matakuliah']?></td>
-                                                    <td><?= $data['nama_matakuliah']?></td>
-                                                    <td><?= $data['sks']?></td>
-                                                    <td><?= $data['semester']?></td>
-                                                    <td><?= $data['grade']?></td>
-                                                    <td><?= $data['bobot']?></td>
-                                                    <td><?= $data['jumlah']?></td>
+                                                    <td class="text-center"><?= $no?></td>
+                                                    <td class="text-center"><?= $data['kode_matakuliah']?></td>
+                                                    <td class="text-center"><?= $data['nama_matakuliah']?></td>
+                                                    <td class="text-center"><?= $data['sks']?></td>
+                                                    <td class="text-center"><?= $data['semester']?></td>
+                                                    <td class="text-center"><?= $data['grade']?></td>
+                                                    <td class="text-center"><?= $data['bobot']?></td>
+                                                    <td class="text-center"><?= $data['jumlah']?></td>
                                                 </tr>
                                             <?php $no++;endforeach;?>
                                         </tbody>

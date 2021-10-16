@@ -226,7 +226,6 @@ class Mahasiswa extends CI_Controller
 	}
 
 	// this method for upload picture file 
-
 	private function _upload(){
 
         $config['allowed_types']    = 'jpg|jpeg|png';
@@ -403,15 +402,15 @@ class Mahasiswa extends CI_Controller
 			'id_kebutuhan_khusus_ibu'		=> $this->input->post('id_kebutuhan_khusus_ibu'),
 		];
 
-        $result_biodata = $this->wsfeeder->insertBiodataMahasiswa($data_biodata_mahasiswa);
+        // $result_biodata = $this->wsfeeder->insertBiodataMahasiswa($data_biodata_mahasiswa);
 
 		$data_mahasiswa = [
-			// "id_mahasiswa" => "ee44163e-3be2-4c7e-ba90-9a86f1f47718",
+			"id_mahasiswa" => "ee44163e-3be2-4c7e-ba90-9a86f1f47718",
 			"id_mahasiswa" => $result_biodata->data['id_mahasiswa'],
 			"nim" => "2020202020",
 			"id_jenis_daftar" => "1",
 			"id_periode_masuk" => "20213",
-			"tanggal_daftar" => "2018-01-01",
+			"tanggal_daftar" => "2021-01-01",
 			"id_perguruan_tinggi" => "8d96c84e-eb26-4436-906c-33b286d9d49d",
 			"id_prodi" => "7da00522-2fbd-487d-91ae-5486b46f70b4",
 			"id_pembiayaan" => "3",
@@ -475,6 +474,18 @@ class Mahasiswa extends CI_Controller
     {
         $data = $this->wsfeeder->getSemester();
         echo json_encode($data);
+    }
+
+	public function getPeriode()
+    {
+        $data = $this->wsfeeder->getPeriode();
+        echo json_encode($data->data);
+    }
+
+	public function getFakultas()
+    {
+        $data = $this->wsfeeder->getFakultas();
+        echo json_encode($data->data);
     }
 
 }

@@ -12,6 +12,7 @@ class Matakuliah extends CI_Controller
 		$this->check->user_login();
 		$this->load->model('MatakuliahModel');
 		$this->load->model('AuthModel');
+		$this->load->library('wsfeeder');
 	}
 
 	public function index()
@@ -23,6 +24,7 @@ class Matakuliah extends CI_Controller
 			'data' => $admin_data,
 			'title' => 'Master',
 			'sub_title' => 'Matakuliah',	
+			'jurusan' => $this->db->get('jurusan')->result(),	
 		];
 
 		$this->load->view('component/header',$data);
@@ -34,8 +36,9 @@ class Matakuliah extends CI_Controller
 
 	public function show()
 	{
-		$this->datatables->select('id_matakuliah,kode_matakuliah,nama_matakuliah,sks,semester');
+		$this->datatables->select('matakuliah.id_matakuliah,matakuliah.jenis,matakuliah.kode_matakuliah,matakuliah.nama_matakuliah,matakuliah.sks,matakuliah.semester,matakuliah.status_matakuliah,jurusan.nama_jurusan');
 		$this->datatables->from('matakuliah');
+		$this->datatables->join('jurusan','jurusan.id_jurusan = matakuliah.jurusan_id_matakuliah');
 		$this->datatables->add_column('view','<a href="#" class="edit-matakuliah btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-matakuliah btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_matakuliah');
 		return print_r($this->datatables->generate());	
 	}
@@ -166,7 +169,6 @@ class Matakuliah extends CI_Controller
 
 	}
 
-
 	public function destroy()
 	{
 		$id = $this->input->post('id');
@@ -177,6 +179,25 @@ class Matakuliah extends CI_Controller
 
 		echo json_encode($message);
 
+	}
+	
+	public function insertMatakuliah()
+	{
+		$data = json_decode(json_encode($this->wsfeeder->getListMataKuliah()),true);
+		echo json_encode($data);die();
+
+		// for ($i=0; $i < count($data['data']) ; $i++) { 
+
+		// 	$jurusan = $this->db->where('nama_jurusan',$data['data'][$i]['nama_program_studi'])->get('jurusan')->result();
+
+		// 	$this->db->insert('matakuliah',[
+		// 		'kode_matakuliah' => $data['data'][$i]['kode_mata_kuliah'],
+		// 		'nama_matakuliah' => $data['data'][$i]['nama_mata_kuliah'],
+		// 		'sks' => $data['data'][$i]['sks_mata_kuliah'],
+		// 		'semester' => 0,
+		// 		'jurusan_id' => $jurusan[0]->id_jurusan,
+		// 	]);
+		// }
 	}
 
 }

@@ -60,12 +60,12 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Form Tambah Nilai</h5>
+                            <h5 class="m-b-10">Form Perubahan Nilai</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="<?= base_url()?>dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="#">Form Tambah Nilai</a></li>
+                            <li class="breadcrumb-item"><a href="#">Form Perubahan Nilai</a></li>
                         </ul>
                     </div>
                 </div>
@@ -164,6 +164,10 @@
                                                 <tr>
                                                     <th class="text-center">NIM</th>
                                                     <th class="text-center">Nama Mahasiswa</th>
+                                                    <th class="text-center">Absen</th>
+                                                    <th class="text-center">Tugas</th>
+                                                    <th class="text-center">UTS</th>
+                                                    <th class="text-center">UAS</th>
                                                     <th class="text-center">Nilai Akhir</th>
                                                     <th class="text-center">Grade</th>
                                                 </tr>

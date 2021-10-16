@@ -58,12 +58,13 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="height:50px">&nbsp;<b>Dosen</b></td>
+                                                    <td style="height:50px">&nbsp;<b>Matakuliah</b></td>
                                                     <td>
                                                         :&nbsp;&nbsp;&nbsp;<div class="btn-group">
                                                             <button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih Aksi</button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/dosen">Download Data</a>
+                                                                <a class="dropdown-item" href="<?= base_url()?>dikti/matakuliah">Download Data</a>
+                                                                <a class="dropdown-item" href="#" data-target="#modal-insert_matakuliah" data-toggle="modal">Export Ke PD DIKTI</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -110,7 +111,7 @@
                                                             <button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih Aksi</button>
                                                             <div class="dropdown-menu">
                                                                 <a class="dropdown-item" href="<?= base_url()?>dikti/nilai">Download Data</a>
-                                                                <a class="dropdown-item" href="#">Export Data Ke PD DIKTI</a>a>
+                                                                <a class="dropdown-item" href="#">Export Data Ke PD DIKTI</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -166,3 +167,59 @@
     </div>
 </section>
 <!-- [ Main Content ] end -->
+
+<!-- modal add matakuliah -->
+<div class="modal fade" id="modal-insert_matakuliah" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="myLargeModalLabel">List Matakuliah</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                
+                <!-- alert error -->
+                <div class="alert alert-danger text-danger text-center" id="alert-error" style="display: none;"></div>
+
+                <div class="table-responsive">
+                    <table class="table" id="table-matakuliah" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="text-transform: capitalize;display: none">id Matakuliah</th>
+                                <th class="text-center" style="text-transform: capitalize;">Kode Matakuliah</th>
+                                <th class="text-center" style="text-transform: capitalize;">Nama Matakuliah</th>
+                                <th class="text-center" style="text-transform: capitalize;">SKS</th>
+                                <th class="text-center" style="text-transform: capitalize;">Semester</th>
+                                <th class="text-center" style="text-transform: capitalize;">Nama Jurusan</th>
+                                <th class="text-center" style="text-transform: capitalize;">Jenis</th>
+                                <th class="text-center" style="text-transform: capitalize;"><input type="checkbox" name="select_all"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <?php foreach($matakuliah as $item):?>
+                                <tr>
+                                    <td class="text-center" style="display:none"><?= $item['id_matakuliah']?></td>
+                                    <td class="text-center"><?= $item['kode_matakuliah']?></td>
+                                    <td class="text-center"><?= $item['nama_matakuliah']?></td>
+                                    <td class="text-center"><?= $item['sks']?></td>
+                                    <td class="text-center"><?= $item['semester']?></td>
+                                    <td class="text-center"><?= $item['nama_jurusan']?></td>
+                                    <td class="text-center"><?= $item['jenis']?></td>
+                                    <td class="text-center"><input type="checkbox"></td>
+                                </tr>
+                           <?php endforeach;?>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i></button>
+                <button type="submit" class="btn btn-primary" id="btn-save"><i class="feather icon-save"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- href="<?= base_url()?>dikti/insertMatakuliah" -->

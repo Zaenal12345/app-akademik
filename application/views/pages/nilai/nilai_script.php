@@ -27,6 +27,11 @@
 			placeholder: "Pilih NIM",
             dropdownParent: $("#modal-perbaikan_nilai")
 		});
+        
+		$(".js-select2-matakuliah").select2({
+			placeholder: "Pilih Matakuliah",
+            dropdownParent: $("#modal-perbaikan_nilai")
+		});
 
 		$(".js-select2-mahasiswa2").select2({
 			placeholder: "Pilih NIM",
@@ -78,10 +83,6 @@
 			{"data": "nim", class:"text-center"},
 			{"data": "nama_mahasiswa", class:"text-center"},
 			{"data": "nama_matakuliah", class:"text-center"},
-			{"data": "absen", class:"text-center"},
-			{"data": "tugas", class:"text-center"},
-			{"data": "uts", class:"text-center"},
-			{"data": "uas", class:"text-center"},
 			{"data": "nilai", class:"text-center"},
 			{"data": "grade", class:"text-center"},
 			{"data": "keterangan", class:"text-center"},
@@ -113,7 +114,7 @@
 
                     for (let index = 0; index < res.length; index++) {
                     
-                        html+='<tr><td class="text-center">'+ res[index].nim +'</td><td class="text-center">'+ res[index].nama_mahasiswa +'</td><td class="text-center"><div class="form-group" style="margin-top:-10px; margin-bottom: -5px"><input type="text" class="form-control" name="absen[]"></div></td><td class="text-center"><div class="form-group" style="margin-top:-10px; margin-bottom: -5px"><input type="text" class="form-control" name="tugas[]"></div></td><td class="text-center"><div class="form-group" style="margin-top:-10px; margin-bottom: -5px"><input type="text" class="form-control" name="uts[]"></div></td><td class="text-center"><div class="form-group" style="margin-top:-10px; margin-bottom: -5px"><input type="text" class="form-control" name="uas[]"></div></td><td class="text-center"><div class="form-group" style="margin-top:-10px; margin-bottom: -5px"><input type="text" class="form-control" name="nilai[]"></div></td><td class="text-center"><div class="form-group" style="margin-top:-10px; margin-bottom: -5px"><input type="text" class="form-control" name="grade[]"></div></td></tr><input type="hidden" name="mahasiswa_id[]" value="'+ res[index].id_mahasiswa +'">';
+                        html+='<tr><td class="text-center">'+ res[index].nim +'</td><td class="text-center">'+ res[index].nama_mahasiswa +'</td><td class="text-center"><div class="form-group" style="margin-top:-10px; margin-bottom: -5px"><input type="text" class="form-control" name="nilai[]"></div></td><td class="text-center"><div class="form-group" style="margin-top:-10px; margin-bottom: -5px"><input type="text" class="form-control" name="grade[]"></div></td></tr><input type="hidden" name="mahasiswa_id[]" value="'+ res[index].id_mahasiswa +'">';
 
                     }
 
@@ -142,65 +143,60 @@
             data:$(this).serialize(),
             success:function(res){
                 console.log(res);
-                // if (res.message) {
+                if (res.message) {
 
-                //     toastr.success(res.message,{timeOut: 4000});
-                //     setTimeout(() => {
-                //         window.location.href="<?= base_url()?>nilai";
-                //     }, 2000);
-                // }
+                    toastr.success(res.message,{timeOut: 4000});
+                    setTimeout(() => {
+                        window.location.href="<?= base_url()?>nilai";
+                    }, 2000);
+                }
             }
         });
 
+    });
+
+    $('#frm-ubah_nilai').submit(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url:$(this).attr('action'),
+            type: $(this).attr('method'),
+            data:$(this).serialize(),
+            dataType:'JSON',
+            success:function(res) {
+                if (res.message) {
+                    toastr.success(res.message,{timeOut: 4000});
+                    $('#modal-perbaikan_nilai').modal('hide');
+                    $('#data-nilai').DataTable().ajax.reload();
+                    $(this).reset();
+                }
+            }
+        })
     })
 
+    $('#nim2').change(function() {
+        getNilai($(this).val(),$('#matakuliah_id').val());
+    });
+
+    $('#matakuliah_id').change(function() {
+        getNilai($('#nim2').val(),$(this).val());
+    });
+
+    function getNilai(nim,matakuliah) {
+        $.ajax({
+            url:'<?= base_url()?>nilai/getNilai',
+            type: 'POST',
+            dataType: 'JSON',
+            data:{
+                mahasiswa_id: nim,
+                matakuliah_id: matakuliah,
+            },
+            success:function(res){
+                // console.log(res);
+                $('#nilai_edit').val(res[0].nilai);
+                $('#grade_edit').val(res[0].grade);
+            }
+        });
+    }
 </script>
-
-<!-- auto complete script -->
-<script>
-
-	// auto complete tahun ajar
-    $( "#tahun_ajar" ).autocomplete({
-      source: "<?= base_url()?>nilai/getTahunAjar",
-      select: function( event, ui ) {
-        $( "#tahun_ajar" ).val( ui.item.label );
-        $( "#id_tahun_ajar" ).val( ui.item.result );
-        return false;
-      }  
-    });
-
-	// auto complete matakuliah
-    $( "#nama_matakuliah").autocomplete({
-      source: "<?= base_url()?>nilai/getMatakuliah",
-      select: function( event, ui ) {
-        $( "#nama_matakuliah" ).val( ui.item.label);
-        $( "#id_matakuliah" ).val( ui.item.result);
-        return false;
-		
-      }  
-    });
-
-	// auto complete kelas
-    $( "#nama_kelas").autocomplete({
-      source: "<?= base_url()?>nilai/getKelas",
-      select: function( event, ui ) {
-        $( "#nama_kelas" ).val( ui.item.label);
-        $( "#id_kelas" ).val( ui.item.result);
-        return false;
-		
-      }  
-    });
-
-	// auto complete program studi
-    $( "#nama_jurusan").autocomplete({
-      source: "<?= base_url()?>nilai/getJurusan",
-      select: function( event, ui ) {
-        $( "#nama_jurusan" ).val( ui.item.label);
-        $( "#id_jurusan" ).val( ui.item.result);
-        return false;
-      }  
-    });
-
-
-</script> 
 

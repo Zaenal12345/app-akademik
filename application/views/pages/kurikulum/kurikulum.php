@@ -291,7 +291,7 @@
                 
                 <div class="form-group">
                     <input type="hidden" name="id_kurikulum" id="id_kurikulum">
-                    <select name="dosen_id" id="dosen_id" class="form-control">
+                    <select name="dosen_id" id="dosen_id" class="form-control" style="width:100%">
                         <option value="">Pilih Nama Dosen</option>
                         <?php foreach($dosen as $data):?>
                             <option value="<?= $data['id_dosen']?>"><?= $data['nama_dosen']?></option>

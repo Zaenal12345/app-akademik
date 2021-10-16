@@ -85,11 +85,11 @@
 							<button class="btn  btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manajemen Data</button>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="<?= base_url()?>nilai/create">Tambah Data</a>
-								<!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-perbaikan_nilai">Perbaikan Nilai</a> -->
-								<a class="dropdown-item" href="#">Perbaikan Nilai</a>
+								<!-- <a class="dropdown-item" href="<?= base_url()?>nilai/perbaikan_nilai">Perbaikan Nilai</a> -->
+								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-perbaikan_nilai">Perbaikan Nilai</a>
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-transkip_nilai">Cek Transkip Nilai</a>
-								<a class="dropdown-item" href="#">Cek Nilai Persemester</a>
-								<!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-nilai_persemester">Cek Nilai Persemester</a> -->
+								<!-- <a class="dropdown-item" href="#">Cek Nilai Persemester</a> -->
+								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-nilai_persemester">Cek Nilai Persemester</a>
 							</div>
 						</div>
                         <div style="clear: both;"></div>
@@ -102,10 +102,6 @@
                                         <th class="text-center" style="text-transform: capitalize;">NIM</th>
                                         <th class="text-center" style="text-transform: capitalize;">Nama Mahasiswa</th>
                                         <th class="text-center" style="text-transform: capitalize;">Nama Matakuliah</th>
-                                        <th class="text-center" style="text-transform: capitalize;">Absen</th>
-                                        <th class="text-center" style="text-transform: capitalize;">Tugas</th>
-                                        <th class="text-center" style="text-transform: capitalize;">UTS</th>
-                                        <th class="text-center" style="text-transform: capitalize;">UAS</th>
                                         <th class="text-center" style="text-transform: capitalize;">Nilai Akhir</th>
                                         <th class="text-center" style="text-transform: capitalize;">Grade</th>
                                         <th class="text-center" style="text-transform: capitalize;">Keterangan</th>
@@ -156,7 +152,7 @@
     </div>
 </div>
 
-<!-- <div id="modal-nilai_persemester" class="modal fade"  role="dialog" aria-hidden="true">
+<div id="modal-nilai_persemester" class="modal fade"  role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -206,9 +202,9 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
-<!-- <div id="modal-perbaikan_nilai" class="modal fade"  role="dialog" aria-hidden="true">
+<div id="modal-perbaikan_nilai" class="modal fade"  role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -216,16 +212,49 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <form id="frm-kelas" method="post" action="<?= base_url()?>nilai/transkipNilai">
-                    <div class="form-group">
-                        <label for="nim"><b>NIM: </b></label><br>
-                        <select class="js-select2-mahasiswa form-control" name="nim" id="nim" style="width:100%">
-                            <option value=""></option>
-                            <?php foreach($mahasiswa as $data):?>
-                                <option value="<?= $data->id_mahasiswa?>"><?= $data->nim?> - <?= $data->nama_mahasiswa?></option>
-                            <?php endforeach;?>
-                        </select>
-                        <small id="nim-err" class="form-text text-danger"></small>
+                <form id="frm-ubah_nilai" method="post" action="<?= base_url()?>nilai/ubahNilai">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nim"><b>NIM: </b></label><br>
+                                <select class="js-select2-mahasiswa form-control" name="nim2" id="nim2" style="width:100%">
+                                    <option value=""></option>
+                                    <?php foreach($mahasiswa as $data):?>
+                                        <option value="<?= $data->id_mahasiswa?>"><?= $data->nim?> - <?= $data->nama_mahasiswa?></option>
+                                    <?php endforeach;?>
+                                </select>
+                                <small id="nim-err" class="form-text text-danger"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nim"><b>Matakuliah: </b></label><br>
+                                <select class="js-select2-matakuliah form-control" name="matakuliah_id" id="matakuliah_id" style="width:100%">
+                                    <option value=""></option>
+                                    <?php foreach($matakuliah as $data):?>
+                                        <option value="<?= $data->id_matakuliah?>"><?= $data->kode_matakuliah?> - <?= $data->nama_matakuliah?></option>
+                                    <?php endforeach;?>
+                                </select>
+                                <small id="nim-err" class="form-text text-danger"></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nilai_edit"><b>Nilai :</b></label>
+                                <input type="text" class="form-control" name="nilai_edit" id="nilai_edit" placeholder="Masukkan Nilai">
+                                <small id="nilai_edit-err" class="form-text text-danger"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="grade_edit"><b>Grade :</b></label>
+                                <input type="text" class="form-control" name="grade_edit" id="grade_edit" placeholder="Masukkan Grade">
+                                <small id="grade_edit-err" class="form-text text-danger"></small>
+                            </div>
+                        </div>
                     </div>
                 
             </div>
@@ -236,4 +265,4 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
