@@ -37,6 +37,7 @@ class Matakuliah extends CI_Controller
 	public function show()
 	{
 		$this->datatables->select('matakuliah.id_matakuliah,matakuliah.jenis,matakuliah.kode_matakuliah,matakuliah.nama_matakuliah,matakuliah.sks,matakuliah.semester,matakuliah.status_matakuliah,jurusan.nama_jurusan');
+		$this->db->order_by('status_matakuliah','ASC');
 		$this->datatables->from('matakuliah');
 		$this->datatables->join('jurusan','jurusan.id_jurusan = matakuliah.jurusan_id_matakuliah');
 		$this->datatables->add_column('view','<a href="#" class="edit-matakuliah btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-matakuliah btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_matakuliah');
@@ -46,28 +47,38 @@ class Matakuliah extends CI_Controller
 	public function store()
 	{
 		// set up validation
+		$this->form_validation->set_rules('jurusan', 'Nama jurusan', 'required',
+		[
+			'required' => 'Field nama jurusan harus di isi.',
+		]);
+		$this->form_validation->set_rules('jenis', 'Nama jenis', 'required',
+		[
+			'required' => 'Field jenis matakuliah harus di isi.',
+		]);
 		$this->form_validation->set_rules('sks', 'SKS', 'required|is_natural_no_zero',
 		[
 			'required' => 'Field SKS harus di isi.',
 			'is_natural_no_zero' => 'SKS yang dimasukkan harus berupa angka (1,2,3 ..)'
-
 		]);
-		$this->form_validation->set_rules('semester', 'Semester', 'required|is_natural_no_zero',
+		$this->form_validation->set_rules('sks', 'SKS', 'required',
 		[
-			'required' => 'Field Semester harus di isi.',
-			'is_natural_no_zero' => 'Semester yang dimasukkan harus berupa angka (1,2,3 ..)'
-
+			'required' => 'Field SKS harus di isi.',
 		]);
-		$this->form_validation->set_rules('kode_matakuliah', 'Kode Matakuliah', 'required|is_unique[matakuliah.kode_matakuliah]|max_length[100]',
+		$this->form_validation->set_rules('semester', 'Semester', 'required',
+		[
+			'required' => 'Field semester harus di isi.',
+		]);
+		$this->form_validation->set_rules('kode_matakuliah', 'Kode Matakuliah', 'required|is_unique[matakuliah.kode_matakuliah]|max_length[50]',
 		[
 			'required' => 'Field kode matakuliah harus di isi.',
 			'is_unique' => 'Kode yang dimasukkan sudah ada.',
 			'max_length' => 'Kode yang dimasukkan melebihi batas maksimum'
 		]);
-		$this->form_validation->set_rules('nama_matakuliah', 'Nama Matakuliah', 'required|max_length[100]', 
+		$this->form_validation->set_rules('nama_matakuliah', 'Nama Matakuliah', 'required|max_length[50]|is_unique[matakuliah.kode_matakuliah]', 
 		[
 			'required' => 'Field nama matakuliah harus di isi.',
 			'max_length' => 'Nama yang dimasukkan melebihi batas maksimum',
+			'is_unique' => 'Nama yang dimasukkan sudah ada.',
 		]);
 
 		// check validation
@@ -79,6 +90,8 @@ class Matakuliah extends CI_Controller
             	'nama_matakuliah_err' => form_error('nama_matakuliah'),
             	'sks_err' => form_error('sks'),
             	'semester_err' => form_error('semester'),
+            	'jurusan_err' => form_error('jurusan'),
+            	'jenis_err' => form_error('jenis'),
             ];
 
 		} else {
@@ -88,10 +101,12 @@ class Matakuliah extends CI_Controller
 				'nama_matakuliah' => $this->input->post('nama_matakuliah'),
 				'sks' => $this->input->post('sks'),
 				'semester' => $this->input->post('semester'),
+				'jurusan_id_matakuliah' => $this->input->post('jurusan'),
+				'jenis' => $this->input->post('jenis'),
+				'status_matakuliah' => $this->input->post('status'),
 			];
 
 			$this->MatakuliahModel->saveData($data);
-
 			$message = [
 				'success' => true
 			];			
@@ -112,24 +127,30 @@ class Matakuliah extends CI_Controller
 	{
 		
 		// set up validation
+		$this->form_validation->set_rules('jurusan_edit', 'Nama jurusan', 'required',
+		[
+			'required' => 'Field nama jurusan harus di isi.',
+		]);
+		$this->form_validation->set_rules('jenis_edit', 'Nama jenis', 'required',
+		[
+			'required' => 'Field jenis matakuliah harus di isi.',
+		]);
 		$this->form_validation->set_rules('sks_edit', 'SKS', 'required|is_natural_no_zero',
 		[
 			'required' => 'Field SKS harus di isi.',
 			'is_natural_no_zero' => 'SKS yang dimasukkan harus berupa angka (1,2,3 ..)'
-
 		]);
 		$this->form_validation->set_rules('semester_edit', 'Semester', 'required|is_natural_no_zero',
 		[
 			'required' => 'Field Semester harus di isi.',
 			'is_natural_no_zero' => 'Semester yang dimasukkan harus berupa angka (1,2,3 ..)'
-
 		]);
-		$this->form_validation->set_rules('kode_matakuliah_edit', 'Kode Matakuliah', 'required|max_length[100]',
+		$this->form_validation->set_rules('kode_matakuliah_edit', 'Kode Matakuliah', 'required|max_length[50]',
 		[
 			'required' => 'Field kode matakuliah harus di isi.',
 			'is_unique' => 'Kode yang dimasukkan sudah ada.',
 		]);
-		$this->form_validation->set_rules('nama_matakuliah_edit', 'Nama Matakuliah', 'required|max_length[100]', 
+		$this->form_validation->set_rules('nama_matakuliah_edit', 'Nama Matakuliah', 'required|max_length[50]', 
 		[
 			'required' => 'Field nama matakuliah harus di isi.',
 			'max_length' => 'Nama yang dimasukkan melebihi batas maksimum',
@@ -155,6 +176,9 @@ class Matakuliah extends CI_Controller
 				'nama_matakuliah' => $this->input->post('nama_matakuliah_edit'),
 				'sks' => $this->input->post('sks_edit'),
 				'semester' => $this->input->post('semester_edit'),
+				'jurusan_id_matakuliah' => $this->input->post('jurusan_edit'),
+				'jenis' => $this->input->post('jenis_edit'),
+				'status_matakuliah' => $this->input->post('status_edit'),
 			];
 
 			$this->MatakuliahModel->updateData($data,$id);

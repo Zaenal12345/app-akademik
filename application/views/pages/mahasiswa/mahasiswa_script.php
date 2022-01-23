@@ -2,29 +2,49 @@
 
 $(function() {
     
+    // $(".js-select2-jenis_kelamin").select2({
+    //     placeholder: "Pilih Jenis Kelamin",
+    //     dropdownParent: $("#modal-mahasiswa")
+    // });
+
+    // $(".js-select2-agama").select2({
+    //     placeholder: "Pilih Agama",
+    //     dropdownParent: $("#modal-mahasiswa")
+    // });
+
+    // $(".js-select2-jurusan_id").select2({
+    //     placeholder: "Pilih Jurusan",
+    //     dropdownParent: $("#modal-mahasiswa")
+    // });
+
+    // $(".js-select2-kelas_id").select2({
+    //     placeholder: "Pilih Kelas",
+    //     dropdownParent: $("#modal-mahasiswa")
+    // });
+
+    // $(".js-select2-status_mahasiswa").select2({
+    //     placeholder: "Pilih Status Mahasiswa",
+    //     dropdownParent: $("#modal-mahasiswa")
+    // });
+    
     $(".js-select2-jenis_kelamin").select2({
         placeholder: "Pilih Jenis Kelamin",
-        dropdownParent: $("#modal-mahasiswa")
     });
 
     $(".js-select2-agama").select2({
         placeholder: "Pilih Agama",
-        dropdownParent: $("#modal-mahasiswa")
     });
 
     $(".js-select2-jurusan_id").select2({
         placeholder: "Pilih Jurusan",
-        dropdownParent: $("#modal-mahasiswa")
     });
 
     $(".js-select2-kelas_id").select2({
         placeholder: "Pilih Kelas",
-        dropdownParent: $("#modal-mahasiswa")
     });
 
     $(".js-select2-status_mahasiswa").select2({
         placeholder: "Pilih Status Mahasiswa",
-        dropdownParent: $("#modal-mahasiswa")
     });
 
     // clear add form
@@ -79,7 +99,7 @@ $(function() {
 
     });
 
-    // create or data 
+    // create data 
     $('#frm-mahasiswa').submit(function(e){
         e.preventDefault();
         
@@ -149,10 +169,34 @@ $(function() {
                         $('#agama_err').html('');
                     }
 
-                    if (res.alamat_err != "") {
-                        $('#alamat_err').html(res.alamat_err);
+                    if (res.nik_err != "") {
+                        $('#nik_err').html(res.nik_err);
                     } else {
-                        $('#alamat_err').html('');
+                        $('#nik_err').html('');
+                    }
+
+                    if (res.nik_ibu_err != "") {
+                        $('#nik_ibu_err').html(res.nik_ibu_err);
+                    } else {
+                        $('#nik_ibu_err').html('');
+                    }
+
+                    if (res.nik_ayah_err != "") {
+                        $('#nik_ayah_err').html(res.nik_ayah_err);
+                    } else {
+                        $('#nik_ayah_err').html('');
+                    }
+
+                    if (res.nama_ibu_err != "") {
+                        $('#nama_ibu_err').html(res.nama_ibu_err);
+                    } else {
+                        $('#nama_ibu_err').html('');
+                    }
+
+                    if (res.nama_ayah_err != "") {
+                        $('#nama_ayah_err').html(res.nama_ayah_err);
+                    } else {
+                        $('#nama_ayah_err').html('');
                     }
 
                     if (res.tahun_angkatan_err != "") {
@@ -165,10 +209,13 @@ $(function() {
                 }
 
                 if (res.success) {
-                    $('#data-mahasiswa').DataTable().ajax.reload();
                     toastr.success('Data berhasi disimpan',{timeOut: 4000});
-                    $('#modal-mahasiswa').modal('hide');
-                    clear();
+                    setTimeout(() => {
+                        window.location.href="<?= base_url('mahasiswa')?>";
+                    }, 2000);
+                    // $('#data-mahasiswa').DataTable().ajax.reload();
+                    // $('#modal-mahasiswa').modal('hide');
+                    // clear();
 
                 } 
             }
@@ -219,6 +266,12 @@ $(function() {
                 $('#tempat_lahir_edit').val(res.tempat_lahir);
                 $('#foto_lama').val(res.foto);
                 $('#tahun_angkatan_edit').val(res.tahun_angkatan);
+                $('#nik_edit').val(res.nik);
+                $('#email_edit').val(res.email);
+                $('#nik_ibu_edit').val(res.nik_ibu);
+                $('#nik_ayah_edit').val(res.nik_ayah);
+                $('#nama_ayah_edit').val(res.nama_ayah);
+                $('#nama_ibu_edit').val(res.nama_ibu);
                 clear_edit();
             }
         })
@@ -361,8 +414,9 @@ $(function() {
 
 function clear_add(){
     $('#frm-mahasiswa')[0].reset();
-    $('#nim_err,#nama_mahasiswa_err,#jenis_kelamin_err,#status_err,#tempat_lahir_err,#tanggal_lahir_err,#agama_err,#alamat_err,#tahun_angkatan_err').html('');
+    $('#nim_err,#nama_mahasiswa_err,#jenis_kelamin_err,#status_err,#tempat_lahir_err,#tanggal_lahir_err,#agama_err,#alamat_err,#tahun_angkatan_err,#nik_err,#nama_ibu_err').html('');
 }
+
 function clear_edit(){
     $('#nim_edit_err,#nama_mahasiswa_edit_err,#jenis_kelamin_edit_err,#status_edit_err,#tempat_lahir_edit_err,#tanggal_lahir_edit_err,#agama_edit_err,#alamat_edit_err,tahun_angkatan_edit_err').html('');
 }

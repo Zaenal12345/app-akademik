@@ -44,13 +44,14 @@ class Fakultas extends CI_Controller
 	public function store()
 	{
 		// set up validation form
-		$this->form_validation->set_rules('kode_fakultas','Kode Fakultas','required|is_unique[fakultas.kode_fakultas]|max_length[100]',[
+		$this->form_validation->set_rules('kode_fakultas','Kode Fakultas','required|is_unique[fakultas.kode_fakultas]|max_length[50]',[
 			'required' => 'Field kode fakultas harus di isi.',
 			'is_unique' => 'Kode yang dimasukkan sudah ada.',
 			'max_length' => 'Kode yang dimasukkan melebihi batas maksimum'
 		]);
-		$this->form_validation->set_rules('nama_fakultas','Nama Fakultas','required|max_length[100]',[
+		$this->form_validation->set_rules('nama_fakultas','Nama Fakultas','required|max_length[50]|is_unique[fakultas.nama_fakultas]',[
 			'required' => 'Field nama fakultas harus di isi.',
+			'is_unique' => 'Nama yang dimasukkan sudah ada.',
 			'max_length' => 'Nama yang dimasukkan melebihi batas maksimum'
 		]);
 
@@ -63,8 +64,7 @@ class Fakultas extends CI_Controller
             	'nama_fakultas_err' => form_error('nama_fakultas'),
             ];
 
-        }
-        else{
+        }else{
 
         	$data = [
 				'kode_fakultas' => $this->input->post('kode_fakultas'),
@@ -72,12 +72,10 @@ class Fakultas extends CI_Controller
 			];
 
 			$this->FakultasModel->saveData($data);
-
 			$message = [
 				'success' => true
 			];
         }
-		
 		
         echo json_encode($message);
 	}
@@ -92,11 +90,11 @@ class Fakultas extends CI_Controller
 	public function update()
 	{
 		// set up validation form
-		$this->form_validation->set_rules('kode_fakultas_edit','Kode Fakultas','required|max_length[100]',[
+		$this->form_validation->set_rules('kode_fakultas_edit','Kode Fakultas','required|max_length[50]',[
 			'required' => 'Field kode fakultas harus di isi.',
 			'max_length' => 'Kode yang dimasukkan melebihi batas maksimum',
 		]);
-		$this->form_validation->set_rules('nama_fakultas_edit','Nama Fakultas','required|max_length[100]',[
+		$this->form_validation->set_rules('nama_fakultas_edit','Nama Fakultas','required|max_length[50]',[
 			'required' => 'Field nama fakultas harus di isi.',
 			'max_length' => 'Nama yang dimasukkan melebihi batas maksimum',
 		]);
@@ -110,8 +108,7 @@ class Fakultas extends CI_Controller
             	'nama_fakultas_edit_err' => form_error('nama_fakultas_edit'),
             ];
 
-        }
-        else{
+        }else{
 
         	$id = $this->input->post('id_fakultas_edit');
         	$data = [
@@ -120,7 +117,6 @@ class Fakultas extends CI_Controller
 			];
 
 			$this->FakultasModel->updateData($data,$id);
-
 			$message = [
 				'success' => true
 			];
@@ -128,10 +124,7 @@ class Fakultas extends CI_Controller
         }
 		
 		echo json_encode($message);
-		
-		
 	}
-
 
 	public function destroy()
 	{
@@ -142,7 +135,6 @@ class Fakultas extends CI_Controller
 		];
 
 		echo json_encode($message);
-
 	}
 
 }

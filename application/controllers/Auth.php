@@ -18,11 +18,6 @@ class Auth extends CI_Controller
 		$this->load->view('pages/login_page');
 	}
 
-	// public function test()
-	// {
-	// 	$this->check->user_logout();
-	// 	$this->load->view('pages/sign-in');
-	// }
 
 	public function login(){
 
@@ -96,6 +91,45 @@ class Auth extends CI_Controller
 		]);
 	}
 
+	public function testCheckbox()
+	{
+		$this->load->view('test_');
+	}
 
+	public function generateAdmin()
+    {
+        $last_user = $this->db->select('*')->order_by('id','DESC')->limit(1)->get('users')->result();
+        if (count($last_user) != 0) {
+            $last_user = $last_user[0]->username;
+        
+            if(strlen($last_user) == 10){
+                $count = (int)(substr($last_user,8))+1;
+                $username = 'admin'.$this->getRandomString(4).$count;
+            }else{
+                $username = 'admin'.$this->getRandomString(4).'1';
+            }
+        }else{
+            $username = 'admin'.$this->getRandomString(4).'1';
+        }
+
+        $data = [
+            'username' => $username,
+            'password' => password_hash('admin123', PASSWORD_BCRYPT),
+            'role_id' => '1',
+        ];
+        $this->db->insert('users',$data);
+    }
+
+    private function getRandomString($n) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+      
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+      
+        return $randomString;
+    }
 
 }

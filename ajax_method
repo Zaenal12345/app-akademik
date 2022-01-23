@@ -1,5 +1,5 @@
-jquery ajax method :
-=============
+//jquery ajax method :
+//=============
 - $(selector).load(URL,data,callback);
 
 - $.get (URL,callback);
@@ -9,7 +9,7 @@ $('#btn_tampil').click(function(){
     });
 });
 
-- $.post(URL,data,callback);
+$.post(URL,data,callback);
 $.post('info.php',{nama : 'Setiawan Dimas'},
     function(data, status){
         alert('Data : '+data+'\nStatus: '+status);

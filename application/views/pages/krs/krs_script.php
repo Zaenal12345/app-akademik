@@ -265,7 +265,7 @@
 		getDetailMatakuliah($(this).val());
 	});
 
-	// checkbox action
+	// check all or unchecked all from checkbox with name select-all
     $('[name="select-all"]').change(function() {
        if(this.checked){
             $('#table-krs_detail tbody :checkbox').prop('checked', true);

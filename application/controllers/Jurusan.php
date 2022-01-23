@@ -46,19 +46,18 @@ class Jurusan extends CI_Controller
 
 	public function store()
 	{
-		
 		// set up validation
 		$this->form_validation->set_rules('nama_fakultas', 'Nama Fakultas', 'required',
 		[
 			'required' => 'Field nama fakultas harus di isi.'
 		]);
-		$this->form_validation->set_rules('kode_jurusan', 'Kode Jurusan', 'required|is_unique[jurusan.kode_jurusan]|max_length[100]',
+		$this->form_validation->set_rules('kode_jurusan', 'Kode Jurusan', 'required|is_unique[jurusan.kode_jurusan]|max_length[50]',
 		[
-			'required' => 'Field kode fakultas harus di isi.',
+			'required' => 'Field kode jurusan harus di isi.',
 			'is_unique' => 'Kode yang dimasukkan sudah ada.',
 			'max_length' => 'Kode yang dimasukkan melebihi batas maksimum'
 		]);
-		$this->form_validation->set_rules('nama_jurusan', 'Nama Jurusan', 'required|max_length[100]', 
+		$this->form_validation->set_rules('nama_jurusan', 'Nama Jurusan', 'required|max_length[50]|is_unique[jurusan.nama_jurusan]', 
 		[
 			'required' => 'Field nama jurusan harus di isi.',
 			'max_length' => 'Nama yang dimasukkan melebihi batas maksimum',
@@ -83,7 +82,6 @@ class Jurusan extends CI_Controller
 			];
 
 			$this->JurusanModel->saveData($data);
-
 			$message = [
 				'success' => true
 			];			
@@ -91,7 +89,6 @@ class Jurusan extends CI_Controller
 		}
 
 		echo json_encode($message);
-
 	}
 
 	public function edit()
@@ -109,12 +106,12 @@ class Jurusan extends CI_Controller
 		[
 			'required' => 'Field nama fakultas harus di isi.'
 		]);
-		$this->form_validation->set_rules('kode_jurusan_edit', 'Kode Jurusan', 'required|max_length[100]',
+		$this->form_validation->set_rules('kode_jurusan_edit', 'Kode Jurusan', 'required|max_length[50]',
 		[
 			'required' => 'Field kode fakultas harus di isi.',
 			'max_length' => 'Kode yang dimasukkan melebihi batas maksimum'
 		]);
-		$this->form_validation->set_rules('nama_jurusan_edit', 'Nama Jurusan', 'required|max_length[100]', 
+		$this->form_validation->set_rules('nama_jurusan_edit', 'Nama Jurusan', 'required|max_length[50]', 
 		[
 			'required' => 'Field nama jurusan harus di isi.',
 			'max_length' => 'Nama yang dimasukkan melebihi batas maksimum'

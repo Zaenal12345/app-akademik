@@ -2,6 +2,40 @@
     
     $(function() {
 
+        // select2 
+        $("#jurusan").select2({
+			placeholder: "Pilih Jurusan",
+			dropdownParent: $("#modal-matakuliah")
+		});
+        $("#jenis").select2({
+			placeholder: "Pilih Jenis",
+			dropdownParent: $("#modal-matakuliah")
+		});
+        $("#sks").select2({
+			placeholder: "Pilih SKS",
+			dropdownParent: $("#modal-matakuliah")
+		});
+        $("#semester").select2({
+			placeholder: "Pilih Semester",
+			dropdownParent: $("#modal-matakuliah")
+		});
+        $("#jurusan_edit").select2({
+			placeholder: "Pilih Jurusan",
+			dropdownParent: $("#modal-matakuliah_edit")
+		});
+        $("#jenis_edit").select2({
+			placeholder: "Pilih Jenis",
+			dropdownParent: $("#modal-matakuliah_edit")
+		});
+        $("#sks_edit").select2({
+			placeholder: "Pilih SKS",
+			dropdownParent: $("#modal-matakuliah_edit")
+		});
+        $("#semester_edit").select2({
+			placeholder: "Pilih Semester",
+			dropdownParent: $("#modal-matakuliah_edit")
+		});
+        
         // clear add form
         $('#tambah-matakuliah').click(function() {
             clear(); 
@@ -99,6 +133,18 @@
                             $('#semester-err').html('');
                         }
 
+                        if (res.jurusan_err != "") {
+                            $('#jurusan-err').html(res.jurusan_err);
+                        } else {
+                            $('#jurusan-err').html('');
+                        }
+
+                        if (res.jenis_err != "") {
+                            $('#jenis-err').html(res.jenis_err);
+                        } else {
+                            $('#jenis-err').html('');
+                        }
+
                     }
                 }
             });
@@ -147,9 +193,11 @@
                     $('#id_matakuliah_edit').val(res.id_matakuliah);
                     $('#kode_matakuliah_edit').val(res.kode_matakuliah);
                     $('#nama_matakuliah_edit').val(res.nama_matakuliah);
-                    $('#sks_edit').val(res.sks);
-                    $('#semester_edit').val(res.semester);
-                    // console.log(res);
+                    $('#sks_edit').val(res.sks).trigger('change');
+                    $('#semester_edit').val(res.semester).trigger('change');
+                    $('#jurusan_edit').val(res.jurusan_id_matakuliah).trigger('change');
+                    $('#jenis_edit').val(res.jenis).trigger('change');
+                    $('#status_edit').val(res.status_matakuliah);
                     $('#kode_matakuliah_edit-err,#nama_matakuliah_edit-err, #sks_edit-err, #semester_edit-err').html('');
 
                 }
@@ -203,6 +251,18 @@
                             $('#semester_edit-err').html('');
                         }
 
+                        if (res.jurusan_edit_err != "") {
+                            $('#jurusan_edit-err').html(res.jurusan_edit_err);
+                        } else {
+                            $('#jurusan_edit-err').html('');
+                        }
+
+                        if (res.jenis_edit_err != "") {
+                            $('#jenis_edit-err').html(res.jenis_edit_err);
+                        } else {
+                            $('#jenis_edit-err').html('');
+                        }
+
                     }
                 }
             });
@@ -211,13 +271,13 @@
 
         // function clear error message and form
         function clear() {
-            $('#kode_matakuliah,#nama_matakuliah,#sks,#semester').val('');
-            $('#kode_matakuliah_edit,#nama_matakuliah_edit,#sks_edit,#semester_edit').val('');
+            $('#kode_matakuliah,#nama_matakuliah').val('');
+            $('#sks,#semester,#jurusan,#jenis').val('').trigger('change');
+            $('#kode_matakuliah_edit,#nama_matakuliah_edit').val('');
+            $(',#sks_edit,#semester_edit,#jurusan_edit,#jenis_edit').val('').trigger('change');
             $('#kode_matakuliah-err,#nama_matakuliah-err, #sks-err, #semester-err').html('');
             $('#kode_matakuliah_edit-err,#nama_matakuliah_edit-err, #sks_edit-err, #semester_edit-err').html('');
         }
-
-
 
     });
 

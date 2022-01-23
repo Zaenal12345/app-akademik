@@ -5,8 +5,9 @@
 <script src="<?= base_url()?>assets/template/dist/assets/js/ripple.js"></script>
 <script src="<?= base_url()?>assets/template/dist/assets/js/pcoded.js"></script>
 
+<?php if($title == 'dashboard'):?>
 <script src="<?= base_url()?>assets/template/dist/assets/js/plugins/apexcharts.min.js"></script>
-
+<?php endif?>
 <!-- Datatable -->
 <script src="<?= base_url()?>assets/datatables.min.js"></script>
 
@@ -16,8 +17,6 @@
 <!-- Apex Chart -->
 <!-- <script src="<?= base_url()?>assets/template/dist/assets/js/plugins/apexcharts.min.js"></script> -->
 
-<!-- custom-chart js -->
-<script src="<?= base_url()?>assets/template/dist/assets/js/pages/dashboard-main.js"></script>
 <!-- jquery ui -->
 <script src="<?= base_url()?>assets/jqueryui/jquery-ui.js"></script>
 <!-- select2 -->

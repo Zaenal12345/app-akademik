@@ -44,7 +44,7 @@ class Mahasiswa extends CI_Controller
 		$this->datatables->join('jurusan','jurusan.id_jurusan = mahasiswa.jurusan_id', 'left');
 		$this->datatables->join('kelas','kelas.id_kelas = mahasiswa.kelas_id', 'left');
 		$this->datatables->add_column('gambar','<img src="'. $base .'assets/picture/mahasiswa/$1" width="60" height="60">','foto');
-		$this->datatables->add_column('view','<a href="#" class="edit-mahasiswa btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i></a> <a href="#" class="delete-mahasiswa btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i></a>','id_mahasiswa');
+		$this->datatables->add_column('view','<a href="#" class="edit-mahasiswa btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-mahasiswa btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_mahasiswa');
 		$this->datatables->from('mahasiswa');
 		return print_r($this->datatables->generate());
 	}
@@ -56,29 +56,68 @@ class Mahasiswa extends CI_Controller
 
 		$data = [
 			'data' => $admin_data,
+			'jurusan' => $this->JurusanModel->showData(),
+			'kelas' => $this->KelasModel->showData(),
+			'title' => 'Master',
+			'sub_title' => 'Mahasiswa',	
 		];
 
 		$this->load->view('component/header',$data);
 		$this->load->view('component/sidebar',$data);
-		$this->load->view('pages/dosen/dosen_create',$data);
+		$this->load->view('pages/mahasiswa/mahasiswa_create',$data);
 		$this->load->view('component/footer',$data);
-		$this->load->view('pages/dosen/dosen_script');
+		$this->load->view('pages/mahasiswa/mahasiswa_script');
 	}
 
 	public function store()
 	{
 		// set up validation
-		$this->form_validation->set_rules('nim','NIK','required|is_unique[mahasiswa.nim]|max_length[20]');
-		$this->form_validation->set_rules('nama_mahasiswa','Nama Mahasiswa','required|max_length[100]');
+		$this->form_validation->set_rules('nim','NIM','required|is_unique[mahasiswa.nim]|max_length[20]|is_natural',[
+			'is_unique' => 'NIM yang dimasukkan sudah ada.',
+			'max_length' => 'NIM yang dimasukkan melebihi batas maksimum',
+			'is_natural' => 'NIM yang dimasukkan harus berupa angka'
+		]);
+		$this->form_validation->set_rules('nama_mahasiswa','Nama Mahasiswa','required|max_length[100]',[
+			'max_length' => 'Nama yang dimasukkan melebihi batas maksimum',
+		]);
 		$this->form_validation->set_rules('jenis_kelamin','Jenis Kelamin','required|max_length[10]');
-		$this->form_validation->set_rules('status_mahasiswa','Status','required|max_length[20]');
-		$this->form_validation->set_rules('tempat_lahir','Tempat Lahir','required|max_length[100]');
+		$this->form_validation->set_rules('status_mahasiswa','Status','required|max_length[50]');
+		$this->form_validation->set_rules('tempat_lahir','Tempat Lahir','required|max_length[100]',[
+			'max_length' => 'Tempat lahir yang dimasukkan melebihi batas maksimum',
+		]);
 		$this->form_validation->set_rules('tanggal_lahir','Tanggal Lahir','required');
-		$this->form_validation->set_rules('agama','Agama','required|max_length[20]');
-		$this->form_validation->set_rules('alamat','Alamat','required');
+		$this->form_validation->set_rules('agama','Agama','required|max_length[50]');
+		// $this->form_validation->set_rules('alamat','Alamat','required');
 		$this->form_validation->set_rules('jurusan_id','Prodi','required');
 		$this->form_validation->set_rules('kelas_id','Kelas','required');
-		$this->form_validation->set_rules('tahun_angkatan','Tahun Angkatan','required');
+		$this->form_validation->set_rules('tahun_angkatan','Tahun Angkatan','required|max_length[10]',[
+			'max_length' => 'Tahun angkatan yang dimasukkan melebihi batas maksimum',
+		]);
+		$this->form_validation->set_rules('nik','NIK','required|max_length[20]|is_unique[mahasiswa.nik]|is_natural',[
+			'is_unique' => 'NIK yang dimasukkan sudah ada.',
+			'max_length' => 'NIK yang dimasukkan melebihi batas maksimum',
+			'is_natural' => 'NIK yang dimasukkan harus berupa angka'
+		]);
+
+		$this->form_validation->set_rules('nik_ibu','NIK','max_length[20]|is_unique[mahasiswa.nik]|is_natural',[
+			'is_unique' => 'NIK yang dimasukkan sudah ada.',
+			'max_length' => 'NIK yang dimasukkan melebihi batas maksimum',
+			'is_natural' => 'NIK yang dimasukkan harus berupa angka'
+		]);
+		$this->form_validation->set_rules('nama_ibu','Nama Ibu','required|max_length[50]',[
+			'max_length' => 'Nama yang dimasukkan melebihi batas maksimum',
+		]);
+		$this->form_validation->set_rules('nik_ayah','NIK','max_length[20]|is_unique[mahasiswa.nik]|is_natural',[
+			'is_unique' => 'NIK yang dimasukkan sudah ada.',
+			'max_length' => 'NIK yang dimasukkan melebihi batas maksimum',
+			'is_natural' => 'NIK yang dimasukkan harus berupa angka'
+		]);
+		$this->form_validation->set_rules('nama_ayah','Nama Ayah','max_length[50]',[
+			'max_length' => 'Nama yang dimasukkan melebihi batas maksimum',
+		]);
+		$this->form_validation->set_rules('email','Email','max_length[50]|valid_email',[
+			'max_length' => 'Email yang dimasukkan melebihi batas maksimum',
+		]);
 
 		$this->form_validation->set_message('required','Field %s tidak boleh kosong');
 
@@ -89,7 +128,11 @@ class Mahasiswa extends CI_Controller
 			if ($_FILES['foto']['name'] != "") {
 				$foto = $this->_upload();
 			} else {
-				$foto = 'default.jpg';
+				if ($this->input->post('jenis_kelamin' == "L")) {
+					$foto = 'default1.jpg';
+				}else{
+					$foto = 'default2.jpg';
+				}
 			}
 
 			$data = [
@@ -105,6 +148,12 @@ class Mahasiswa extends CI_Controller
 				'alamat' => $this->input->post('alamat'),
 				'tahun_angkatan' => $this->input->post('tahun_angkatan'),
 				'foto' => $foto,
+				'nik' => $this->input->post('nik'),
+				'nik_ibu' => $this->input->post('nik_ibu'),
+				'nama_ibu' => $this->input->post('nama_ibu'),
+				'nik_ayah' => $this->input->post('nik_ayah'),
+				'nama_ayah' => $this->input->post('nama_ayah'),
+				'email' => $this->input->post('email'),
 			];
 
 			$this->MahasiswaModel->saveData($data);
@@ -125,6 +174,12 @@ class Mahasiswa extends CI_Controller
 				'agama_err' =>form_error('agama'),
 				'alamat_err' =>form_error('alamat'),
 				'tahun_angkatan_err' =>form_error('tahun_angkatan'),
+				'nik_err' =>form_error('nik'),
+				'nama_ibu_err' =>form_error('nama_ibu'),
+				'nama_ayah_err' =>form_error('nama_ayah'),
+				'nik_ayah_err' =>form_error('nik_ayah'),
+				'nik_ibu_err' =>form_error('nik_ibu'),
+				'email_err' =>form_error('email'),
 			];
 
 		}
@@ -137,8 +192,26 @@ class Mahasiswa extends CI_Controller
 	public function edit()
 	{
 		$id =  $this->input->post('id');
-		$data = $this->MahasiswaModel->editData($id);
-		echo json_encode($data);
+		$mahasiswa = $this->MahasiswaModel->editData($id);
+		// echo json_encode($data);
+
+		// get admin data
+		$admin_data = $this->AuthModel->getDataByUsername($this->session->userdata('username'));
+
+		$data = [
+			'data' => $admin_data,
+			'jurusan' => $this->JurusanModel->showData(),
+			'kelas' => $this->KelasModel->showData(),
+			'title' => 'Master',
+			'sub_title' => 'Mahasiswa',	
+			'mahasiswa' => $data,	
+		];
+
+		$this->load->view('component/header',$data);
+		$this->load->view('component/sidebar',$data);
+		$this->load->view('pages/mahasiswa/mahasiswa_edit',$data);
+		$this->load->view('component/footer',$data);
+		$this->load->view('pages/mahasiswa/mahasiswa_script');
 	}
 
 	public function update()
@@ -215,9 +288,11 @@ class Mahasiswa extends CI_Controller
 	public function destroy()
 	{
 		$data = $this->MahasiswaModel->editData($this->input->post('id'));
-
+		
 		if ($data->foto != 'default.jpg') {
-			$this->_hapus_file($data->foto);
+			if(file_exists(FCPATH."assets/picture/mahasiswa/".$data->foto)){
+				$this->_hapus_file($data->foto);
+			}
 		}
 		$this->MahasiswaModel->deleteData($data->id_mahasiswa);
 
@@ -230,13 +305,29 @@ class Mahasiswa extends CI_Controller
 
         $config['allowed_types']    = 'jpg|jpeg|png';
         $config['max_size']         = 0;
-        $config['file_name']        = uniqid();
-        $config['upload_path']      = './assets/picture/mahasiswa/';
-
+        // $config['file_name']        = uniqid();
+		$config['encrypt_name'] = TRUE;
+        // $config['upload_path']      = './assets/picture/mahasiswa/';
+		
+		$this->upload->initialize($config);
         $this->load->library('upload',$config);
 
         if($this->upload->do_upload('foto')){
-            return $this->upload->data('file_name');
+            // upload file
+			$foto = $this->upload->data('file_name');
+			//Compress Image
+			$config['image_library']='gd2';
+			$config['source_image']='./assets/picture/mahasiswa/'.$foto;
+			$config['create_thumb']= FALSE;
+			$config['maintain_ratio']= FALSE;
+			$config['quality']= '50%';
+			$config['width']= 236;
+			$config['height']= 236;
+			$config['new_image']= './assets/picture/mahasiswa/'.$foto;
+			$this->load->library('image_lib', $config);
+			$this->image_lib->resize();
+
+			return $foto;
         }
 
     }
