@@ -45,6 +45,7 @@ class Mahasiswa extends CI_Controller
 		$this->datatables->join('kelas','kelas.id_kelas = mahasiswa.kelas_id', 'left');
 		$this->datatables->add_column('gambar','<img src="'. $base .'assets/picture/mahasiswa/$1" width="60" height="60">','foto');
 		$this->datatables->add_column('view','<a href="#" class="edit-mahasiswa btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-mahasiswa btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_mahasiswa');
+		$this->db->order_by('id_mahasiswa','DESC');
 		$this->datatables->from('mahasiswa');
 		return print_r($this->datatables->generate());
 	}

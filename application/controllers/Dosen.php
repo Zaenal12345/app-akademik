@@ -149,6 +149,7 @@ class Dosen extends CI_Controller
 		$this->datatables->select('id_dosen,nidn,nik,nama_dosen,jenis_kelamin_dosen,gelar,pendidikan,status_dosen,tempat_lahir_dosen,tanggal_lahir_dosen,agama_dosen,alamat_dosen,foto_dosen');
 		$this->datatables->add_column('gambar','<img src="'. $base .'assets/picture/dosen/$1" width="90">','foto_dosen');
 		$this->datatables->add_column('view','<a href="#" class="edit-dosen btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-dosen btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_dosen');
+		$this->db->order_by('id_dosen','DESC');
 		$this->datatables->from('dosen');
 		return print_r($this->datatables->generate());
 	}

@@ -107,6 +107,18 @@
         .btn-blue:hover{
             color: white !important;
         }
+
+        .card-login {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0px solid rgba(0, 0, 0, 0.125);
+            border-radius: 0.25rem;
+        }
     </style>
 
 </head>
@@ -179,9 +191,7 @@
             <div class="row">
 
                 <!-- Introduction -->
-                <br>
-                <br>
-                <br>
+                <br><br><br>
                 <div class="col-md-6 caption">
 
                     <h1>Sistem Informasi Akademik Universitas Nasional PASIM</h1>
@@ -200,12 +210,10 @@
                 </div>
 
                 <!-- Sign Up -->
-                <br>
-                <br>
-                <br>
+                <br><br><br>
                 <div class="col-md-5 col-md-offset-1">
 
-                    <form id="login-form" class="signup-form" style="margin-top: -50px;">
+                    <form id="login-form" class="signup-form card-login" style="margin-top: -50px;">
 
                         <div class="alert alert-danger text-center" style="display:none"></div>
 
@@ -214,18 +222,18 @@
                         <hr>
 
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="User Name" id="username" name="username" autofocus="on">
+                            <input type="text" class="form-control" placeholder="User Name" id="username" name="username" autofocus="on" style="border: none; border-bottom: 1px solid #ddd">
                             <small id="username_error" class="text-danger"></small>
                         </div>
-
+                        <br>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password" id="password" name="password">
+                            <input type="password" class="form-control" placeholder="Password" id="password" name="password" style="border: none; border-bottom: 1px solid #ddd">
                             <small id="password_error" class="text-danger"></small>
                         </div>
-
+                        <br>
                         <div class="form-group text-center">
 
-                            <button type="submit" class="btn btn-blue btn-block" style="background-color: #ff5252 !important;">Log In</button>
+                            <button type="submit" class="btn btn-blue" style="background-color: #ff5252 !important; box-shadow: 0 10px 5px -8px rgb(0 0 0 / 40%); border-radius: 0.25rem;">Log In</button>
 
                         </div>
 
@@ -282,7 +290,7 @@ $(function() {
 				}
 				
 				if(res.error_login){
-					$('.alert').html(res.message).fadeIn();
+					$('.alert').html(res.message).fadeIn().delay('30000').fadeOut('slow');
 					$('#password,#username').val('');
 					$('#username_error').html('');
 					$('#password_error').html('');

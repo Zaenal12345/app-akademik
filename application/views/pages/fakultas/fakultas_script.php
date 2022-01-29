@@ -89,30 +89,36 @@
 
 		// delete fakultas data 
 		$(document).on('click','.delete-fakultas',function() {
-			
-			if (confirm('Apakah anda ingin menghapus data ini ?')) {
 
-				$.ajax({
-					url: "<?= base_url()?>fakultas/destroy",
-					type: "POST",
-					dataType: "JSON",
-					data: { id: $(this).data('id')},
-					success:function(res) {
-						
-						if (res.success) {
+			Swal.fire({
+				title: 'Apakah anda yakin?',
+				text: "Data yang dihapus tidak akan bisa dikembalikan!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya',
+				cancelButtonText: 'Tidak',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						url: "<?= base_url()?>fakultas/destroy",
+						type: "POST",
+						dataType: "JSON",
+						data: { id: $(this).data('id')},
+						success:function(res) {
 							
-							$('#data-fakultas').DataTable().ajax.reload();
-							toastr.success('Data berhasil dihapus',{timeOut: 4000});
+							if (res.success) {
+								
+								$('#data-fakultas').DataTable().ajax.reload();
+								toastr.success('Data berhasil dihapus',{timeOut: 4000});
+
+							}
 
 						}
-
-					}
-				});
-
-
-			} else {
-				return false;
-			}
+					});
+				}
+			})
 		});
 
 		// get fakultas data

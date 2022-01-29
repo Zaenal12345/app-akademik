@@ -35,6 +35,7 @@ class Kelas extends CI_Controller
 	public function show()
 	{
 		$this->datatables->select('id_kelas,kode_kelas,nama_kelas,status_kelas');
+		$this->db->order_by('id_kelas','DESC');
 		$this->datatables->from('kelas');
 		$this->datatables->add_column('view','<a href="#" class="edit-kelas btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-kelas btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_kelas');
 		return print_r($this->datatables->generate());

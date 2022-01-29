@@ -132,29 +132,59 @@
         // delete fajurusankultas data 
         $(document).on('click','.delete-jurusan',function() {
             
-            if (confirm('Apakah anda ingin menghapus data ini ?')) {
+            // if (confirm('Apakah anda ingin menghapus data ini ?')) {
 
-                $.ajax({
-                    url: "<?= base_url()?>jurusan/destroy",
-                    type: "POST",
-                    dataType: "JSON",
-                    data: { id: $(this).data('id')},
-                    success:function(res) {
+                // $.ajax({
+                //     url: "<?= base_url()?>jurusan/destroy",
+                //     type: "POST",
+                //     dataType: "JSON",
+                //     data: { id: $(this).data('id')},
+                //     success:function(res) {
                         
-                        if (res.success) {
+                //         if (res.success) {
                             
-                            $('#data-jurusan').DataTable().ajax.reload();
-                            toastr.success('Data berhasil dihapus',{timeOut: 4000});
+                //             $('#data-jurusan').DataTable().ajax.reload();
+                //             toastr.success('Data berhasil dihapus',{timeOut: 4000});
+
+                //         }
+
+                //     }
+                // });
+
+
+            // } else {
+            //     return false;
+            // }
+
+            Swal.fire({
+				title: 'Apakah anda yakin?',
+				text: "Data yang dihapus tidak akan bisa dikembalikan!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya',
+				cancelButtonText: 'Tidak',
+			}).then((result) => {
+				if (result.isConfirmed) {
+                    $.ajax({
+                        url: "<?= base_url()?>jurusan/destroy",
+                        type: "POST",
+                        dataType: "JSON",
+                        data: { id: $(this).data('id')},
+                        success:function(res) {
+                            
+                            if (res.success) {
+                                
+                                $('#data-jurusan').DataTable().ajax.reload();
+                                toastr.success('Data berhasil dihapus',{timeOut: 4000});
+
+                            }
 
                         }
-
-                    }
-                });
-
-
-            } else {
-                return false;
-            }
+                    });
+				}
+			})
         });
 
         // get jurusan data

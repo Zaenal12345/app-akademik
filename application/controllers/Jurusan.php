@@ -38,6 +38,7 @@ class Jurusan extends CI_Controller
 	public function show()
 	{
 		$this->datatables->select('fakultas.nama_fakultas,jurusan.id_jurusan,jurusan.kode_jurusan,jurusan.nama_jurusan,jurusan.status_akreditasi, jurusan.jenjang');
+		$this->db->order_by('id_jurusan','DESC');
 		$this->datatables->from('jurusan');
 		$this->datatables->join('fakultas','fakultas.id_fakultas = jurusan.fakultas_id');
 		$this->datatables->add_column('view','<a href="#" class="edit-jurusan btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-jurusan btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_jurusan');

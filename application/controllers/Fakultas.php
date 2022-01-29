@@ -36,6 +36,7 @@ class Fakultas extends CI_Controller
 	public function show()
 	{
 		$this->datatables->select('id_fakultas,kode_fakultas,nama_fakultas');
+		$this->db->order_by('id_fakultas','DESC');
 		$this->datatables->from('fakultas');
 		$this->datatables->add_column('view','<a href="#" class="edit-fakultas btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-fakultas btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_fakultas');
 		return print_r($this->datatables->generate());

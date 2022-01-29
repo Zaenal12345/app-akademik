@@ -22,7 +22,7 @@
 				<div class="collapse" id="nav-user-link">
 					<ul class="list-unstyled">
 						<li class="list-group-item"><a href="user-profile.html"><i class="feather icon-user m-r-5"></i>Profile</a></li>
-						<li class="list-group-item"><a href="<?= base_url()?>auth/logout" onclick="return confirm('Apakah anda ingin logout?')"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
+						<li class="list-group-item"><a href="#" class="btn-logout"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
 					</ul>
 				</div>
 			</div>
