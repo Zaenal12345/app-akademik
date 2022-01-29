@@ -172,14 +172,16 @@
 
     <!--//** Banner**//-->
 
-    <section id="home">
+    <section id="home" style="height:976px">
 
         <div class="container">     
 
             <div class="row">
 
                 <!-- Introduction -->
-
+                <br>
+                <br>
+                <br>
                 <div class="col-md-6 caption">
 
                     <h1>Sistem Informasi Akademik Universitas Nasional PASIM</h1>
@@ -198,7 +200,9 @@
                 </div>
 
                 <!-- Sign Up -->
-
+                <br>
+                <br>
+                <br>
                 <div class="col-md-5 col-md-offset-1">
 
                     <form id="login-form" class="signup-form" style="margin-top: -50px;">
@@ -234,32 +238,6 @@
         </div>
 
     </section>
-
-    <!--======================================== 
-
-           Footer
-
-    ========================================-->
-
-
-
-    <footer style="background-color: #ff5252 !important;">
-
-        <div class="container">
-
-            <div class="row">
-
-                <div class="footer-caption">
-
-                    <h6 class="text-center">SIAKAD Universitas Nasional PASIM, &copy;2021 All rights reserved</h6>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </footer>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
