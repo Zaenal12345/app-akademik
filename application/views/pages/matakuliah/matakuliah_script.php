@@ -153,30 +153,36 @@
 
         // delete matakuliah data 
         $(document).on('click','.delete-matakuliah',function() {
-            
-            if (confirm('Apakah anda ingin menghapus data ini ?')) {
 
-                $.ajax({
-                    url: "<?= base_url()?>matakuliah/destroy",
-                    type: "POST",
-                    dataType: "JSON",
-                    data: { id: $(this).data('id')},
-                    success:function(res) {
-                        
-                        if (res.success) {
+            Swal.fire({
+				title: 'Apakah anda yakin?',
+				text: "Data yang dihapus tidak akan bisa dikembalikan!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya',
+				cancelButtonText: 'Tidak',
+			}).then((result) => {
+				if (result.isConfirmed) {
+                    $.ajax({
+                        url: "<?= base_url()?>matakuliah/destroy",
+                        type: "POST",
+                        dataType: "JSON",
+                        data: { id: $(this).data('id')},
+                        success:function(res) {
                             
-                            $('#data-matakuliah').DataTable().ajax.reload();
-                            toastr.success('Data berhasil dihapus',{timeOut: 4000});
+                            if (res.success) {
+                                
+                                $('#data-matakuliah').DataTable().ajax.reload();
+                                toastr.success('Data berhasil dihapus',{timeOut: 4000});
+
+                            }
 
                         }
-
-                    }
-                });
-
-
-            } else {
-                return false;
-            }
+                    });
+				}
+			})
         });
 
         // get matakuliah data

@@ -131,30 +131,6 @@
 
         // delete fajurusankultas data 
         $(document).on('click','.delete-jurusan',function() {
-            
-            // if (confirm('Apakah anda ingin menghapus data ini ?')) {
-
-                // $.ajax({
-                //     url: "<?= base_url()?>jurusan/destroy",
-                //     type: "POST",
-                //     dataType: "JSON",
-                //     data: { id: $(this).data('id')},
-                //     success:function(res) {
-                        
-                //         if (res.success) {
-                            
-                //             $('#data-jurusan').DataTable().ajax.reload();
-                //             toastr.success('Data berhasil dihapus',{timeOut: 4000});
-
-                //         }
-
-                //     }
-                // });
-
-
-            // } else {
-            //     return false;
-            // }
 
             Swal.fire({
 				title: 'Apakah anda yakin?',
