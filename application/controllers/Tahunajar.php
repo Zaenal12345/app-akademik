@@ -37,7 +37,7 @@ class Tahunajar extends CI_Controller
 		$this->datatables->select('kode_tahun_ajar,id_tahun_ajar,tahun_ajar,status');
 		$this->db->order_by("status", "asc");
 		$this->datatables->from('tahun_ajar');
-		$this->datatables->add_column('view','<a href="#" class="edit-tahun_ajar btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i></a> <a href="#" class="delete-tahun_ajar btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i></a>','id_tahun_ajar');
+		$this->datatables->add_column('view','<a href="#" class="edit-tahun_ajar btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-tahun_ajar btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_tahun_ajar');
 		return print_r($this->datatables->generate());
 	}
 

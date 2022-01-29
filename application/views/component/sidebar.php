@@ -29,7 +29,7 @@
 			
 			<ul class="nav pcoded-inner-navbar ">
 				<li class="nav-item pcoded-menu-caption" style="color: #ff5252">
-				    <label>Main</label>
+				    <label>Main Menu</label>
 				</li>
 				<li class="nav-item <?= $title == 'Dashboard' ? 'active' : '' ?>">
 				    <a href="<?= base_url()?>dashboard" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
@@ -48,11 +48,10 @@
 				        <li <?= $sub_title == 'Kurikulum' ? 'active' : '' ?> ><a href="<?= base_url()?>kurikulum">Kurikulum</a></li>
 				    </ul>
 				</li>
-				<!-- <li class="nav-item <?= $title == 'Kegiatan' ? 'active' : '' ?>">
-				    <a href="<?= base_url()?>KegiatanMahasiswa" class="nav-link"><span class="pcoded-micon"><i class="feather icon-calendar"></i></span><span class="pcoded-mtext">Kegiatan Mahasiswa</span></a>
-				</li> -->
 
-
+				<li class="nav-item pcoded-menu-caption" style="color: #ff5252">
+				    <label>Other Menu</label>
+				</li>
 				<li class="nav-item  <?= $title == 'Jadwal' ? 'active' : '' ?>">
 				    <a href="<?= base_url() ?>jadwal" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Penjadwalan</span></a>
 				</li>

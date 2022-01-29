@@ -65,17 +65,17 @@
             <div class="modal-body">
                 <form id="frm-kelas">
                     <div class="form-group">
-                        <label for="kode_kelas">Kode Kelas</label>
+                        <label for="kode_kelas"><b>Kode Kelas : </b></label>
                         <input type="text" class="form-control" id="kode_kelas" name="kode_kelas" placeholder="Masukkan Kode Kelas">
                         <small id="kode_kelas-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_kelas">Nama Kelas</label>
+                        <label for="nama_kelas"><b>Nama Kelas : </b></label>
                         <input type="text" class="form-control" id="nama_kelas" name="nama_kelas" placeholder="Masukkan Nama Kelas">
                         <small id="nama_kelas-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_kelas">Status</label>
+                        <label for="nama_kelas"><b>Status: </b></label>
                         <select name="status" id="status" class="form-control">
                             <option value="Aktif">Aktif</option>
                             <option value="Tidak Aktif">Tidak Aktif</option>
@@ -85,8 +85,8 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i></button>
-                <button type="submit" class="btn btn-primary"><i class="feather icon-save"></i></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i> Tutup</button>
+                <button type="submit" class="btn btn-primary"><i class="feather icon-save"></i> Simpan</button>
                 </form>
             </div>
         </div>
@@ -103,18 +103,18 @@
             <div class="modal-body">
                 <form id="frm-kelas_edit">
                     <div class="form-group">
-                        <label for="kode_kelas_edit">Kode Kelas</label>
+                        <label for="kode_kelas_edit"><b>Kode Kelas :</b></label>
                         <input type="hidden" name="id_kelas_edit" id="id_kelas_edit">
                         <input type="text" class="form-control" name="kode_kelas_edit" id="kode_kelas_edit"  placeholder="Masukkan Kode Kelas" readonly>
                         <small id="kode_kelas_edit-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_kelas_edit">Nama Kelas</label>
+                        <label for="nama_kelas_edit"><b>Nama Kelas :</b></label>
                         <input type="text" class="form-control" name="nama_kelas_edit" id="nama_kelas_edit" placeholder="Masukkan Nama Kelas">
                         <small id="nama_kelas_edit-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_kelas">Status</label>
+                        <label for="nama_kelas"><b>Status :</b></label>
                         <select name="status_edit" id="status_edit" class="form-control">
                             <option value="Aktif">Aktif</option>
                             <option value="Tidak Aktif">Tidak Aktif</option>
@@ -124,8 +124,8 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn  btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i></button>
-                <button type="submit" class="btn  btn-primary"><i class="feather icon-save"></i></button>
+                <button type="button" class="btn  btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i> Tutup</button>
+                <button type="submit" class="btn  btn-primary"><i class="feather icon-save"></i> Simpan</button>
                 </form>
             </div>
         </div>

@@ -12,6 +12,16 @@
 			dropdownParent: $("#modal-jurusan_edit")
 		});
 
+		$(".js-select2-jenjang").select2({
+			placeholder: "Pilih Jenjang Pendidikan",
+			dropdownParent: $("#modal-jurusan")
+		});
+
+		$(".js-select2-jenjang2").select2({
+			placeholder: "Pilih Jenjang Pendidikan",
+			dropdownParent: $("#modal-jurusan_edit")
+		});
+
         // clear add form
         $('#tambah-jurusan').click(function() {
             clear(); 
@@ -54,6 +64,8 @@
                 {"data": "nama_fakultas", class:"text-center"},
                 {"data": "kode_jurusan", class:"text-center"},
                 {"data": "nama_jurusan", class:"text-center"},
+                {"data": "status_akreditasi", class:"text-center"},
+                {"data": "jenjang", class:"text-center"},
                 {"data": "view", class:"text-center"}
             ],
 
@@ -97,6 +109,18 @@
                             $('#nama_fakultas-err').html(res.nama_fakultas_err);
                         } else {
                             $('#nama_fakultas-err').html('');
+                        }
+                        
+                        if (res.status_akreditasi_err != "") {
+                            $('#status_akreditasi-err').html(res.status_akreditasi_err);
+                        } else {
+                            $('#status_akreditasi-err').html('');
+                        }
+
+                        if (res.jenjang_err != "") {
+                            $('#jenjang-err').html(res.jenjang_err);
+                        } else {
+                            $('#jenjang-err').html('');
                         }
 
                     }
@@ -147,8 +171,10 @@
                     $('#id_jurusan_edit').val(res.id_jurusan);
                     $('#kode_jurusan_edit').val(res.kode_jurusan);
                     $('#nama_jurusan_edit').val(res.nama_jurusan);
+                    $('#status_akreditasi_edit').val(res.status_akreditasi);
                     $('#nama_fakultas_edit').val(res.fakultas_id).trigger('change');
-                    $('#kode_jurusan_edit-err,#nama_jurusan_edit-err, #nama_fakultas_edit-err').html('');
+                    $('#jenjang_edit').val(res.jenjang).trigger('change');
+                    $('#kode_jurusan_edit-err,#nama_jurusan_edit-err, #nama_fakultas_edit-err, #status_akreditasi_edit-err, #jenjang_edit_err').html('');
 
                 }
             });
@@ -195,6 +221,18 @@
                             $('#nama_fakultas_edit-err').html('');
                         }
 
+                        if (res.status_akreditasi_edit_err != "") {
+                            $('#status_akreditasi_edit-err').html(res.status_akreditasi_edit_err);
+                        } else {
+                            $('#status_akreditasi_edit-err').html('');
+                        }
+
+                        if (res.jenjang_edit_err != "") {
+                            $('#jenjang_edit-err').html(res.jenjang_edit_err);
+                        } else {
+                            $('#jenjang_edit-err').html('');
+                        }
+
                     }
                 }
             });
@@ -203,10 +241,12 @@
 
         // function clear error message and form
         function clear() {
-            $('#kode_jurusan,#nama_jurusan,#nama_fakultas').val('');
+            $('#kode_jurusan,#nama_jurusan,#status_akreditasi').val('');
+            $('#nama_fakultas,#jenjang').val('').trigger('change');
+            $('#kode_jurusan-err,#nama_jurusan-err, #nama_fakultas-err, #jenjang_err, #status_akreditasi_err').html('');
+
             $('#kode_jurusan_edit,#nama_jurusan_edit,#nama_fakultas_edit').val('');
-            $('#kode_jurusan-err,#nama_jurusan-err, #nama_fakultas-err').html('');
-            $('#kode_jurusan_edit-err,#nama_jurusan_edit-err, #nama_fakultas_edit-err').html('');
+            $('#kode_jurusan_edit-err,#nama_jurusan_edit-err, #nama_fakultas_edit-err, #jenjang_edit_err, #status_akreditasi_edit_err').html('');
         }
 
 

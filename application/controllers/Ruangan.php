@@ -36,7 +36,7 @@ class Ruangan extends CI_Controller
 	{
 		$this->datatables->select('id_ruangan,nama_ruangan');
 		$this->datatables->from('ruangan');
-		$this->datatables->add_column('view','<a href="#" class="edit-ruangan btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i></a> <a href="#" class="delete-ruangan btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i></a>','id_ruangan');
+		$this->datatables->add_column('view','<a href="#" class="edit-ruangan btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-ruangan btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_ruangan');
 		return print_r($this->datatables->generate());
 	}
 

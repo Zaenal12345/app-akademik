@@ -85,15 +85,10 @@ class Auth extends CI_Controller
 
 	// test function for insert admin data 
 	public function createUser(){
-		$this->AuthModel->saveData([
-			'username' => 'admin',
-			'password' => password_hash('123456789',PASSWORD_BCRYPT)
-		]);
-	}
-
-	public function testCheckbox()
-	{
-		$this->load->view('test_');
+		// $this->AuthModel->saveData([
+		// 	'username' => 'admin',
+		// 	'password' => password_hash('123456789',PASSWORD_BCRYPT)
+		// ]);
 	}
 
 	public function generateAdmin()

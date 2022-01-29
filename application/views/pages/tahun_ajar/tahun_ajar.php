@@ -86,8 +86,8 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i></button>
-                <button type="submit" class="btn btn-primary"><i class="feather icon-save"></i></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i> Tutup</button>
+                <button type="submit" class="btn btn-primary"><i class="feather icon-save"></i> Simpan</button>
                 </form>
             </div>
         </div>
@@ -127,8 +127,8 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i></button>
-                <button type="submit" class="btn btn-primary"><i class="feather icon-save"></i></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="feather icon-x"></i> Tutup</button>
+                <button type="submit" class="btn btn-primary"><i class="feather icon-save"></i> Simpan</button>
                 </form>
             </div>
         </div>

@@ -89,6 +89,8 @@
                                         <th class="text-center" style="text-transform: capitalize;">Nama Fakultas</th>
                                         <th class="text-center" style="text-transform: capitalize;">Kode Jurusan</th>
                                         <th class="text-center" style="text-transform: capitalize;">Nama Jurusan</th>
+                                        <th class="text-center" style="text-transform: capitalize;">Status Akreditasi</th>
+                                        <th class="text-center" style="text-transform: capitalize;">Jenjang</th>
                                         <th class="text-center" style="text-transform: capitalize;">Aksi</th>
                                     </tr>
                                 </thead>
@@ -118,6 +120,16 @@
                 <form id="frm-jurusan">
 
                     <div class="form-group">
+                        <label for="nama_fakultas"><b>Nama Fakultas :</b></label>
+                        <select class="form-control js-select2-fakultas" id="nama_fakultas" name="nama_fakultas" style="width:100%">
+                            <option value=""></option>
+                            <?php foreach($fakultas as $data):?>
+                            <option value="<?= $data->id_fakultas ?>"><?= $data->nama_fakultas ?></option>
+                            <?php endforeach;?>
+                        </select>
+                        <small id="nama_fakultas-err" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
                         <label for="kode_jurusan"><b>Kode Jurusan :</b></label>
                         <input type="text" class="form-control" id="kode_jurusan" name="kode_jurusan" placeholder="Masukkan Kode Jurusan">
                         <small id="kode_jurusan-err" class="form-text text-danger"></small>
@@ -128,14 +140,18 @@
                         <small id="nama_jurusan-err" class="form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label for="nama_fakultas"><b>Nama Fakultas :</b></label>
-                        <select class="form-control js-select2-fakultas" id="nama_fakultas" name="nama_fakultas" style="width:100%">
+                        <label for="status_akreditasi"><b>Status Akreditasi :</b></label>
+                        <input type="text" class="form-control" id="status_akreditasi" name="status_akreditasi" placeholder="Masukkan Status Akreditasi">
+                        <small id="status_akreditasi-err" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="jenjang"><b>Jenjang :</b></label>
+                        <select class="form-control js-select2-jenjang" id="jenjang" name="jenjang" style="width:100%">
                             <option value=""></option>
-                            <?php foreach($fakultas as $data):?>
-                            <option value="<?= $data->id_fakultas ?>"><?= $data->nama_fakultas ?></option>
-                            <?php endforeach;?>
+                            <option value="D3">D3</option>
+                            <option value="S1">S1</option>
                         </select>
-                        <small id="nama_fakultas-err" class="form-text text-danger"></small>
+                        <small id="jenjang-err" class="form-text text-danger"></small>
                     </div>
                 
             </div>
@@ -178,6 +194,20 @@
                             <?php endforeach;?>
                         </select>
                         <small id="nama_fakultas_edit-err" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="status_akreditasi_edit"><b>Status Akreditasi :</b></label>
+                        <input type="text" class="form-control" id="status_akreditasi_edit" name="status_akreditasi_edit" placeholder="Masukkan Status Akreditasi">
+                        <small id="status_akreditasi_edit-err" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="jenjang_edit"><b>Jenjang :</b></label>
+                        <select class="form-control js-select2-jenjang2" id="jenjang_edit" name="jenjang_edit" style="width:100%">
+                            <option value=""></option>
+                            <option value="D3">D3</option>
+                            <option value="S1">S1</option>
+                        </select>
+                        <small id="jenjang_edit-err" class="form-text text-danger"></small>
                     </div>
                 
             </div>

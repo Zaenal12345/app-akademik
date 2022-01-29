@@ -37,7 +37,7 @@ class Jurusan extends CI_Controller
 
 	public function show()
 	{
-		$this->datatables->select('fakultas.nama_fakultas,jurusan.id_jurusan,jurusan.kode_jurusan,jurusan.nama_jurusan');
+		$this->datatables->select('fakultas.nama_fakultas,jurusan.id_jurusan,jurusan.kode_jurusan,jurusan.nama_jurusan,jurusan.status_akreditasi, jurusan.jenjang');
 		$this->datatables->from('jurusan');
 		$this->datatables->join('fakultas','fakultas.id_fakultas = jurusan.fakultas_id');
 		$this->datatables->add_column('view','<a href="#" class="edit-jurusan btn btn-warning btn-sm" data-id="$1"><i class="feather icon-edit"></i> Edit</a> <a href="#" class="delete-jurusan btn btn-danger btn-sm" data-id="$1"><i class="feather icon-trash"></i> Hapus</a>','id_jurusan');
@@ -55,12 +55,21 @@ class Jurusan extends CI_Controller
 		[
 			'required' => 'Field kode jurusan harus di isi.',
 			'is_unique' => 'Kode yang dimasukkan sudah ada.',
-			'max_length' => 'Kode yang dimasukkan melebihi batas maksimum'
+			'max_length' => 'Karakter yang dimasukkan melebihi batas maksimum'
 		]);
 		$this->form_validation->set_rules('nama_jurusan', 'Nama Jurusan', 'required|max_length[50]|is_unique[jurusan.nama_jurusan]', 
 		[
 			'required' => 'Field nama jurusan harus di isi.',
-			'max_length' => 'Nama yang dimasukkan melebihi batas maksimum',
+			'max_length' => 'Karakter yang dimasukkan melebihi batas maksimum',
+		]);
+		$this->form_validation->set_rules('status_akreditasi', 'Status Akreditasi', 'required', 
+		[
+			'required' => 'Field status akreditasi harus di isi.',
+		]);
+		$this->form_validation->set_rules('jenjang', 'Jenjang', 'required|max_length[5]', 
+		[
+			'required' => 'Field jenjang pendidikan harus di isi.',
+			'max_length' => 'Karakter yang dimasukkan melebihi batas maksimum',
 		]);
 
 		// check validation
@@ -71,6 +80,8 @@ class Jurusan extends CI_Controller
             	'kode_jurusan_err' => form_error('kode_jurusan'),
             	'nama_jurusan_err' => form_error('nama_jurusan'),
             	'nama_fakultas_err' => form_error('nama_fakultas'),
+            	'status_akreditasi_err' => form_error('status_akreditasi'),
+            	'jenjang_err' => form_error('jenjang'),
             ];
 
 		} else {
@@ -79,6 +90,8 @@ class Jurusan extends CI_Controller
 				'kode_jurusan' => $this->input->post('kode_jurusan'),
 				'nama_jurusan' => $this->input->post('nama_jurusan'),
 				'fakultas_id' => $this->input->post('nama_fakultas'),
+				'status_akreditasi' => $this->input->post('status_akreditasi'),
+				'jenjang' => $this->input->post('jenjang'),
 			];
 
 			$this->JurusanModel->saveData($data);
@@ -116,6 +129,15 @@ class Jurusan extends CI_Controller
 			'required' => 'Field nama jurusan harus di isi.',
 			'max_length' => 'Nama yang dimasukkan melebihi batas maksimum'
 		]);
+		$this->form_validation->set_rules('status_akreditasi_edit', 'Status Akreditasi', 'required', 
+		[
+			'required' => 'Field status akreditasi harus di isi.',
+		]);
+		$this->form_validation->set_rules('jenjang_edit', 'Jenjang', 'required|max_length[5]', 
+		[
+			'required' => 'Field jenjang pendidikan harus di isi.',
+			'max_length' => 'Karakter yang dimasukkan melebihi batas maksimum',
+		]);
 
 		// check validation
 		if ($this->form_validation->run() == FALSE) {
@@ -125,6 +147,8 @@ class Jurusan extends CI_Controller
             	'kode_jurusan_edit_err' => form_error('kode_jurusan_edit'),
             	'nama_jurusan_edit_err' => form_error('nama_jurusan_edit'),
             	'nama_fakultas_edit_err' => form_error('nama_fakultas_edit'),
+				'status_akreditasi_edit_err' => form_error('status_akreditasi_edit'),
+            	'jenjang_edit_err' => form_error('jenjang_edit'),
             ];
 
 		} else {
@@ -135,6 +159,8 @@ class Jurusan extends CI_Controller
 				'kode_jurusan' => $this->input->post('kode_jurusan_edit'),
 				'nama_jurusan' => $this->input->post('nama_jurusan_edit'),
 				'fakultas_id' => $this->input->post('nama_fakultas_edit'),
+				'status_akreditasi' => $this->input->post('status_akreditasi_edit'),
+				'jenjang' => $this->input->post('jenjang_edit'),
 			];
 
 			$this->JurusanModel->updateData($data,$id);
